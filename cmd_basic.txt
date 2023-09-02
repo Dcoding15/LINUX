@@ -1,0 +1,129 @@
+Command: date
+Display the current time in the given FORMAT, or set the system date.
+
+Usage: date [OPTION] [+FORMAT]
+
+[OPTION]
+  -d, --date=STRING          display time described by STRING="MM-DD-YYYY HH:MM:SS AM/PM" / "YYYY-MM-DD HH:MM:SS AM/PM" (any one)
+
+      --debug                display notes to parsed date and warning to stderr.
+
+  -f, --file=DATEFILE        it is like -d, --date and accept DATEFILE argument as file
+							(the file should only contain date format otherwise give error).
+
+  -I[FMT], --iso-8601[=FMT]  display date and time in ISO 8601 format. FMT=d(date), h(hour), m(minute), s(second), n(nanosecond)
+                             for date and time to the indicated precision.
+
+  -R, --rfc-email            display date and time in RFC 5322 format.
+      --rfc-3339=FMT         display date/time in RFC 3339 format. FMT=d(date), s(second), n(nanosecond)
+							 for date and time to the indicated precision.
+
+  -r, --reference=FILE       display the last modification time of FILE
+
+  -s, --set=STRING           set time described by STRING="MM-DD-YYYY HH:MM:SS AM/PM" / "YYYY-MM-DD HH:MM:SS AM/PM" (any one). You may need extra permission.
+
+  -u, --utc, --universal     print or set Coordinated Universal Time (UTC)
+
+[+FORMAT]
+  %%   display literal %
+  %a   locale's abbreviated weekday name (e.g., Sun)
+  %A   locale's full weekday name (e.g., Sunday)
+  %b   locale's abbreviated month name (e.g., Jan)
+  %B   locale's full month name (e.g., January)
+  %c   locale's date and time (e.g., Thu Mar  3 23:05:25 2005)
+  %C   century; like %Y, except omit last two digits (e.g., 20)
+  %d   day of month (e.g., 01)
+  %D   date; same as %m/%d/%y
+  %e   day of month, space padded; same as %_d
+  %F   full date; like %+4Y-%m-%d
+  %g   last two digits of year of ISO week number (see %G)
+  %G   year of ISO week number (see %V); normally useful only with %V
+  %h   same as %b
+  %H   hour (00..23) 24-hours format
+  %I   hour (01..12) 12-hours format
+  %j   day of year (001..366)
+  %k   hour, space padded ( 0..23); same as %_H
+  %l   hour, space padded ( 1..12); same as %_I
+  %m   month (01..12)
+  %M   minute (00..59)
+  %n   a newline
+  %N   nanoseconds (000000000..999999999)
+  %p   locale's equivalent of either AM or PM; blank if not known
+  %P   like %p, but lower case
+  %q   quarter of year (1..4)
+  %r   locale's 12-hour clock time (e.g., 11:11:04 PM)
+  %R   24-hour hour and minute; same as %H:%M
+  %s   seconds since 1970-01-01 00:00:00 UTC
+  %S   second (00..60)
+  %t   a tab
+  %T   time; same as %H:%M:%S
+  %u   day of week (1..7); 1 is Monday
+  %U   week number of year, with Sunday as first day of week (00..53)
+  %V   ISO week number, with Monday as first day of week (01..53)
+  %w   day of week (0..6); 0 is Sunday
+  %W   week number of year, with Monday as first day of week (00..53)
+  %x   locale's date representation (e.g., 12/31/99)
+  %X   locale's time representation (e.g., 23:13:48)
+  %y   last two digits of year (00..99)
+  %Y   year
+  %z   +hhmm numeric time zone (e.g., -0400)
+  %:z  +hh:mm numeric time zone (e.g., -04:00)
+  %::z  +hh:mm:ss numeric time zone (e.g., -04:00:00)
+  %:::z  numeric time zone with : to necessary precision (e.g., -04, +05:30)
+  %Z   alphabetic time zone abbreviation (e.g., EDT)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Command: ncal
+Displays a calendar and the date of Easter
+
+Usage: ncal -C [general options] [-jy] [[month] year]
+       ncal -C [general options] [-j] [-m month] [year]
+       ncal [general options] [-bhJjpwySM] [-H yyyy-mm-dd] [-s country_code] [-W number of days] [[month] year]
+       ncal [general options] [-Jeo] [year]
+General options: [-31] [-A months] [-B months] [-d yyyy-mm]
+
+[OPTION]
+
+     -h                 Turns off highlighting of today.
+
+     -m month           Display the specified month. If month is specified as a decimal number, appending ‘f’ or ‘p’ displays the same month of the following or pre‐
+                                 previous year respectively.
+
+     -p                 Print the country codes and switching days from Julian to Gregorian Calendar as they are assumed by ncal. The country code as determined from
+                              the local environment is marked with an asterisk.
+
+     -w                 Print the number of the week below each week column.
+
+     -y                 Display a calendar for the specified year. This option is implied when a year but no month are specified on the command line.
+
+     -3                 Display the previous, current and next month surrounding today.
+
+     -1                 Display only the current month. This is the default.
+
+     -A number          Months to add after. The specified number of months is added to the end of the display.
+
+     -B number          Months to add before. The specified number of months is added to the beginning of the display.
+
+     -C                 Completely switch to cal mode.
+
+     -d yyyy-mm         Use yyyy-mm as the current date (for debugging of date selection).
+
+     -H yyyy-mm-dd      Use yyyy-mm-dd as the current date (for debugging of highlighting).
+
+     -M                 Weeks start on Monday.
+
+     -S                 Weeks start on Sunday.
+
+     -W number          First week of the year has at least number days.
+
+     -b                 Use oldstyle format for ncal output.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Command: xdg-open
+Opens a file or URL in the user's preferred application
+
+Usage: xdg-open { file | URL }
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------

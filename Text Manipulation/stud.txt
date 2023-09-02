@@ -1,0 +1,6 @@
+slno.|name|code|course|gender
+1|debrishi|195|BCA|male
+2|tusar|224|BSC|male
+3|ayush|206|MA|male
+4|ritika|194|Mtech|female
+5|Mohini|201|BCA|female

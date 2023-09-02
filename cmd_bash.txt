@@ -1,0 +1,188 @@
+Command: read
+Read a line from the standard input and split it into fields. If no NAMEs are supplied, the line read is stored in the REPLY variable.
+
+Usage: read [-ers] [-a array] [-d delim] [-i text] [-n nchars] [-N nchars] [-p prompt] [-t timeout] [-u fd] [name ...]
+
+[OPTION]
+      -a            array assign the words read to sequential indices of the array variable ARRAY, starting at zero
+      -d            delim continue until the first character of DELIM is read, rather than newline
+      -e	        use Readline to obtain the line
+      -i text	    use TEXT as the initial text for Readline -n nchars	return after reading NCHARS characters rather than waiting for a newline, but honor a delimiter
+                       if fewer than NCHARS characters are read before the delimiter
+      -N            nchars return only after reading exactly NCHARS characters, unless EOF is encountered or read times out, ignoring any delimiter
+      -p            prompt output the string PROMPT without a trailing newline before attempting to read
+      -r	        do not allow backslashes to escape any characters
+      -s	        do not echo input coming from a terminal
+      -t timeout	time out and return failure if a complete line of input is not read within TIMEOUT seconds. The value of the TMOUT variable is the default timeout.
+                     TIMEOUT may be a fractional number. If TIMEOUT is 0, read returns immediately, without trying to read any data,
+                     returning success only if input is available on the specified file descriptor.
+                     The exit status is greater than 128 if the timeout is exceeded
+      -u fd	        read from file descriptor FD instead of the standard input
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Command: echo
+Display a line of text
+
+Usage: echo [OPTION]... [STRING]...
+
+[OPTION]
+     -n     don't output newline
+
+     -E     disable interpretation of backslash escapes (default)
+
+     -e     enable interpretation of backslash escapes
+
+  If -e is in effect, the following sequences are recognized:
+
+       \\     backslash
+
+       \a     alert (BEL)
+
+       \b     backspace
+
+       \c     produce no further output
+
+       \e     escape
+
+       \f     form feed
+
+       \n     new line
+
+       \r     carriage return
+
+       \t     horizontal tab
+
+       \v     vertical tab
+
+       \0NNN  byte with octal value NNN (1 to 3 digits)
+
+       \xHH   byte with hexadecimal value HH (1 to 2 digits)
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Command: chmod
+Changes the file mode bits of each given file, modes can be change by symbolic modes or octal modes.
+
+Usage: chmod [OPTION]... MODE[,MODE]... FILE...
+       chmod [OPTION]... OCTAL-MODE FILE...
+       chmod [OPTION]... --reference=RFILE FILE...
+
+[OPTION]
+      -c, --changes              like verbose but report only when a change is made
+
+      -f, --silent, --quiet      suppress most error messages
+
+      -v, --verbose              output a diagnostic for every file processed
+
+      --no-preserve-root         do not treat '/' specially (the default)
+
+      --preserve-root            fail to operate recursively on '/'
+
+      --reference=RFILE          use RFILE's mode instead of MODE values
+
+      -R, --recursive            change files and directories recursively
+
+Symbolic Modes [ugoa][+-+][rwxXst]:
+             u          user who owns file
+             g          other user in file's group
+             o          other user not in file's group
+             a          all users
+             +          add mode bits
+             -          remove mode bits
+             =          replace mode bits
+             r          enable read mode
+             w          enable write mode
+             x          enable execute mode
+             X          enable execute mode if the file is directory or already have execute permission for some user
+             s          enable execute mode to set user or other user in file's group
+             t          restricted deletion flag or sticky bit
+
+Octal Modes [user, group, other]:
+0 bit represent no permission given
+1 bit represent permission given
+                      [read write execute]
+             0           0    0      0
+             1           0    0      1
+             2           0    1      0
+             3           0    1      1
+             4           1    0      0
+             5           1    0      1
+             6           1    1      0
+             7           1    1      1
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Command: wc
+Print newline, word, and byte counts for each file
+
+Usage: wc [OPTION]... [FILE]...
+       wc [OPTION]... -files0-from=F
+
+[OPITON]
+       -c, --bytes              print the byte counts
+
+       -m, --chars              print the character counts
+
+       -l, --lines              print the newline counts
+
+       --files0-from=F          read  input  from the files specified by NUL-terminated names in file F; If F is - then read names from standard input
+
+       -L, --max-line-length    print the maximum display width
+
+       -w, --words              print the word counts
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Command: cat
+Concatenate files and print on the standard output
+
+Usage: cat [OPTION]... [FILE]...
+
+[OPTION]
+With no FILE, or when FILE is -, read standard input.
+
+       -A, --show-all              equivalent to -vET
+
+       -b, --number-nonblank       number nonempty output lines, overrides -n
+
+       -e                          equivalent to -vE
+
+       -E, --show-ends             display $ at end of each line
+
+       -n, --number                number all output lines
+
+       -s, --squeeze-blank         suppress repeated empty output lines
+
+       -t                          equivalent to -vT
+
+       -T, --show-tabs             display TAB characters as ^I
+
+       -u                          (ignored)
+
+       -v, --show-nonprinting      use ^ and M- notation, except for LFD and TAB
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Command: tac
+Concatenate files and print in reverse
+
+Usage: [OPTION]... [FILE]...
+
+[OPTION]
+With no FILE, or when FILE is -, read standard input.
+
+       Mandatory arguments to long options are mandatory for short options too.
+
+       -b, --before                   attach the separator before instead of after
+
+       -r, --regex                    interpret the separator as a regular expression
+
+       -s, --separator=STRING         use STRING as the separator instead of newline
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Command: rev
+Reverse line characterwise
+
+Usage: rev [FILE]...
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

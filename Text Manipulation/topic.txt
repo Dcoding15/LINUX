@@ -1,0 +1,29 @@
+Commands for text manipulation: -
+1. grep	(search of text pattern)
+2. awk (scripting language / command-line text manipulation tool)
+3. sed (perform find and replace function like windows)
+4. sort (text sorting)
+5. cut (printing part of text in a file)
+
+Command for creating files: -
+1. touch (create any type of empty file and also can change of timestamp of exitsting file)
+2. cat > file_name.file_extension
+	ctrl + d
+
+Commands for viewing files: -
+1. cat (display a file)
+2. head (by default display 10 line of text in a file from above)
+3. tail (by default display 10 line of text in a file from below)
+4. nl (display all text in a file with number line)
+5. more (controlling display instead of printing the whole file at once)
+6. less (controlling display instead of printing the whole file at once and also with additional feature like filter search)
+7. tac (display a file in reverse order)
+8. rev (display a file's text in reverse order)
+9. wc (display word, character count in a file)
+
+Command to compare two files: -
+1. cmp
+2. diff
+3. sdiff
+4. vdiff
+5. comm

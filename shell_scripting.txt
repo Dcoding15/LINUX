@@ -1,0 +1,367 @@
+Variable and value:
+-------------------
+
+    There are two types of variable: -
+        (1) Environment / Predefined variable
+        (2) User-defined variable
+	
+	1. Predefined / Environment variables: -
+	   ----------------------------------
+		These are mostly used by system internally therefore these variables are also known as System variables. We can also use them in our scripts also. We can get all enviournment variables information by using: -
+		env command
+		set command
+	
+	2. User defined variables: -
+	   ----------------------
+	   These are used based on our programming requirement, we can define our own vairable also.
+	
+	Q) How to define readonly vairables ?
+		A=100
+		readonly A
+
+		echo $A		#100
+		
+		#In readonly variable we can't reassign the value. These variable are only available for session.
+
+    Rules of variable: -
+        (1) It can contain uppercase, lowercase, digits and underscore.
+        (2) It can't start with digits.
+        (3) There will be no space at the time of assigning variables i.e., x=10
+        (4) Array variables can be define as (10 20 30 40)
+        (5) String variable can be define as "" i.e., x="Hello"
+        (6) We can use variables by $ as prefix or as ${variable_name}
+Note: We can use variables by ${command_name} or `command_name`
+
+Commenting:
+----------
+
+	Single line commnet put # at start of line
+	Multi line comment put <<com ... com. It can be any word include com.
+
+
+Variable Scope:
+---------------
+
+	There are three variale scope: -
+		(1) Session scope: These are declared in the terminal and available till exit of terminal.
+		(2) User scope: These are declared in the .sh / .bashrc  file and available within the file.
+		(3) System scope: These are declared in the /etc/profile file and available for all session and user.
+
+Variable Substitution:
+---------------------
+
+	Accessing the value of variable by using $ symbol is called variable substitution.
+	Syntax: -
+	------
+		$variable_name
+		${variable_name} (recommended to use)
+	
+	Note:  If we use single quote then variable substitution will not happening.
+
+Command Substitution:
+--------------------
+
+	Accessing the value of command by using $(command) is called command substitution.
+	Syntax: -
+	------
+		variable_name=$(command)
+
+Command Line Argument:
+---------------------
+
+	Example: -
+	-------
+
+		./test.sh This is the example of command line argument
+
+		$#  ---->  No. of arguments except script name
+		$0  ---->  Script Name
+		$1  ---->  first argument
+		$2  ---->  second argument
+		.
+		.
+		.
+		.
+
+		$*  ---->  Display all characters with IFS (Internal Field Seperator). By default the IFS value is whitespace.
+		$@  ---->  Display all character with whitespace seperator
+		$?  ---->  Represent exit code of previously executed command or scripts.
+	
+	Note: -
+	----
+		Exit Code / Status Code: Every command return some value previous execution which indicate whether the execution is successfully or not. There is range of 0 to 255. There are 2 types of code: -
+			(i) Zero value: It means the script is executed successfully.
+			(ii) Non-zero value: It means the script is not executed successfully.
+		
+		Exit Command: In the script to stop execution in the middle, we can use exit command. Syntax: exit status_code. There is a range of status code from 0 to 255. After 255 the code will again start from 0 i.e., 256 as 0 , 257 as 1 258 as 2 ... and so on.
+
+Operator:
+---------
+
+	(1) Arithematic: -
+			+   Addition
+			-   Subtaction
+			\*  Multiplication
+			/   Division
+			%   Modulus
+			++	Increment by 1
+			--	Decrement by 1
+	(2.1) Reltional only for numbers: -
+			-gt  Greater than
+			-ge  Greater than or equal
+			-lt  Lesser than
+			-le  Lesser than or equal
+			-eq  Equal to
+			-ne  Not equal to
+	(2.2) Relational only for strings: -
+			=	Equal to
+			!=	Not equal to
+			<	Lesser than
+			<=	Lesser than or equal to
+			>	Greater than
+			>=	Greater than or equal to
+	(3) Logical: -
+			-a  Logical AND
+			-o  Logical OR
+			!   Logical NOT
+
+					OR
+
+			&&	Logical AND
+			||	Logical OR
+			!	Logical NOT
+	(4) File Test Options: -
+			-e  Return true if file / directory exits.
+			-f  Return true if file is a regular file.
+			-d  Return true if file is a directory.
+			-s  Return true if file is non-empty.
+			-l  Return true if file is a link file.
+			-b  Return true if file is block special file.
+			-c  Return true if file is character speacial file.
+			-r  Return true if current user has read permission on the file.
+			-w  Return true if current user has write permission on the file.
+			-x  Return true if current user has execute permission on the file.
+			-o  Return true if current user is owner of the file.
+			file1 -ot file2  Return true if file1 is older than file2 in comparision of last modified time.
+			file1 -nt file2  Return true if file1 is newer than file2 in comparision of last modified time.
+	(5) String Test Option: -
+			-z  Return true if the string is empty.
+			-n  Return true if the string is non-empty.
+			str1 = str2  Return true if both string are same.
+			str1 != str2  Return true if both string are different.
+			str1 \< str2    Return true if str1 is alphabetically greater than str2.
+			str1 \> str2    Return true if str1 is alphabetically lesser than str2.
+
+Write expressions:
+-----------------
+
+	1. By using expr keyword
+		echo `expr $1 + $2`
+		echo $(expr $1 + $2)
+		Note:  while usign expr keyword whitespace must be required before and after + symbol.
+
+	2. By using let keyword
+		let x=$1+$2
+		echo $x
+
+		a=$1
+		b=$2
+		x=a+b
+		echo $x
+		Note: while using let keyword we should not use whitespace before and after + symbol.
+
+	3. By using (())
+		echo $(($1+$2))
+		a=$1
+		b=$2
+		echo $((a+b))
+		Note while using (()) both $ and whitespace are optional.
+
+	4. By using []
+		echo $[$1+$2]
+		a=$1
+		b=$2
+		echo $[a+b]
+		Note while using [] both $ and whitespace are optional.
+
+Q) what = with whitespace and without whitespace ?
+Ans) x=10 i.e., x variable is assigned value 10 and x = 10 i.e., x variable is compared to value 10
+
+Flow Control:
+-------------
+
+Note: In shell scripting anything within the condition will be treated as true condition.
+
+	(1) if-elif-else: -
+			if [ condition ]
+			then
+				statement / command
+			elif [ condition ]
+			then
+				statement / command
+			else
+				statement / command
+			fi
+
+	(2) case statement: -
+			case $variable_name in
+				option1)
+						statement / command
+						;;
+				option2)
+						statement / command
+						;;
+				*)
+						default - statement / command
+						;;
+				esac
+	
+	Regular Expressions for case statement: -
+	-----------------------------------
+
+		   --->  Reperesent zero or more character
+		?  --->  Represent only one character
+		[]  --->  Range of characters
+		{file1, file2, ..., fileN}  --->  List of files with comma seperator
+		[abc]  --->  a or b or c.
+		[^abc] --->  any character except a and b and c.
+		[a-z] or [[:lower:]]  --->  any lower case alphabet symbol.
+		[A-Z] or [[:upper:]]  --->  any upper case alphabet symbol.
+		[a-zA-Z] or [[:alpha:]]  --->  any alphabet symbol whether it is in lower case or upper case.
+		[0-9] or [[:digit:]]  --->  any digit from 0 to 9.
+		[a-zA-Z0-9] or [[:alnum:]]  --->  any lowercase, uppercase alphabets and digits.
+		[^a-zA-Z0-9]  --->  any character except lowercase, uppercase alphabets and digits.
+		[aeiouAEIOU]  --->  any vowels
+		[^aeiouAEIOU]  --->  any consonants
+		
+
+	(3) while loop: while loop iterate till condition became false.
+			while [ condition ]
+			do
+				statement / command
+			done
+
+	(4) until loop: until loop iterate till condition became true
+			until [ condition ]
+			do
+				statement / command
+			done
+
+	(5) for loop: -
+			for (( start; condition; increment/decrement ))
+			do
+				statement / command
+			done
+
+	(6) for-in loop: -
+			for variable_name in value1 value2 ... valueN
+			do
+				statement / command
+			done
+
+			OR
+
+			for variable_name in {starting_number..Ending_numebr}
+			do
+				statement / command
+			done
+
+Note: -
+----
+
+	(1) For flow control we have break and continue statements
+
+Array:
+------
+It is heterogenous data type and non-contiguous index.
+
+	Define array:
+	------------
+	variable_name=(value1 value2 value3 ... valueN)
+
+	Defining array by index:
+	-----------------------
+	variable_name[n]=value1
+	variable_name[n]=value2
+	variable_name[n]=value3
+	              .
+				  .
+				  .
+				  .
+	variable_name[n]=valueN
+
+	Access array: value_variable=${variable_name[n]}
+	Note: Where n refers to index starting from zero
+
+	#Display all elements present in array.
+	echo ${variable_name[@]}
+
+	# Display all elements present in array in single string seperated by first character in IFS (evnvironment varible) i.e., whitespace
+	echo ${variable_name[*]}
+
+	# Display all index where elements are present in array.
+	echo ${!variable_name[@]}
+
+	# Display total number of elements present in array.
+	echo ${#variable_name[@]}
+
+	# Display total number of character are present in nth index in array.
+	echo ${#variable_name[n]}
+
+	Delete array elements: unset variable_name[n]  --->  To remove nth index element from array
+	---------------------
+							unset variable_name[@]  --->  To remove all elements from array
+
+Function:
+---------
+
+	# Define function
+			1st way:
+					function function_name()
+					{
+						statement / commands
+					}
+
+			2nd way:
+					function_name()
+					{
+						statement / commands
+					}
+
+	# Calling function
+			fucntion_name $1 $2 ... $N
+
+	$0 --> Returns a script name
+	$1 --> First parameter
+	$2 --> Second parameter
+	$3 --> Third parameter
+	$4 --> Fourth parameter
+	.
+	.
+	.
+	.
+	$N --> Nth parameter
+	$@ --> All parameter
+	$* --> All parameter with IFS
+	$# --> Total number of parameter
+
+	Note: -
+	----
+
+		Every function is shell scripting return some value. The default value is exit code / status code of the last command inside function. But based on out requirement, we can return value explicitly by using return statement.
+		Syntax: -
+		------
+			return <exit_code / status_code>
+			The allowed values for exit code are 0 - 255
+			where,
+				0 means successfull execution
+				non-zero means unsuccessfull execution
+
+break vs exit vs return: -
+-----------------------
+
+	break: We can use break only inside loops to break loop execution. We will come out of the loop and remaining statement after loop will be executed.
+
+	exit: We can use anywhere to terminate from script execution. There is no chance of execution of any command or statement after exit command.
+
+	return: We can use only inside the function to stop execution of function. After return statement, the remaining statemen will not be executed. But after function call the remaining statement / command will be executed.

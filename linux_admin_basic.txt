@@ -1,0 +1,157 @@
+These directories are an integral part of the Linux file hierarchy and play crucial roles in the functioning of the operating system. Here are some of the most important special directories in Linux:
+
+1. /root (Root Directory): This is the home directory of the superuser (root).
+
+2. /home (Home Directory): This directory contains the home directories of regular users.
+
+3. /bin (Binary Binaries): This directory contains essential user binaries and commands that are required for system maintenance, recovery, boot the system and perform basic operations.
+
+4. /sbin (Superuser Binaries): This directory contains system binaries that are meant for system administrators and require administrative privileges to execute.
+
+5. /etc (Configuration Files): This directory stores system-wide configuration files and settings for different applications and services.
+
+6. /tmp (Temporary Files): A temporary directory where applications and users can store temporary files. The contents of this directory are typically deleted upon system reboot.
+
+7. /var (Variable Files): This directory contains variable data files, such as log files, spool files, and other files that change frequently as the system operates.
+
+8. /dev (Device Files): This directory contains device files that represent various hardware devices attached to the system.
+
+9. /proc (Process Information): A virtual file system that provides information about running processes and system resources as files.
+
+10. /sys (Sysfs File System): This directory provides information about devices, drivers, and kernel settings.
+
+11. /mnt and /media (Mount Points): These directories are used to temporarily mount external storage devices such as USB drives, network shares, and optical discs.
+
+12. /opt (Optional Files): This directory stores third-party applications and software that is not part of the core system can be installed here.
+
+13. /srv (Service Data): This directory is used to store data for services provided by the system. For example, web server data or FTP server data might be stored here.
+
+14. /boot (Boot Files): Contains the files needed for the initial stages of the boot process, including the kernel and bootloader configuration.
+
+15. /lib, /libx32, /lib64 (Shared Files): These directories store essential shared library files required for the operation of various programs and binaries. Here `/lib` stores 32-bit and `/lib64` stores 64-bit. `libx32` stores shared libraries which is 32-bit and optimised of 64-bit shared libraries which complied using x32 ABI (Application Binary Interface).
+
+16. /lost+found: This directory is used by the filesystem's `fsck` (file system check) utility to store recovered files and fragments after a filesystem check and repair operation.
+
+1. Job scheduling with corntab: -
+   ---------------------------
+   cron is derived from greek and its meaning is time. If any job execute automatically at a specified interval of time then such type of jobs are called cron jobs. It can be either single command or script. We have to configure cron jobs in crontabs.
+
+   Commands: -
+   --------
+   crontab -l ---> To list out cron jobs which is already configured.
+   crontab -e ---> To edit already existing cron jobs and to define new cron jobs.
+   crontab -r ---> To remove all configured cron jobs.
+   crontab filename ---> To install new crontab from file.
+
+   Format to configure cronjob: -
+   ---------------------------
+
+   Syntax: m h dom mon dow command
+   
+   m ---> minutes (range from 0 to 59)
+   h ---> hours (range from 0 to 23)
+   dom ---> day of month (range from 1 to 31)
+   mon ---> month of year (range from 1 to 12). We can also take english word as FIRST THREE LETTERS of month.
+   dow ---> day of week (range from 0 to 6). We can also take english word as SUN represent 0 or 7, MON represent 1, TUE represent 2, WED represent 3, THU represent 4, FRI represent 5, SAT represent 6.
+
+   Note: In place of m, h, dom, mon, dow if we put * then it will take current / every date and time.
+         For using range we use - like day range from thursday to saturday 4-6.
+         */n , where n represent no. of steps.
+         a-b/n, where a-b represent range starts from a to b with each n steps.
+         a,b,c,...,n <--- we represent value seperated by comma
+
+	Crontab shortcuts:-
+	-----------------
+	@reboot             ---> Run once at startup
+	@yearly / @annually ---> Run once a year
+	@monthly            ---> Run once a month
+	@weekly             ---> Run once a week
+	@daily / @midnight  ---> Run once a day
+	@hourly             ---> Run once a hour
+
+2. User Management: -
+   ---------------
+	Q1) How to add new group ?
+	Ans) By using addgroup command ---> sudo addgroup group_name
+		 To check new group is added ---> cat /etc/group
+
+	Q2) How to add new user ?
+	Ans) By using adduser command ---> sudo adduser user_name
+		 Adding new user in existing group ---> sudo adduser --ingroup existing_group_name user_name
+		 To check new user is added ---> cat /etc/passwd
+	Note: Adding new user will create new group of same name as new user.
+
+	Q3) Switching from one user to another ?
+	Ans) By using su command.
+		 For switching to another user ---> su user_name
+		 For switching to root user ---> sudo su / sudo -i
+	Note: For switching both user and enviornment, use: su - user_name
+
+	Q4) How to get information about particular user ?
+	Ans) finger user_name
+		 cat /etc/passwd <--- contain user info
+		 cat /etc/shadow <--- contain user password in encrypted form
+		 cat /etc/group  <--- contain group info
+
+	Note: We have to install finger first. (sudo apt install finger)
+
+	Q5) How to delete user ?
+	Ans) By using deluser command ---> sudo deluser user_name
+
+	Q6) How to delete group ?
+	Ans) By using delgroup command ---> sudo delgroup group_name
+	Note: If last user get delete then group will automatically deleted. This command is require to delete empty group.
+
+	Q7) How to change ownership of file ?
+	Ans) By using chown command where sudo permission must require.
+		 sudo chown root file_name ---> change to root user
+		 sudo chown user_name file_name ---> change to another user
+
+	Q8) How to change group membership of a file ?
+	Ans) By using chgrp command where sudo permission must require.
+		 sudo chgrp group_name file_name ---> change to another group
+
+	Q9) How to change group of a user ?
+	Ans) By using usermod command where sudo permission must require.
+		 sudo usermod -g group_name user_name
+
+	Q10) Add a user to multiple group ?
+	Ans) By using usermod command where sudo permission must require.
+		 sudo usermod -aG group1_name, group2_name, ..., groupN_name user_name
+
+	Q11) How to check available group ?
+	Ans) By using following commands: -
+		 groups ---> list all group that current user belong
+		 groups user_name ---> list group for particular user
+
+	Q12) How to change password of a user ?
+	Ans) By using passwd command.
+		 sudo passwd user_name ---> To change password of specified user
+		 sudo passwd root      ---> To change password of root user
+		 passwd                ---> To change password of current user
+
+	Q13) What is difference between adduser and useradd in LINUX ?
+	Ans)
+		 adduser: -
+			1. It is higher level and not available on all linux distribution. It adds a user with standard system settings.
+			2. It provide user creation process using interactive prompt. It is beginner friendly way to add a new user.
+
+		 useradd: -
+			1. It is lower level and available on all linux distribution. It adds a user with some additional parameter.
+			2. It provide user creation process using non-interactive prompt. It is portable across different linux systems.
+
+	Q15) sudoers file
+	Ans) To view sudo configuration ---> sudo cat /etc/sudoers
+
+3. PuTTY: -
+   -----
+	1. It can be used to connect with remote linux servers from local machine.
+	2. It is an SSH and telnet client can be used to connect with remote users.
+	3. It is an open source software.
+	4. Install net-tools, openssh-server, openssh-client.
+	5. To configure PuTTY:
+		(a) IP address of linux server into Host Name (or IP address) field.
+		(b) Enter name under Saved sessions.
+		(c) Save it !!!
+		(d) To run click the repective sessions, click load and click open.
+	6. At a time we can connect only one window. Therefore we use SuperPuTTY to connect to multiple windows at a time.
