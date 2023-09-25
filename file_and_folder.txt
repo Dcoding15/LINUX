@@ -199,4 +199,57 @@ Usage: rm [OPTION]... [FILE]...
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Command: chmod
+Changes the file mode bits of each given file, modes can be change by symbolic modes or octal modes.
+
+Usage: chmod [OPTION]... MODE[,MODE]... FILE...
+       chmod [OPTION]... OCTAL-MODE FILE...
+       chmod [OPTION]... --reference=RFILE FILE...
+
+[OPTION]
+      -c, --changes              like verbose but report only when a change is made
+
+      -f, --silent, --quiet      suppress most error messages
+
+      -v, --verbose              output a diagnostic for every file processed
+
+      --no-preserve-root         do not treat '/' specially (the default)
+
+      --preserve-root            fail to operate recursively on '/'
+
+      --reference=RFILE          use RFILE's mode instead of MODE values
+
+      -R, --recursive            change files and directories recursively
+
+Symbolic Modes [ugoa][+-+][rwxXst]:
+             u          user who owns file
+             g          other user in file's group
+             o          other user not in file's group
+             a          all users
+             +          add mode bits
+             -          remove mode bits
+             =          replace mode bits
+             r          enable read mode
+             w          enable write mode
+             x          enable execute mode
+             X          enable execute mode if the file is directory or already have execute permission for some user
+             s          enable execute mode to set user or other user in file's group
+             t          restricted deletion flag or sticky bit
+
+Octal Modes [user, group, other]:
+0 bit represent no permission given
+1 bit represent permission given
+                      [read write execute]
+             0           0    0      0
+             1           0    0      1
+             2           0    1      0
+             3           0    1      1
+             4           1    0      0
+             5           1    0      1
+             6           1    1      0
+             7           1    1      1
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 Command: stat
+Command: find
