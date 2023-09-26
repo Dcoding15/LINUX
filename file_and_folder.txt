@@ -253,3 +253,4 @@ Octal Modes [user, group, other]:
 
 Command: stat
 Command: find
+Command: ln
