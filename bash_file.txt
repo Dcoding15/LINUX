@@ -2,22 +2,22 @@
        bash - GNU Bourne-Again SHell
 
 [SYNOPSIS]
-       bash [options] [command_string | file]
+       bash [long options] [short option] [command_string | file]
 
 [OPTIONS]
        All  of  the  single-character shell options documented in the description of the set builtin command, including 
 
 
        -o [option_name]
-                 test operator to check whether option is enabled or not. If option is enabled it return 1 otherwise 0.
+                 test operator to check whether option is working or not.
 
-       -c        commands are read from the command_string.
+       -c        commands are read only from the command_string.
 
        -i        shell is interactive.
 
-       -l        Make bash act as if it had been invoked as a login shell (see INVOCATION below).
+       -l        Make bash act as if it had been invoked as a login shell.
 
-       -r        shell becomes restricted (see RESTRICTED SHELL below).
+       -r        shell becomes restricted.
 
        -s        if no arguments remain after option processing, then commands are read from the standard input. This option allows the positional parameters to be set
                  when invoking an interactive shell or when reading input through a pipe.
@@ -25,9 +25,6 @@
        -v        Print shell input lines as they are read.
 
        -x        Print commands and their arguments as they are executed.
-
-       -D        A list of all double-quoted strings preceded by $ is printed on the standard output. These are the strings that are subject to language translation
-                 when the current locale is not C or POSIX.
 
        -n        no commands will be executed.
 
@@ -63,18 +60,13 @@
 
        --norc                  Do not read and execute the system wide initialization file /etc/bash.bashrc and the personal initialization file ~/.bashrc if the shell  is  interactive. This option is on by default if the shell is invoked as sh.
 
-       --posix
-              Change the behavior of bash where the default operation differs from the POSIX standard to match the standard (posix mode).  See SEE ALSO below for a ref‐
-              erence to a document that details how posix mode affects bash's behavior.
+       --posix                 Change the behavior of bash where the default operation differs from the POSIX standard to match the standard (posix mode).  See SEE ALSO below for a reference to a document that details how posix mode affects bash's behavior.
 
-       --restricted
-              The shell becomes restricted (see RESTRICTED SHELL below).
+       --restricted            The shell becomes restricted (see RESTRICTED SHELL below).
 
-       --verbose
-              Equivalent to -v.
+       --verbose               Equivalent to -v.
 
-       --version
-              Show version information for this instance of bash on the standard output and exit successfully.
+       --version               Show version information for this instance of bash on the standard output and exit successfully.
 
 [ARGUMENTS]
        If arguments remain after option processing, and neither the -c nor the -s option has been supplied, the first argument is assumed to be the name of a file  con‐
