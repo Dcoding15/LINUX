@@ -1,3 +1,24 @@
+Pipes and redirections: -
+----------------------
+	Symbol		Uses
+	------      ----
+	  >         output overwrite
+	  >>        output append
+	  <         input overwrite
+	  <<        output append
+	  |         use to combine two or more commands
+
+Expansions and substitutions: -
+----------------------------
+	Representation            Name
+	--------------            ----
+	  ~                       Tilde expansion
+	  {...}                   Brace expansion (create sets or ranges like {start..end..step})
+	  ${...}                  Parameter expansion (retrive and transform stored values)
+	  $(...)                  Command substitution (puts output of one command into another)
+	  $((...))                Arithematic expansion (does calculation similar as $[...])
+
+
 Variable and value:
 -------------------
 
