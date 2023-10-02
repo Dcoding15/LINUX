@@ -50,33 +50,35 @@
        --init-file file        Can be used to customize the bash environment before any other commands are run.
                                This can be useful for setting environment variables, sourcing other bash scripts, or defining aliases.
 
-       --rcfile file           Execute commands from file from user initialized file if the shell is interactive (see INVOCATION below).
+       --rcfile file           Execute commands from file from user initialized file.
 
        --login                 Equivalent to -l.
 
        --noediting             Do not use the GNU readline library to read command lines when the shell is interactive.
 
-       --noprofile             Do  not  read  either the system-wide startup file /etc/profile or any of the personal initialization files ~/.bash_profile, ~/.bash_login, or ~/.profile. By default, bash reads these files when it is invoked as a login shell (see INVOCATION below).
+       --noprofile             Do  not  read  either the system-wide startup file /etc/profile or any of the personal initialization files ~/.bash_profile, ~/.bash_login, or ~/.profile.
 
-       --norc                  Do not read and execute the system wide initialization file /etc/bash.bashrc and the personal initialization file ~/.bashrc if the shell  is  interactive. This option is on by default if the shell is invoked as sh.
+       --norc                  Do not read and execute the system wide initialization file /etc/bash.bashrc and the personal initialization file ~/.bashrc if the shell is interactive.
 
-       --posix                 Change the behavior of bash where the default operation differs from the POSIX standard to match the standard (posix mode).  See SEE ALSO below for a reference to a document that details how posix mode affects bash's behavior.
+       --posix                 Change the behavior of bash where the default operation differs from the POSIX standard to match the standard (posix mode).
 
-       --restricted            The shell becomes restricted (see RESTRICTED SHELL below).
+       --restricted            The shell becomes restricted.
 
        --verbose               Equivalent to -v.
 
-       --version               Show version information for this instance of bash on the standard output and exit successfully.
+       --version               Show version information of bash.
 
 [ARGUMENTS]
-       If arguments remain after option processing, and neither the -c nor the -s option has been supplied, the first argument is assumed to be the name of a file  con‐
-       taining shell commands.  If bash is invoked in this fashion, $0 is set to the name of the file, and the positional parameters are set to the remaining arguments.
-       Bash reads and executes commands from this file, then exits.  Bash's exit status is the exit status of the last command executed in the script.  If  no  commands
-       are  executed,  the  exit status is 0.  An attempt is first made to open the file in the current directory, and, if no file is found, then the shell searches the
-       directories in PATH for the script.
+       If arguments remain after option processing, and neither the -c nor the -s option has been supplied, the first argument is assumed to be the name of a file containing shell commands.
+
+       If bash is invoked in this fashion, $0 is set to the name of the file, and the positional parameters are set to the remaining arguments.
+
+       Bash reads and executes commands from file, then exits. It's exit status is the exit status of the last command executed in the script. If no commands are executed, the exit status is 0.
+
+       An attempt is first made to open the file in the current directory, and, if no file is found, then the shell searches the directories in PATH for the script.
 
 [INVOCATION]
-       A login shell is one whose first character of argument zero is a -, or one started with the --login option.
+       A login shell is one whose first character of argument zero is a -l, or one started with the --login option.
 
        An interactive shell is one started without non-option arguments (unless -s is specified) and without the -c option whose standard input and error are both  con‐
        nected  to  terminals  (as  determined  by  isatty(3)), or one started with the -i option.  PS1 is set and $- includes i if bash is interactive, allowing a shell
