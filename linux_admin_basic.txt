@@ -4,9 +4,9 @@ These directories are an integral part of the Linux file hierarchy and play cruc
 
 2. /home (Home Directory): This directory contains the home directories of regular users.
 
-3. /bin (Binary Binaries): This directory contains essential user binaries and commands that are required for system maintenance, recovery, boot the system and perform basic operations.
+3. /bin (User Binaries): This directory contains essential user binaries and commands that are required for system maintenance, recovery, boot the system and perform basic operations.
 
-4. /sbin (Superuser Binaries): This directory contains system binaries that are meant for system administrators and require administrative privileges to execute.
+4. /sbin (System Binaries): This directory contains system binaries that are meant for system administrators and require administrative privileges to execute.
 
 5. /etc (Configuration Files): This directory stores system-wide configuration files and settings for different applications and services.
 
@@ -20,7 +20,7 @@ These directories are an integral part of the Linux file hierarchy and play cruc
 
 10. /sys (Sysfs File System): This directory provides information about devices, drivers, and kernel settings.
 
-11. /mnt and /media (Mount Points): These directories are used to temporarily mount external storage devices such as USB drives, network shares, and optical discs.
+11. /mnt and /media (Mount Points): These directories are used to temporarily mount external storage devices such as USB drives, network shares, and optical discs. The /mnt is for virtual drivers and /media is for phisical drivers.
 
 12. /opt (Optional Files): This directory stores third-party applications and software that is not part of the core system can be installed here.
 
@@ -31,6 +31,8 @@ These directories are an integral part of the Linux file hierarchy and play cruc
 15. /lib, /libx32, /lib64 (Shared Files): These directories store essential shared library files required for the operation of various programs and binaries. Here `/lib` stores 32-bit and `/lib64` stores 64-bit. `libx32` stores shared libraries which is 32-bit and optimised of 64-bit shared libraries which complied using x32 ABI (Application Binary Interface).
 
 16. /lost+found: This directory is used by the filesystem's `fsck` (file system check) utility to store recovered files and fragments after a filesystem check and repair operation.
+
+17. /usr:
 
 1. Job scheduling with corntab: -
    ---------------------------
@@ -79,7 +81,7 @@ These directories are an integral part of the Linux file hierarchy and play cruc
 	Ans) By using adduser command ---> sudo adduser user_name
 		 Adding new user in existing group ---> sudo adduser --ingroup existing_group_name user_name
 		 To check new user is added ---> cat /etc/passwd
-	Note: Adding new user will create new group of same name as new user.
+	Note: Adding new user will create new group of same name as new user. If group is not already existed.
 
 	Q3) Switching from one user to another ?
 	Ans) By using su command.

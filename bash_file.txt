@@ -68,49 +68,6 @@
 
        --version               Show version information of bash.
 
-[ARGUMENTS]
-       If arguments remain after option processing, and neither the -c nor the -s option has been supplied, the first argument is assumed to be the name of a file containing shell commands.
-
-       If bash is invoked in this fashion, $0 is set to the name of the file, and the positional parameters are set to the remaining arguments.
-
-       Bash reads and executes commands from file, then exits. It's exit status is the exit status of the last command executed in the script. If no commands are executed, the exit status is 0.
-
-       An attempt is first made to open the file in the current directory, and, if no file is found, then the shell searches the directories in PATH for the script.
-
-[INVOCATION]
-The following paragraphs describe how bash executes its startup files. If any of the files exist but cannot be read, bash reports an error. Tildes are expanded in filenames.
-
-When  bash  is  invoked  as an interactive login shell, or as a non-interactive shell with the --login option, it first reads and executes commands from the file /etc/profile, if that file exists. After reading that file, it looks for ~/.bash_profile, ~/.bash_login, and ~/.profile, in that order, and reads and executes commands from the first one that exists and is readable. The --noprofile option may be used when the shell is started to inhibit this behavior.
-
-When an interactive login shell exits, or a non-interactive login shell executes the exit builtin command, bash reads and executes commands from the file ~/.bash_logout, if it exists.
-
-When an interactive shell that is not a login shell is started, bash reads and executes commands from /etc/bash.bashrc and ~/.bashrc, if these files exist. This may  be  inhibited  by  using the --norc option.  The --rcfile file option will force bash to read and execute commands from file instead of /etc/bash.bashrc and ~/.bashrc.
-
-When bash is started non-interactively, to run a shell script, for example, it looks for the variable BASH_ENV in the environment, expands its value  if  it  ap‐
-       pears there, and uses the expanded value as the name of a file to read and execute.  Bash behaves as if the following command were executed:
-              if [ -n "$BASH_ENV" ]; then . "$BASH_ENV"; fi
-       but the value of the PATH variable is not used to search for the filename.
-
-If  bash  is  invoked with the name sh, it tries to mimic the startup behavior of historical versions of sh as closely as possible, while conforming to the POSIX
-       standard as well.  When invoked as an interactive login shell, or a non-interactive shell with the --login option, it first attempts to read and execute commands
-       from  /etc/profile  and  ~/.profile,  in that order.  The --noprofile option may be used to inhibit this behavior.  When invoked as an interactive shell with the
-       name sh, bash looks for the variable ENV, expands its value if it is defined, and uses the expanded value as the name of a file to read  and  execute.   Since  a
-       shell  invoked  as sh does not attempt to read and execute commands from any other startup files, the --rcfile option has no effect.  A non-interactive shell in‐
-       voked with the name sh does not attempt to read any other startup files.  When invoked as sh, bash enters posix mode after the startup files are read.
-
-When bash is started in posix mode, as with the --posix command line option, it follows the POSIX standard for startup files.  In this mode,  interactive  shells
-       expand the ENV variable and commands are read and executed from the file whose name is the expanded value.  No other startup files are read.
-
-Bash  attempts  to determine when it is being run with its standard input connected to a network connection, as when executed by the remote shell daemon, usually
-       rshd, or the secure shell daemon sshd.  If bash determines it is being run in this fashion, it reads and executes commands from ~/.bashrc and ~/.bashrc, if these
-       files exist and are readable.  It will not do this if invoked as sh.  The --norc option may be used to inhibit this behavior, and the --rcfile option may be used
-       to force another file to be read, but neither rshd nor sshd generally invoke the shell with those options or allow them to be specified.
-
-If the shell is started with the effective user (group) id not equal to the real user (group) id, and the -p option is not supplied, no startup files  are  read,
-       shell  functions  are  not  inherited from the environment, the SHELLOPTS, BASHOPTS, CDPATH, and GLOBIGNORE variables, if they appear in the environment, are ig‐
-       nored, and the effective user id is set to the real user id.  If the -p option is supplied at invocation, the startup behavior is the  same,  but  the  effective
-       user id is not reset.
-
 [DEFINITIONS]
        The following definitions are used throughout the rest of this document.
        blank             ---> A space or tab.
@@ -132,10 +89,9 @@ If the shell is started with the effective user (group) id not equal to the real
 [SHELL GRAMMAR]
    Simple Commands: -
    ---------------
-       A simple command is a sequence of optional variable assignments followed by blank-separated words and redirections, and terminated by a control operator. The
-       first word specifies the command to be executed, and is passed as argument zero. The remaining words are passed as arguments to the invoked command.
-
-       The return value of a simple command is its exit status, or 128+n if the command is terminated by signal n.
+       A simple command is a  blank-separated words with sequence of optional variable, redirections, terminated by a control operator.
+       The remaining words are passed as arguments to the invoked command.
+       The return value of a simple command is its exit status, or 128+n if the command is terminated by signal n. Where n refers to signal number.
 
    Pipelines: -
    ---------
@@ -143,27 +99,25 @@ If the shell is started with the effective user (group) id not equal to the real
 
               [time [-p]] [ ! ] command [ [|⎪|&] command2 ... ]
 
-       The standard output of command is connected via a pipe to the standard input of command2.  This connection is performed before any redirections specified by  the
-       command  (see REDIRECTION below).  If |& is used, command's standard error, in addition to its standard output, is connected to command2's standard input through
-       the pipe; it is shorthand for 2>&1 |.  This implicit redirection of the standard error to the standard output is performed after any  redirections  specified  by
-       the command.
+       The standard output of "command" is connected via a pipe to the standard input of "command2".
+       If |& is used, "command" standard error and standard output, is connected to "command2" standard input through the pipe; it is shorthand for 2>&1 |.
+       This implicit redirection of the standard error to the standard output is performed after any redirections specified by the command.
 
-       The  return  status  of  a pipeline is the exit status of the last command, unless the pipefail option is enabled.  If pipefail is enabled, the pipeline's return
-       status is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands exit successfully.  If the reserved word !   precedes
-       a  pipeline, the exit status of that pipeline is the logical negation of the exit status as described above.  The shell waits for all commands in the pipeline to
-       terminate before returning a value.
+       The return status of a pipeline is the exit status of the last command, if pipefail option is disabled. If pipefail is enabled, the pipeline's return status 
+       is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands exit successfully.
+       
+       If the "!" precedes a pipeline, the exit status of that pipeline is the logical negation. The shell waits for all commands in the pipeline to terminate before 
+       returning a value.
 
-       If the time reserved word precedes a pipeline, the elapsed as well as user and system time consumed by its execution are reported when the  pipeline  terminates.
-       The  -p  option changes the output format to that specified by POSIX.  When the shell is in posix mode, it does not recognize time as a reserved word if the next
-       token begins with a `-'.  The TIMEFORMAT variable may be set to a format string that specifies how the timing information should be displayed; see  the  descrip‐
-       tion of TIMEFORMAT under Shell Variables below.
+       If the "time" precedes a pipeline, the elapsed as well as user and system time consumed by its execution are reported when the pipeline terminates. The "-p" option
+       changes the output format to that specified by POSIX. When the shell is in posix mode, it does not recognize time as a reserved word if the next token begins with
+       a `-'. The TIMEFORMAT variable may be set to a format string that specifies how the timing information should be displayed.
 
-       When  the  shell  is in posix mode, time may be followed by a newline.  In this case, the shell displays the total user and system time consumed by the shell and
-       its children.  The TIMEFORMAT variable may be used to specify the format of the time information.
+       When the shell is in posix mode, time may be followed by a newline. In this case, the shell displays the total user and system time consumed by the shell and
+       its children. The TIMEFORMAT variable may be used to specify the format of the time information.
 
-       Each command in a pipeline is executed as a separate process (i.e., in a subshell).  See COMMAND EXECUTION ENVIRONMENT for a description of a  subshell  environ‐
-       ment.   If  the  lastpipe  option is enabled using the shopt builtin (see the description of shopt below), the last element of a pipeline may be run by the shell
-       process.
+       Each command in a pipeline is executed as a separate process i.e., in a subshell. If the lastpipe option is enabled using the shopt builtin, the last element of
+       a pipeline may be run by the shellprocess.
 
    Lists: -
    -----
@@ -2603,7 +2557,7 @@ If the shell is started with the effective user (group) id not equal to the real
 
 
 
-
+[COMPATIBILITY]
        The following table describes the behavior changes controlled by each compatibility level setting.  The compatNN tag is used as shorthand for setting the compat‐
        ibility  level  to NN using one of the following mechanisms.  For versions prior to bash-5.0, the compatibility level may be set using the corresponding compatNN
        shopt option.  For bash-4.3 and later versions, the BASH_COMPAT variable is preferred, and it is required for bash-5.1 and later versions.
