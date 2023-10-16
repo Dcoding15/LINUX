@@ -32,7 +32,13 @@ These directories are an integral part of the Linux file hierarchy and play cruc
 
 16. /lost+found: This directory is used by the filesystem's `fsck` (file system check) utility to store recovered files and fragments after a filesystem check and repair operation.
 
-17. /usr:
+17. /usr: It contains  user binaries, documentations, header files, files for the X windowing system, etc. It is one of the largest directories in LINUX system size-wise. There are some sub-directories:
+	(1) /usr/bin --> contains applications for system users.
+	(2) /usr/include --> contains header files for compiling C and C++ programs.
+	(3) /usr/doc --> contain documentation for various programs
+	(4) /usr/src --> contains LINUX kernel files, documentation, header files.
+	(5) /usr/sbin --> contains programs for system administration.
+	(6) /usr/local --> contains program for third-party software which doesn't comes with any distro of LINUX.
 
 1. Job scheduling with corntab: -
    ---------------------------
