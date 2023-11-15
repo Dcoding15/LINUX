@@ -63,7 +63,7 @@ Commenting:
 Variable Scope:
 ---------------
 
-	There are three variale scope: -
+	There are three variable scope: -
 		(1) Session scope: These are declared in the terminal and available till exit of terminal.
 		(2) User scope: These are declared in the .sh / .bashrc  file and available within the file.
 		(3) System scope: These are declared in the /etc/profile file and available for all session and user.
@@ -125,8 +125,8 @@ Operator:
 			\*  Multiplication
 			/   Division
 			%   Modulus
-			++	Increment by 1
-			--	Decrement by 1
+			++	Increment by 1 (post increment)
+			--	Decrement by 1 (post decrement)
 	(2.1) Reltional only for numbers: -
 			-gt  Greater than
 			-ge  Greater than or equal
