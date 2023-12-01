@@ -127,3 +127,10 @@ Opens a file or URL in the user's preferred application
 Usage: xdg-open { file | URL }
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Command: firefox-esr / google-chrome/ brave / any-browser
+Opens a tab / web page
+
+Usage: any-browser URL
+
+SEARCH QUERY: any-browser www.google.com/search?q=enter+your+query
