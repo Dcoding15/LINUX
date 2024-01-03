@@ -1,78 +1,11 @@
 [NAME]
        bash - GNU Bourne-Again SHell
 
-[SYNOPSIS]
-       bash [long options] [short option] [command_string | file]
-
-[OPTIONS]
-       All  of  the  single-character shell options documented in the description of the set builtin command, including 
-
-
-       -o [option_name]
-                 test operator to check whether option is working or not.
-
-       -c        commands are read only from the command_string.
-
-       -i        shell is interactive.
-
-       -l        Make bash act as if it had been invoked as a login shell.
-
-       -r        shell becomes restricted.
-
-       -s        if no arguments remain after option processing, then commands are read from the standard input. This option allows the positional parameters to be set
-                 when invoking an interactive shell or when reading input through a pipe.
-
-       -v        Print shell input lines as they are read.
-
-       -x        Print commands and their arguments as they are executed.
-
-       -n        no commands will be executed.
-
-       [-+]O [shopt_option]
-                 shopt_option is one of the shell options accepted by the shopt builtin command.
-                 -O sets the value of that shopt_option; +O unsets it.
-                 If shopt_option is not supplied, the names and values of the shell options accepted by shopt are printed on the standard output.
-                 If the invocation option is +O, the output is displayed in a format that may be reused as input.
-
-       --        A -- signals the end of options and disables further option processing. Any arguments after the -- are treated as filenames and arguments.
-                 An argument of - is equivalent to --.
-
-       Bash also interprets a number of multi-character options.  These options must appear on the command line before the single-character options to be recognized.
-
-       --debugger              Arrange for the debugger profile to be executed before the shell starts. Turns on extended debugging mode.
-
-       --dump-po-strings       Equivalent to -D, but the output is in the GNU gettext po (portable object) file format.
-
-       --dump-strings          Equivalent to -D.
-
-       --help                  Display a usage message on standard output and exit successfully.
-
-       --init-file file        Can be used to customize the bash environment before any other commands are run.
-                               This can be useful for setting environment variables, sourcing other bash scripts, or defining aliases.
-
-       --rcfile file           Execute commands from file from user initialized file.
-
-       --login                 Equivalent to -l.
-
-       --noediting             Do not use the GNU readline library to read command lines when the shell is interactive.
-
-       --noprofile             Do  not  read  either the system-wide startup file /etc/profile or any of the personal initialization files ~/.bash_profile, ~/.bash_login, or ~/.profile.
-
-       --norc                  Do not read and execute the system wide initialization file /etc/bash.bashrc and the personal initialization file ~/.bashrc if the shell is interactive.
-
-       --posix                 Change the behavior of bash where the default operation differs from the POSIX standard to match the standard (posix mode).
-
-       --restricted            The shell becomes restricted.
-
-       --verbose               Equivalent to -v.
-
-       --version               Show version information of bash.
-
 [DEFINITIONS]
        The following definitions are used throughout the rest of this document.
        blank             ---> A space or tab.
        word / token      ---> A sequence of characters considered as a single unit by the shell.
-       name / identifier ---> A  word  consisting  only of alphanumeric characters and underscores, and beginning with an alphabetic character or an underscore.
+       name / identifier ---> A word  consisting  only of alphanumeric characters and underscores, and beginning with an alphabetic character or an underscore.
        metacharacter     ---> A character that, when unquoted, separates words. One of the following:
 
                                                         |  & ; ( ) < > space tab newline
@@ -89,7 +22,7 @@
 [SHELL GRAMMAR]
    Simple Commands: -
    ---------------
-       A simple command is a  blank-separated words with sequence of optional variable, redirections, terminated by a control operator.
+       A simple command is a blank-separated words with sequence of optional variable, redirections, terminated by a control operator.
       
        The remaining words are passed as arguments to the invoked command.
       
@@ -97,60 +30,48 @@
 
    Pipelines: -
    ---------
-       A pipeline is a sequence of one or more commands separated by one of the control operators | or |&.  The format for a pipeline is:
+       A pipeline is a sequence of one or more commands separated by one of the control operators | or |&. The format for a pipeline is:
 
               [time [-p]] [ ! ] command [ [|⎪|&] command2 ... ]
 
        The standard output of "command" is connected via a pipe to the standard input of "command2".
        If |& is used, "command" standard error and standard output, is connected to "command2" standard input through the pipe; it is shorthand for 2>&1 |.
-       This implicit redirection of the standard error to the standard output is performed after any redirections specified by the command.
 
-       The return status of a pipeline is the exit status of the last command, if pipefail option is disabled. If pipefail is enabled, the pipeline's return status 
-       is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands exit successfully.
+       If pipefail option is disabled, the return status of a pipeline is the exit status of the last command.
+       If pipefail option is enabled, the return status of a pipeline is the exit status of the last command with a non-zero status or zero if all commands exit successfully.
        
-       If the "!" precedes a pipeline, the exit status of that pipeline is the logical negation. The shell waits for all commands in the pipeline to terminate before 
-       returning a value.
+       If the "!" precedes a pipeline, the shell return value of logical negation after all commands in the pipeline terminates.
 
-       If the "time" precedes a pipeline, the elapsed as well as user and system time consumed by its execution are reported when the pipeline terminates. The "-p" option
-       changes the output format to that specified by POSIX. When the shell is in posix mode, it does not recognize time as a reserved word if the next token begins with
-       a `-'. The TIMEFORMAT variable may be set to a format string that specifies how the timing information should be displayed.
+       If the "time" precedes a pipeline, after termination it will report execution time (user, system, elapsed). 
 
-       When the shell is in posix mode, time may be followed by a newline. In this case, the shell displays the total user and system time consumed by the shell and
-       its children. The TIMEFORMAT variable may be used to specify the format of the time information.
+       The "-p" option changes the output format to that specified by POSIX.
 
    Lists: -
    -----
        A list is a sequence of one or more pipelines separated by one of the operators ;, &, &&, or ||, and optionally terminated by one of ;, &, or <newline>.
 
-       Of these list operators, && and || have equal precedence, followed by ; and & which also have equal precedence.
+       && and ||, followed by ; and & both have equal precedence.
 
-       A sequence of one or more newlines may appear in a list instead of a semicolon to delimit commands.
+       Command terminated by control operator &, the shell executes the command in the background in a subshell and does not wait for the command to finish, 
+       and the return status is 0. These are referred to as asynchronous commands.
 
-       If a command is terminated by the control operator &, the shell executes the command in the background in a subshell. The shell does not wait for the command to
-       finish, and the return status is 0. These are referred to as asynchronous commands.
-
-       Commands separated by a ; are executed sequentially; the shell waits for each command to terminate in turn. The return status is the exit status of the last command 
+       Commands separated by ; are executed sequentially, the shell waits for each command to terminate in sequence. The return status is the exit status of the last command 
        executed. These are referred to as synchronous commands.
 
-       AND and OR lists are sequences of one or more pipelines separated by the && and || control operators, respectively. AND and OR lists are executed with left  as‐
-       sociativity.
-       
-       An AND list has the form
+       AND and OR lists are sequences of one or more pipelines separated by the && and || control operators, respectively. These are executed with left associativity (left to right).
+
+       AND list form, if command1 returns an exit status 0 (successfully executed) then command2 is executed.
 
               command1 && command2
 
-       command2 is executed if, and only if, command1 returns an exit status of zero (success).
-
-       An OR list has the form
+       OR list form, if command2 returns an exit status non-zero (not successfully executed) then command2 is executed.
 
               command1 || command2
 
-       command2 is executed if, and only if, command1 returns a non-zero exit status.
-
    Compound Commands: -
    -----------------
-       A compound command is one of the following.  In most cases a list in a command's description may be separated from the rest of the command by one  or  more  new‐
-       lines, and may be followed by a newline in place of a semicolon.
+       A compound command is one of the following. In most cases a list in a command's description may be separated from the rest of the command by one or more newlines, 
+       and may be followed by a newline in place of a semicolon.
 
        (list) list  is  executed in a subshell environment (see COMMAND EXECUTION ENVIRONMENT below).  Variable assignments and builtin commands that affect the shell's
               environment do not remain in effect after the command completes.  The return status is the exit status of list.
@@ -2610,8 +2531,8 @@
                      that can be reused as input. Bash-5.1 suppresses that message when the -l option is supplied.
 
 [RESTRICTED SHELL]
-       If bash is started with the name rbash, or the -r option is supplied at invocation, the shell becomes restricted.  A restricted shell is used to set up an  envi‐
-       ronment more controlled than the standard shell.  It behaves identically to bash with the exception that the following are disallowed or not performed:
+       If bash is started with the name rbash, or -r option is supplied at invocation, the shell becomes restricted. A restricted shell is used to set up an environment 
+       more controlled than the standard shell. It behaves identically to bash with the exception that the following are disallowed or not performed:
 
        •      changing directories with cd
 

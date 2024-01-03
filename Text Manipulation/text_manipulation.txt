@@ -79,6 +79,9 @@ Usage: wc [OPTION]... [FILE]...
 
        -w, --words              print the word counts
 
+OUPUT: wc [filename]
+	   [lines] [words] [characters] [filename]
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Command: cat

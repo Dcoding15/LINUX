@@ -1,0 +1,16 @@
+Command: rm
+Remove (unlink) the FILE(s) and directories.
+
+Usage: rm [OPTION]... [FILE]...
+
+[OPTION]
+  -f, --force                          forcely remove everything
+  -i                                   prompt before every removal
+  -I                                   prompt before removing more than three files
+      --interactive[=WHEN]             prompt according to WHEN: never, once, always (default)
+      --one-file-system                when removing a hierarchy recursively, skip any directory that is on a file system different from that of the corresponding command line argument
+      --no-preserve-root               do not treat '/' specially
+      --preserve-root[=all]            do not remove '/' (default); with 'all', reject any command line argument on a separate device from its parent
+  -r, -R, --recursive                  remove directories and their contents recursively
+  -d, --dir                            remove empty directories
+  -v, --verbose                        remove file and directory and print message

@@ -1,0 +1,24 @@
+To know the version of a firewall --> sudo ufw version
+
+To know status of a firewall --> sudo ufw status
+To know status of a firewall with number --> sudo ufw status numbered
+To know status of a firewall in details --> sudo ufw status verbose
+To know information of running firewall --> sudo ufw show [ raw | builtins | before-rules | user-rules | after-rules | logging-rules | listening | added ]
+To list all application profile --> sudo ufw app list
+To know status of single application profile --> sudo ufw app [PROFILE NAME]
+
+To enable the firewall --> sudo ufw enable
+To disable the firewall --> sudo ufw disable
+To reload the firewall --> sudo ufw reload
+To reset the firewall --> sudo ufw reset
+
+To setup log level entries --> sudo ufw logging [ off | low / on | medium | high | full ]
+
+NOTE: -
+	1. We use --dry-run to display the change, but not to modify.
+	2. We use --force to modify changes without confirmation.
+	3. Defatult settings of ufw after installation: -
+		(i) ufw is disabled
+		(ii) incoming and forward policy is denied
+		(iii) outgoing policy is allowed
+	4.

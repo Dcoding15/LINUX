@@ -1,0 +1,14 @@
+Command: touch
+Update the access and modification times of each FILE to the current time.
+
+Usage: touch [OPTION]... [FILE]...
+
+[OPTION]
+   -a                                  change only the access time
+   -c, --no-create                     do not create any files
+   -d, --date=STRING                   change date and time according to STRING of current date and time
+   -f                                  forcely create file
+   -m                                  change only the modification time
+   -r, --reference=FILE                use FILE time instead of current time
+   -t STAMP                            use [[CC]YY]MMDDhhmm[.ss] instead of current time
+       --time=WORD                     change the specified time: WORD is access, atime, use, modify, mtime

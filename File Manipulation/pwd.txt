@@ -1,0 +1,8 @@
+Command: pwd
+print the name of current/working directory
+
+Usage: pwd [OPTION]...
+
+[OPTION]
+  -L, --logical                        don't avoid symlinks
+  -P, --physical                       avoid symlinks and print actual path
