@@ -34,29 +34,26 @@
 
               [time [-p]] [ ! ] command [ [|⎪|&] command2 ... ]
 
-       The standard output of "command" is connected via a pipe to the standard input of "command2".
-       If |& is used, "command" standard error and standard output, is connected to "command2" standard input through the pipe; it is shorthand for 2>&1 |.
+       The standard output and error of "command" is connected via a pipe to the standard input of "command2".
+       If |& is used then "command" (standard error and output) and "command2" (standard input); it is shorthand for 2>&1 |.
 
-       If pipefail option is disabled, the return status of a pipeline is the exit status of the last command.
        If pipefail option is enabled, the return status of a pipeline is the exit status of the last command with a non-zero status or zero if all commands exit successfully.
        
-       If the "!" precedes a pipeline, the shell return value of logical negation after all commands in the pipeline terminates.
+       If the "!" at prefix of a pipeline, then shell return value of logical negation after termination of all commands.
 
-       If the "time" precedes a pipeline, after termination it will report execution time (user, system, elapsed). 
+       If the "time" at prefix of a  pipeline, then shell return time (user, system, elapsed) after termination of all commands. 
 
-       The "-p" option changes the output format to that specified by POSIX.
+       The "-p" option changes output format that specified by POSIX.
 
    Lists: -
    -----
-       A list is a sequence of one or more pipelines separated by one of the operators ;, &, &&, or ||, and optionally terminated by one of ;, &, or <newline>.
+       A list is a sequence of one or more pipelines separated by one of the operators ;  &  &&  or  ||  and optionally terminated by one of ;  &   <newline>.
 
-       && and ||, followed by ; and & both have equal precedence.
+       && and ||  followed by ; and & both have equal precedence.
 
-       Command terminated by control operator &, the shell executes the command in the background in a subshell and does not wait for the command to finish, 
-       and the return status is 0. These are referred to as asynchronous commands.
+       Command terminated by control operator &, the shell executes the command in the background in a subshell and does not wait for the command to finish, and the return status is 0. These are referred to as asynchronous commands.
 
-       Commands separated by ; are executed sequentially, the shell waits for each command to terminate in sequence. The return status is the exit status of the last command 
-       executed. These are referred to as synchronous commands.
+       Commands separated by ; are executed sequentially, the shell waits for each command to terminate in sequence. The return status is the exit status of the last command executed. These are referred to as synchronous commands.
 
        AND and OR lists are sequences of one or more pipelines separated by the && and || control operators, respectively. These are executed with left associativity (left to right).
 
@@ -91,7 +88,7 @@
               variable  expansion,  arithmetic expansion, command substitution, process substitution, and quote removal are performed.  Conditional operators such as -f
               must be unquoted to be recognized as primaries.
 
-              When used with [[, the < and > operators sort lexicographically using the current locale.
+              When used with [[ the < and > operators sort lexicographically using the current locale.
 
        See the description of the test builtin command (section SHELL BUILTIN COMMANDS below) for the handling of parameters (i.e.  missing parameters).
 
@@ -206,9 +203,7 @@
               exit status of a function is the exit status of the last command executed in the body.  (See FUNCTIONS below.)
 
 [COMMENTS]
-       In a non-interactive shell, or an interactive shell in which the interactive_comments option to the shopt builtin is enabled (see SHELL BUILTIN COMMANDS  below),
-       a  word  beginning with # causes that word and all remaining characters on that line to be ignored.  An interactive shell without the interactive_comments option
-       enabled does not allow comments.  The interactive_comments option is on by default in interactive shells.
+       In a non-interactive shell, or an interactive shell in which the interactive_comments option to the shopt builtin is enabled (see SHELL BUILTIN COMMANDS  below), a  word  beginning with # causes that word and all remaining characters on that line to be ignored.  An interactive shell without the interactive_comments option enabled does not allow comments. The interactive_comments option is on by default in interactive shells.
 
 [QUOTING]
        Quoting is used to remove the special meaning of certain characters or words to the shell.  Quoting can be used to disable special treatment for special  charac‐
@@ -332,354 +327,6 @@
        0      Expands to the name of the shell or shell script.  This is set at shell initialization.  If bash is invoked with a file of commands, $0 is set to the name
               of that file.  If bash is started with the -c option, then $0 is set to the first argument after the string to be executed, if one is present.  Otherwise,
               it is set to the filename used to invoke bash, as given by argument zero.
-
-   Shell Variables
-       The following variables are set by the shell:
-
-       _      At shell startup, set to the pathname used to invoke the shell or shell script being executed as passed in  the  environment  or  argument  list.   Subse‐
-              quently,  expands  to the last argument to the previous simple command executed in the foreground, after expansion.  Also set to the full pathname used to
-              invoke each command executed and placed in the environment exported to that command.  When checking mail, this parameter holds the name of the  mail  file
-              currently being checked.
-       BASH   Expands to the full filename used to invoke this instance of bash.
-       BASHOPTS
-              A  colon-separated  list  of  enabled  shell options.  Each word in the list is a valid argument for the -s option to the shopt builtin command (see SHELL
-              BUILTIN COMMANDS below).  The options appearing in BASHOPTS are those reported as on by shopt.  If this variable is in the environment  when  bash  starts
-              up, each shell option in the list will be enabled before reading any startup files.  This variable is read-only.
-       BASHPID
-              Expands to the process ID of the current bash process.  This differs from $$ under certain circumstances, such as subshells that do not require bash to be
-              re-initialized.  Assignments to BASHPID have no effect.  If BASHPID is unset, it loses its special properties, even if it is subsequently reset.
-       BASH_ALIASES
-              An associative array variable whose members correspond to the internal list of aliases as maintained by the alias builtin.  Elements added to  this  array
-              appear in the alias list; however, unsetting array elements currently does not cause aliases to be removed from the alias list.  If BASH_ALIASES is unset,
-              it loses its special properties, even if it is subsequently reset.
-       BASH_ARGC
-              An array variable whose values are the number of parameters in each frame of the current bash execution call stack.  The number of parameters to the  cur‐
-              rent  subroutine (shell function or script executed with . or source) is at the top of the stack.  When a subroutine is executed, the number of parameters
-              passed is pushed onto BASH_ARGC.  The shell sets BASH_ARGC only when in extended debugging mode (see the description of the extdebug option to  the  shopt
-              builtin  below).   Setting  extdebug after the shell has started to execute a script, or referencing this variable when extdebug is not set, may result in
-              inconsistent values.
-       BASH_ARGV
-              An array variable containing all of the parameters in the current bash execution call stack.  The final parameter of the last subroutine call  is  at  the
-              top  of  the  stack;  the  first  parameter  of the initial call is at the bottom.  When a subroutine is executed, the parameters supplied are pushed onto
-              BASH_ARGV.  The shell sets BASH_ARGV only when in extended debugging mode (see the description of the extdebug option to the shopt builtin  below).   Set‐
-              ting extdebug after the shell has started to execute a script, or referencing this variable when extdebug is not set, may result in inconsistent values.
-       BASH_ARGV0
-              When  referenced, this variable expands to the name of the shell or shell script (identical to $0; see the description of special parameter 0 above).  As‐
-              signment to BASH_ARGV0 causes the value assigned to also be assigned to $0.  If BASH_ARGV0 is unset, it loses its special properties, even if it is subse‐
-              quently reset.
-       BASH_CMDS
-              An  associative  array variable whose members correspond to the internal hash table of commands as maintained by the hash builtin.  Elements added to this
-              array appear in the hash table; however, unsetting array elements currently does not cause command names to be removed from the hash table.  If  BASH_CMDS
-              is unset, it loses its special properties, even if it is subsequently reset.
-       BASH_COMMAND
-              The  command  currently  being  executed or about to be executed, unless the shell is executing a command as the result of a trap, in which case it is the
-              command executing at the time of the trap.  If BASH_COMMAND is unset, it loses its special properties, even if it is subsequently reset.
-       BASH_EXECUTION_STRING
-              The command argument to the -c invocation option.
-       BASH_LINENO
-              An array variable whose members are the line numbers in source files where each corresponding member of FUNCNAME was invoked.  ${BASH_LINENO[$i]}  is  the
-              line  number  in the source file (${BASH_SOURCE[$i+1]}) where ${FUNCNAME[$i]} was called (or ${BASH_LINENO[$i-1]} if referenced within another shell func‐
-              tion).  Use LINENO to obtain the current line number.
-       BASH_LOADABLES_PATH
-              A colon-separated list of directories in which the shell looks for dynamically loadable builtins specified by the enable command.
-       BASH_REMATCH
-              An array variable whose members are assigned by the =~ binary operator to the [[ conditional command.  The element with index 0  is  the  portion  of  the
-              string matching the entire regular expression.  The element with index n is the portion of the string matching the nth parenthesized subexpression.
-       BASH_SOURCE
-              An  array  variable  whose  members are the source filenames where the corresponding shell function names in the FUNCNAME array variable are defined.  The
-              shell function ${FUNCNAME[$i]} is defined in the file ${BASH_SOURCE[$i]} and called from ${BASH_SOURCE[$i+1]}.
-       BASH_SUBSHELL
-              Incremented by one within each subshell or subshell environment when the shell begins executing  in  that  environment.   The  initial  value  is  0.   If
-              BASH_SUBSHELL is unset, it loses its special properties, even if it is subsequently reset.
-       BASH_VERSINFO
-              A readonly array variable whose members hold version information for this instance of bash.  The values assigned to the array members are as follows:
-              BASH_VERSINFO[0]        The major version number (the release).
-              BASH_VERSINFO[1]        The minor version number (the version).
-              BASH_VERSINFO[2]        The patch level.
-              BASH_VERSINFO[3]        The build version.
-              BASH_VERSINFO[4]        The release status (e.g., beta1).
-              BASH_VERSINFO[5]        The value of MACHTYPE.
-       BASH_VERSION
-              Expands to a string describing the version of this instance of bash.
-       COMP_CWORD
-              An  index  into  ${COMP_WORDS} of the word containing the current cursor position.  This variable is available only in shell functions invoked by the pro‐
-              grammable completion facilities (see Programmable Completion below).
-       COMP_KEY
-              The key (or final key of a key sequence) used to invoke the current completion function.
-       COMP_LINE
-              The current command line.  This variable is available only in shell functions and external commands invoked by the programmable completion facilities (see
-              Programmable Completion below).
-       COMP_POINT
-              The  index  of  the current cursor position relative to the beginning of the current command.  If the current cursor position is at the end of the current
-              command, the value of this variable is equal to ${#COMP_LINE}.  This variable is available only in shell functions and external commands  invoked  by  the
-              programmable completion facilities (see Programmable Completion below).
-       COMP_TYPE
-              Set  to  an integer value corresponding to the type of completion attempted that caused a completion function to be called: TAB, for normal completion, ?,
-              for listing completions after successive tabs, !, for listing alternatives on partial word completion, @, to list completions if the word is  not  unmodi‐
-              fied,  or %, for menu completion.  This variable is available only in shell functions and external commands invoked by the programmable completion facili‐
-              ties (see Programmable Completion below).
-       COMP_WORDBREAKS
-              The set of characters that the readline library treats as word separators when performing word completion.  If COMP_WORDBREAKS is unset, it loses its spe‐
-              cial properties, even if it is subsequently reset.
-       COMP_WORDS
-              An array variable (see Arrays below) consisting of the individual words in the current command line.  The line is split into words as readline would split
-              it, using COMP_WORDBREAKS as described above.  This variable is available only in shell functions invoked by the programmable completion  facilities  (see
-              Programmable Completion below).
-       COPROC An array variable (see Arrays below) created to hold the file descriptors for output from and input to an unnamed coprocess (see Coprocesses above).
-       DIRSTACK
-              An  array  variable (see Arrays below) containing the current contents of the directory stack.  Directories appear in the stack in the order they are dis‐
-              played by the dirs builtin.  Assigning to members of this array variable may be used to modify directories already in the stack, but the  pushd  and  popd
-              builtins  must  be used to add and remove directories.  Assignment to this variable will not change the current directory.  If DIRSTACK is unset, it loses
-              its special properties, even if it is subsequently reset.
-       EPOCHREALTIME
-              Each time this parameter is referenced, it expands to the number of seconds since the Unix Epoch (see time(3)) as a floating point value with micro-second
-              granularity.  Assignments to EPOCHREALTIME are ignored.  If EPOCHREALTIME is unset, it loses its special properties, even if it is subsequently reset.
-       EPOCHSECONDS
-              Each  time this parameter is referenced, it expands to the number of seconds since the Unix Epoch (see time(3)).  Assignments to EPOCHSECONDS are ignored.
-              If EPOCHSECONDS is unset, it loses its special properties, even if it is subsequently reset.
-       EUID   Expands to the effective user ID of the current user, initialized at shell startup.  This variable is readonly.
-       FUNCNAME
-              An array variable containing the names of all shell functions currently in the execution call stack.  The element with index 0 is the  name  of  any  cur‐
-              rently-executing  shell function.  The bottom-most element (the one with the highest index) is "main".  This variable exists only when a shell function is
-              executing.  Assignments to FUNCNAME have no effect.  If FUNCNAME is unset, it loses its special properties, even if it is subsequently reset.
-
-              This variable can be used with BASH_LINENO and BASH_SOURCE.  Each element of FUNCNAME has corresponding elements in BASH_LINENO  and  BASH_SOURCE  to  de‐
-              scribe the call stack.  For instance, ${FUNCNAME[$i]} was called from the file ${BASH_SOURCE[$i+1]} at line number ${BASH_LINENO[$i]}.  The caller builtin
-              displays the current call stack using this information.
-       GROUPS An array variable containing the list of groups of which the current user is a member.  Assignments to GROUPS have no effect.   If  GROUPS  is  unset,  it
-              loses its special properties, even if it is subsequently reset.
-       HISTCMD
-              The  history number, or index in the history list, of the current command.  Assignments to HISTCMD are ignored.  If HISTCMD is unset, it loses its special
-              properties, even if it is subsequently reset.
-       HOSTNAME
-              Automatically set to the name of the current host.
-       HOSTTYPE
-              Automatically set to a string that uniquely describes the type of machine on which bash is executing.  The default is system-dependent.
-       LINENO Each time this parameter is referenced, the shell substitutes a decimal number representing the current sequential line number (starting with 1) within  a
-              script or function.  When not in a script or function, the value substituted is not guaranteed to be meaningful.  If LINENO is unset, it loses its special
-              properties, even if it is subsequently reset.
-       MACHTYPE
-              Automatically set to a string that fully describes the system type on which bash is executing, in the standard GNU cpu-company-system format.  The default
-              is system-dependent.
-       MAPFILE
-              An array variable (see Arrays below) created to hold the text read by the mapfile builtin when no variable name is supplied.
-       OLDPWD The previous working directory as set by the cd command.
-       OPTARG The value of the last option argument processed by the getopts builtin command (see SHELL BUILTIN COMMANDS below).
-       OPTIND The index of the next argument to be processed by the getopts builtin command (see SHELL BUILTIN COMMANDS below).
-       OSTYPE Automatically set to a string that describes the operating system on which bash is executing.  The default is system-dependent.
-       PIPESTATUS
-              An  array  variable (see Arrays below) containing a list of exit status values from the processes in the most-recently-executed foreground pipeline (which
-              may contain only a single command).
-       PPID   The process ID of the shell's parent.  This variable is readonly.
-       PWD    The current working directory as set by the cd command.
-       RANDOM Each time this parameter is referenced, it expands to a random integer between 0 and 32767.  Assigning a value to RANDOM initializes (seeds) the  sequence
-              of random numbers.  If RANDOM is unset, it loses its special properties, even if it is subsequently reset.
-       READLINE_LINE
-              The contents of the readline line buffer, for use with "bind -x" (see SHELL BUILTIN COMMANDS below).
-       READLINE_MARK
-              The  position  of the mark (saved insertion point) in the readline line buffer, for use with "bind -x" (see SHELL BUILTIN COMMANDS below).  The characters
-              between the insertion point and the mark are often called the region.
-       READLINE_POINT
-              The position of the insertion point in the readline line buffer, for use with "bind -x" (see SHELL BUILTIN COMMANDS below).
-       REPLY  Set to the line of input read by the read builtin command when no arguments are supplied.
-       SECONDS
-              Each time this parameter is referenced, the number of seconds since shell invocation is returned.  If a value is assigned to SECONDS, the  value  returned
-              upon  subsequent references is the number of seconds since the assignment plus the value assigned.  The number of seconds at shell invocation and the cur‐
-              rent time is always determined by querying the system clock.  If SECONDS is unset, it loses its special properties, even if it is subsequently reset.
-       SHELLOPTS
-              A colon-separated list of enabled shell options.  Each word in the list is a valid argument for the -o option  to  the  set  builtin  command  (see  SHELL
-              BUILTIN  COMMANDS below).  The options appearing in SHELLOPTS are those reported as on by set -o.  If this variable is in the environment when bash starts
-              up, each shell option in the list will be enabled before reading any startup files.  This variable is read-only.
-       SHLVL  Incremented by one each time an instance of bash is started.
-       SRANDOM
-              This variable expands to a 32-bit pseudo-random number each time it is referenced. The random number generator is  not  linear  on  systems  that  support
-              /dev/urandom or arc4random, so each returned number has no relationship to the numbers preceding it.  The random number generator cannot be seeded, so as‐
-              signments to this variable have no effect.  If SRANDOM is unset, it loses its special properties, even if it is subsequently reset.
-       UID    Expands to the user ID of the current user, initialized at shell startup.  This variable is readonly.
-
-       The following variables are used by the shell.  In some cases, bash assigns a default value to a variable; these cases are noted below.
-
-       BASH_COMPAT
-              The value is used to set the shell's compatibility level.  See SHELL COMPATIBILITY MODE below for a description of the various  compatibility  levels  and
-              their  effects.   The value may be a decimal number (e.g., 4.2) or an integer (e.g., 42) corresponding to the desired compatibility level.  If BASH_COMPAT
-              is unset or set to the empty string, the compatibility level is set to the default for the current version.  If BASH_COMPAT is set to a value that is  not
-              one  of  the  valid  compatibility levels, the shell prints an error message and sets the compatibility level to the default for the current version.  The
-              valid values correspond to the compatibility levels described below under BSHELLCOMPATIBILITYMODE.  For example, 4.2 and 42 are valid values  that  corre‐
-              spond to the compat42 shopt option and set the compatibility level to 42.  The current version is also a valid value.
-       BASH_ENV
-              If  this parameter is set when bash is executing a shell script, its value is interpreted as a filename containing commands to initialize the shell, as in
-              ~/.bashrc.  The value of BASH_ENV is subjected to parameter expansion, command substitution, and arithmetic expansion before being interpreted as a  file‐
-              name.  PATH is not used to search for the resultant filename.
-       BASH_XTRACEFD
-              If  set to an integer corresponding to a valid file descriptor, bash will write the trace output generated when set -x is enabled to that file descriptor.
-              The file descriptor is closed when BASH_XTRACEFD is unset or assigned a new value.  Unsetting BASH_XTRACEFD or assigning it the empty  string  causes  the
-              trace  output  to be sent to the standard error.  Note that setting BASH_XTRACEFD to 2 (the standard error file descriptor) and then unsetting it will re‐
-              sult in the standard error being closed.
-       CDPATH The search path for the cd command.  This is a colon-separated list of directories in which the shell looks for destination directories specified  by  the
-              cd command.  A sample value is ".:~:/usr".
-       CHILD_MAX
-              Set  the  number  of exited child status values for the shell to remember.  Bash will not allow this value to be decreased below a POSIX-mandated minimum,
-              and there is a maximum value (currently 8192) that this may not exceed.  The minimum value is system-dependent.
-       COLUMNS
-              Used by the select compound command to determine the terminal width when printing selection lists.  Automatically set if the checkwinsize  option  is  en‐
-              abled or in an interactive shell upon receipt of a SIGWINCH.
-       COMPREPLY
-              An  array  variable from which bash reads the possible completions generated by a shell function invoked by the programmable completion facility (see Pro‐
-              grammable Completion below).  Each array element contains one possible completion.
-       EMACS  If bash finds this variable in the environment when the shell starts with value "t", it assumes that the shell is running in an  Emacs  shell  buffer  and
-              disables line editing.
-       ENV    Expanded and executed similarly to BASH_ENV (see INVOCATION above) when an interactive shell is invoked in posix mode.
-       EXECIGNORE
-              A  colon-separated  list  of shell patterns (see Pattern Matching) defining the list of filenames to be ignored by command search using PATH.  Files whose
-              full pathnames match one of these patterns are not considered executable files for the purposes of completion and command execution via PATH lookup.  This
-              does  not affect the behavior of the [, test, and [[ commands.  Full pathnames in the command hash table are not subject to EXECIGNORE.  Use this variable
-              to ignore shared library files that have the executable bit set, but are not executable files.  The pattern matching honors the  setting  of  the  extglob
-              shell option.
-       FCEDIT The default editor for the fc builtin command.
-       FIGNORE
-              A colon-separated list of suffixes to ignore when performing filename completion (see READLINE below).  A filename whose suffix matches one of the entries
-              in FIGNORE is excluded from the list of matched filenames.  A sample value is ".o:~" (Quoting is needed when assigning a value  to  this  variable,  which
-              contains tildes).
-       FUNCNEST
-              If  set  to  a numeric value greater than 0, defines a maximum function nesting level.  Function invocations that exceed this nesting level will cause the
-              current command to abort.
-       GLOBIGNORE
-              A colon-separated list of patterns defining the set of file names to be ignored by pathname expansion.  If a file name matched  by  a  pathname  expansion
-              pattern also matches one of the patterns in GLOBIGNORE, it is removed from the list of matches.
-       HISTCONTROL
-              A  colon-separated  list  of values controlling how commands are saved on the history list.  If the list of values includes ignorespace, lines which begin
-              with a space character are not saved in the history list.  A value of ignoredups causes lines matching the previous history entry  to  not  be  saved.   A
-              value  of  ignoreboth is shorthand for ignorespace and ignoredups.  A value of erasedups causes all previous lines matching the current line to be removed
-              from the history list before that line is saved.  Any value not in the above list is ignored.  If HISTCONTROL is unset, or does not include a valid value,
-              all  lines  read  by  the shell parser are saved on the history list, subject to the value of HISTIGNORE.  The second and subsequent lines of a multi-line
-              compound command are not tested, and are added to the history regardless of the value of HISTCONTROL.
-       HISTFILE
-              The name of the file in which command history is saved (see HISTORY below).  The default value is ~/.bash_history.  If unset, the command history  is  not
-              saved when a shell exits.
-       HISTFILESIZE
-              The  maximum  number of lines contained in the history file.  When this variable is assigned a value, the history file is truncated, if necessary, to con‐
-              tain no more than that number of lines by removing the oldest entries.  The history file is also truncated to this size after writing it when a shell  ex‐
-              its.   If the value is 0, the history file is truncated to zero size.  Non-numeric values and numeric values less than zero inhibit truncation.  The shell
-              sets the default value to the value of HISTSIZE after reading any startup files.
-       HISTIGNORE
-              A colon-separated list of patterns used to decide which command lines should be saved on the history list.  Each pattern is anchored at the  beginning  of
-              the  line  and must match the complete line (no implicit `*' is appended).  Each pattern is tested against the line after the checks specified by HISTCON‐
-              TROL are applied.  In addition to the normal shell pattern matching characters, `&' matches the previous history line.  `&' may be escaped using  a  back‐
-              slash; the backslash is removed before attempting a match.  The second and subsequent lines of a multi-line compound command are not tested, and are added
-              to the history regardless of the value of HISTIGNORE.  The pattern matching honors the setting of the extglob shell option.
-       HISTSIZE
-              The number of commands to remember in the command history (see HISTORY below).  If the value is 0, commands are not saved in the  history  list.   Numeric
-              values  less than zero result in every command being saved on the history list (there is no limit).  The shell sets the default value to 500 after reading
-              any startup files.
-       HISTTIMEFORMAT
-              If this variable is set and not null, its value is used as a format string for strftime(3) to print the time stamp associated with each history entry dis‐
-              played by the history builtin.  If this variable is set, time stamps are written to the history file so they may be preserved across shell sessions.  This
-              uses the history comment character to distinguish timestamps from other history lines.
-       HOME   The home directory of the current user; the default argument for the cd builtin command.  The value of this variable is also used  when  performing  tilde
-              expansion.
-       HOSTFILE
-              Contains  the name of a file in the same format as /etc/hosts that should be read when the shell needs to complete a hostname.  The list of possible host‐
-              name completions may be changed while the shell is running; the next time hostname completion is attempted after the value is changed, bash adds the  con‐
-              tents  of  the new file to the existing list.  If HOSTFILE is set, but has no value, or does not name a readable file, bash attempts to read /etc/hosts to
-              obtain the list of possible hostname completions.  When HOSTFILE is unset, the hostname list is cleared.
-       IFS    The Internal Field Separator that is used for word splitting after expansion and to split lines into words with the read  builtin  command.   The  default
-              value is ``<space><tab><newline>''.
-       IGNOREEOF
-              Controls  the action of an interactive shell on receipt of an EOF character as the sole input.  If set, the value is the number of consecutive EOF charac‐
-              ters which must be typed as the first characters on an input line before bash exits.  If the variable exists but does not have a numeric value, or has  no
-              value, the default value is 10.  If it does not exist, EOF signifies the end of input to the shell.
-       INPUTRC
-              The filename for the readline startup file, overriding the default of ~/.inputrc (see READLINE below).
-       INSIDE_EMACS
-              If this variable appears in the environment when the shell starts, bash assumes that it is running inside an Emacs shell buffer and may disable line edit‐
-              ing, depending on the value of TERM.
-       LANG   Used to determine the locale category for any category not specifically selected with a variable starting with LC_.
-       LC_ALL This variable overrides the value of LANG and any other LC_ variable specifying a locale category.
-       LC_COLLATE
-              This variable determines the collation order used when sorting the results of pathname expansion, and determines the behavior of range expressions, equiv‐
-              alence classes, and collating sequences within pathname expansion and pattern matching.
-       LC_CTYPE
-              This variable determines the interpretation of characters and the behavior of character classes within pathname expansion and pattern matching.
-       LC_MESSAGES
-              This variable determines the locale used to translate double-quoted strings preceded by a $.
-       LC_NUMERIC
-              This variable determines the locale category used for number formatting.
-       LC_TIME
-              This variable determines the locale category used for data and time formatting.
-       LINES  Used  by the select compound command to determine the column length for printing selection lists.  Automatically set if the checkwinsize option is enabled
-              or in an interactive shell upon receipt of a SIGWINCH.
-       MAIL   If this parameter is set to a file or directory name and the MAILPATH variable is not set, bash informs the user of the arrival of mail in  the  specified
-              file or Maildir-format directory.
-       MAILCHECK
-              Specifies how often (in seconds) bash checks for mail.  The default is 60 seconds.  When it is time to check for mail, the shell does so before displaying
-              the primary prompt.  If this variable is unset, or set to a value that is not a number greater than or equal to zero, the shell disables mail checking.
-       MAILPATH
-              A colon-separated list of filenames to be checked for mail.  The message to be printed when mail arrives in a particular file may be specified by separat‐
-              ing the filename from the message with a `?'.  When used in the text of the message, $_ expands to the name of the current mailfile.  Example:
-              MAILPATH='/var/mail/bfox?"You have mail":~/shell-mail?"$_ has mail!"'
-              Bash can be configured to supply a default value for this variable (there is no value by default), but the location of the user mail files that it uses is
-              system dependent (e.g., /var/mail/$USER).
-       OPTERR If set to the value 1, bash displays error messages generated by the getopts builtin command (see SHELL BUILTIN COMMANDS below).  OPTERR is initialized to
-              1 each time the shell is invoked or a shell script is executed.
-       PATH   The  search  path for commands.  It is a colon-separated list of directories in which the shell looks for commands (see COMMAND EXECUTION below).  A zero-
-              length (null) directory name in the value of PATH indicates the current directory.  A null directory name may appear as two adjacent colons, or as an ini‐
-              tial or trailing colon.  The default path is system-dependent, and is set by the administrator who installs bash.  A common value is ``/usr/local/bin:
-              /usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin''.
-       POSIXLY_CORRECT
-              If this variable is in the environment when bash starts, the shell enters posix mode before reading the startup files, as if the --posix invocation option
-              had  been  supplied.   If it is set while the shell is running, bash enables posix mode, as if the command set -o posix had been executed.  When the shell
-              enters posix mode, it sets this variable if it was not already set.
-       PROMPT_COMMAND
-              If this variable is set, and is an array, the value of each set element is executed as a command prior to issuing each primary prompt.  If this is set but
-              not an array variable, its value is used as a command to execute instead.
-       PROMPT_DIRTRIM
-              If  set  to  a  number  greater  than zero, the value is used as the number of trailing directory components to retain when expanding the \w and \W prompt
-              string escapes (see PROMPTING below).  Characters removed are replaced with an ellipsis.
-       PS0    The value of this parameter is expanded (see PROMPTING below) and displayed by interactive shells after reading a command and before the command  is  exe‐
-              cuted.
-       PS1    The value of this parameter is expanded (see PROMPTING below) and used as the primary prompt string.  The default value is ``\s-\v\$ ''.
-       PS2    The value of this parameter is expanded as with PS1 and used as the secondary prompt string.  The default is ``> ''.
-       PS3    The value of this parameter is used as the prompt for the select command (see SHELL GRAMMAR above).
-       PS4    The value of this parameter is expanded as with PS1 and the value is printed before each command bash displays during an execution trace.  The first char‐
-              acter of the expanded value of PS4 is replicated multiple times, as necessary, to indicate multiple levels of indirection.  The default is ``+ ''.
-       SHELL  This variable expands to the full pathname to the shell.  If it is not set when the shell starts, bash assigns to it the  full  pathname  of  the  current
-              user's login shell.
-       TIMEFORMAT
-              The  value of this parameter is used as a format string specifying how the timing information for pipelines prefixed with the time reserved word should be
-              displayed.  The % character introduces an escape sequence that is expanded to a time value or other information.  The escape sequences and their  meanings
-              are as follows; the braces denote optional portions.
-              %%        A literal %.
-              %[p][l]R  The elapsed time in seconds.
-              %[p][l]U  The number of CPU seconds spent in user mode.
-              %[p][l]S  The number of CPU seconds spent in system mode.
-              %P        The CPU percentage, computed as (%U + %S) / %R.
-
-              The  optional p is a digit specifying the precision, the number of fractional digits after a decimal point.  A value of 0 causes no decimal point or frac‐
-              tion to be output.  At most three places after the decimal point may be specified; values of p greater than 3 are changed to 3.  If p  is  not  specified,
-              the value 3 is used.
-
-              The optional l specifies a longer format, including minutes, of the form MMmSS.FFs.  The value of p determines whether or not the fraction is included.
-
-              If this variable is not set, bash acts as if it had the value $'\nreal\t%3lR\nuser\t%3lU\nsys\t%3lS'.  If the value is null, no timing information is dis‐
-              played.  A trailing newline is added when the format string is displayed.
-       TMOUT  If set to a value greater than zero, TMOUT is treated as the default timeout for the read builtin.  The select command terminates if input does not arrive
-              after  TMOUT  seconds when input is coming from a terminal.  In an interactive shell, the value is interpreted as the number of seconds to wait for a line
-              of input after issuing the primary prompt.  Bash terminates after waiting for that number of seconds if a complete line of input does not arrive.
-       TMPDIR If set, bash uses its value as the name of a directory in which bash creates temporary files for the shell's use.
-       auto_resume
-              This variable controls how the shell interacts with the user and job control.  If this variable is set, single word simple commands  without  redirections
-              are  treated  as  candidates  for  resumption of an existing stopped job.  There is no ambiguity allowed; if there is more than one job beginning with the
-              string typed, the job most recently accessed is selected.  The name of a stopped job, in this context, is the command line used to start it.   If  set  to
-              the  value exact, the string supplied must match the name of a stopped job exactly; if set to substring, the string supplied needs to match a substring of
-              the name of a stopped job.  The substring value provides functionality analogous to the %?  job identifier (see JOB CONTROL below).  If set to  any  other
-              value, the supplied string must be a prefix of a stopped job's name; this provides functionality analogous to the %string job identifier.
-       histchars
-              The  two or three characters which control history expansion and tokenization (see HISTORY EXPANSION below).  The first character is the history expansion
-              character, the character which signals the start of a history expansion, normally `!'.  The second character is the quick substitution character, which is
-              used  as  shorthand  for  re-running  the previous command entered, substituting one string for another in the command.  The default is `^'.  The optional
-              third character is the character which indicates that the remainder of the line is a comment when found as the first character of a  word,  normally  `#'.
-              The  history  comment  character  causes  history substitution to be skipped for the remaining words on the line.  It does not necessarily cause the shell
-              parser to treat the rest of the line as a comment.
 
 [Arrays]
        Bash provides one-dimensional indexed and associative array variables.  Any variable may be used as an indexed array; the declare builtin will explicitly declare
@@ -2481,109 +2128,35 @@
 
 
 [COMPATIBILITY]
-       The following table describes the behavior changes controlled by each compatibility level setting.  The compatNN tag is used as shorthand for setting the compat‐
-       ibility  level  to NN using one of the following mechanisms.  For versions prior to bash-5.0, the compatibility level may be set using the corresponding compatNN
-       shopt option.  For bash-4.3 and later versions, the BASH_COMPAT variable is preferred, and it is required for bash-5.1 and later versions.
+       The following table describes the behavior changes controlled by each compatibility level setting. The compatNN tag is used as shorthand for setting the compatibility level to NN using one of the following mechanisms. For versions prior to bash-5.0, the compatibility level may be set using the corresponding compatNN shopt option. For bash-4.3 and later versions, the BASH_COMPAT variable is preferred, and it is required for bash-5.1 and later versions.
 
        compat31
               •      quoting the rhs of the [[ command's regexp matching operator (=~) has no special effect
 
        compat32
-              •      interrupting a command list such as "a ; b ; c" causes the execution of the next command in the list (in bash-4.0 and  later  versions,  the  shell
-                     acts as if it received the interrupt, so interrupting one command in a list aborts the execution of the entire list)
+              •      interrupting a command list such as "a ; b ; c" causes the execution of the next command in the list (in bash-4.0 and later versions, the shell acts as if it received the interrupt, so interrupting one command in a list aborts the execution of the entire list)
 
        compat40
-              •      the < and > operators to the [[ command do not consider the current locale when comparing strings; they use ASCII ordering.  Bash versions prior to
-                     bash-4.1 use ASCII collation and strcmp(3); bash-4.1 and later use the current locale's collation sequence and strcoll(3).
+              •      the < and > operators to the [[ command do not consider the current locale when comparing strings; they use ASCII ordering.  Bash versions prior to bash-4.1 use ASCII collation and strcmp(3); bash-4.1 and later use the current locale's collation sequence and strcoll(3).
 
        compat41
               •      in posix mode, time may be followed by options and still be recognized as a reserved word (this is POSIX interpretation 267)
-              •      in posix mode, the parser requires that an even number of single quotes occur in the word portion of a double-quoted parameter expansion and treats
-                     them specially, so that characters within the single quotes are considered quoted (this is POSIX interpretation 221)
+              •      in posix mode, the parser requires that an even number of single quotes occur in the word portion of a double-quoted parameter expansion and treats them specially, so that characters within the single quotes are considered quoted (this is POSIX interpretation 221)
 
        compat42
               •      the replacement string in double-quoted pattern substitution does not undergo quote removal, as it does in versions after bash-4.2
-              •      in posix mode, single quotes are considered special when expanding the word portion of a double-quoted parameter expansion and can be used to quote
-                     a closing brace or other special character (this is part of POSIX interpretation 221); in later versions, single quotes are not special within dou‐
-                     ble-quoted word expansions
+              •      in posix mode, single quotes are considered special when expanding the word portion of a double-quoted parameter expansion and can be used to quote a closing brace or other special character (this is part of POSIX interpretation 221); in later versions, single quotes are not special within double-quoted word expansions
 
        compat43
-              •      the  shell does not print a warning message if an attempt is made to use a quoted compound assignment as an argument to declare (declare -a foo='(1
-                     2)'). Later versions warn that this usage is deprecated
-              •      word expansion errors are considered non-fatal errors that cause the current command to fail, even in posix mode (the default behavior is  to  make
-                     them fatal errors that cause the shell to exit)
-              •      when  executing  a  shell  function,  the loop state (while/until/etc.)  is not reset, so break or continue in that function will break or continue
-                     loops in the calling context. Bash-4.4 and later reset the loop state to prevent this
+              •      the  shell does not print a warning message if an attempt is made to use a quoted compound assignment as an argument to declare (declare -a foo='(12)'). Later versions warn that this usage is deprecated
+			  •      word expansion errors are considered non-fatal errors that cause the current command to fail, even in posix mode (the default behavior is  to  make them fatal errors that cause the shell to exit)
+              •      when  executing  a  shell  function,  the loop state (while/until/etc.)  is not reset, so break or continue in that function will break or continue loops in the calling context. Bash-4.4 and later reset the loop state to prevent this.
 
        compat44
-              •      the shell sets up the values used by BASH_ARGV and BASH_ARGC so they can expand to the shell's positional parameters  even  if  extended  debugging
-                     mode is not enabled
-              •      a  subshell  inherits loops from its parent context, so break or continue will cause the subshell to exit.  Bash-5.0 and later reset the loop state
-                     to prevent the exit
-              •      variable assignments preceding builtins like export and readonly that set attributes continue to affect variables with the same name in the calling
-                     environment even if the shell is not in posix mode
+              •      the shell sets up the values used by BASH_ARGV and BASH_ARGC so they can expand to the shell's positional parameters  even  if  extended  debugging mode is not enabled
+              •      a  subshell  inherits loops from its parent context, so break or continue will cause the subshell to exit.  Bash-5.0 and later reset the loop state to prevent the exit
+              •      variable assignments preceding builtins like export and readonly that set attributes continue to affect variables with the same name in the calling environment even if the shell is not in posix mode
 
        compat50
-              •      Bash-5.1 changed the way $RANDOM is generated to introduce slightly more randomness. If the shell compatibility level is set to 50 or lower, it re‐
-                     verts to the method from bash-5.0 and previous versions, so seeding the random number generator by assigning a value to  RANDOM  will  produce  the
-                     same sequence as in bash-5.0
-              •      If  the  command  hash  table is empty, bash versions prior to bash-5.1 printed an informational message to that effect, even when producing output
-                     that can be reused as input. Bash-5.1 suppresses that message when the -l option is supplied.
-
-[RESTRICTED SHELL]
-       If bash is started with the name rbash, or -r option is supplied at invocation, the shell becomes restricted. A restricted shell is used to set up an environment 
-       more controlled than the standard shell. It behaves identically to bash with the exception that the following are disallowed or not performed:
-
-       •      changing directories with cd
-
-       •      setting or unsetting the values of SHELL, PATH, HISTFILE, ENV, or BASH_ENV
-
-       •      specifying command names containing /
-
-       •      specifying a filename containing a / as an argument to the .  builtin command
-
-       •      specifying a filename containing a slash as an argument to the history builtin command
-
-       •      specifying a filename containing a slash as an argument to the -p option to the hash builtin command
-
-       •      importing function definitions from the shell environment at startup
-
-       •      parsing the value of SHELLOPTS from the shell environment at startup
-
-       •      redirecting output using the >, >|, <>, >&, &>, and >> redirection operators
-
-       •      using the exec builtin command to replace the shell with another command
-
-       •      adding or deleting builtin commands with the -f and -d options to the enable builtin command
-
-       •      using the enable builtin command to enable disabled shell builtins
-
-       •      specifying the -p option to the command builtin command
-
-       •      turning off restricted mode with set +r or set +o restricted.
-
-       These restrictions are enforced after any startup files are read.
-
-       When a command that is found to be a shell script is executed (see COMMAND EXECUTION above), rbash turns off any restrictions in the shell spawned to execute the
-       script.
-
-[FILES]
-/bin/bash                 The bash executable
-/etc/profile              The systemwide initialization file, executed for login shells
-/etc/bash.bashrc          The systemwide per-interactive-shell startup file
-/etc/bash.bash.logout     The systemwide login shell cleanup file, executed when a login shell exits
-~/.bash_profile           The personal initialization file, executed for login shells
-~/.bashrc                 The individual per-interactive-shell startup file
-~/.bash_logout            The individual login shell cleanup file, executed when a login shell exits
-~/.inputrc                Individual readline initialization file
-
-[BUGS]
- (1) It's too big and too slow.
- (2) There are some subtle differences between bash and traditional versions of sh, mostly because of the POSIX specification.
- (3) Aliases are confusing in some uses.
- (4) Shell builtin commands and functions are not stoppable/restartable.
- (5) Compound commands and command sequences of the form `a ; b ; c' are not handled gracefully when process suspension is attempted.
-     When a process is stopped, the shell immediately executes the next command in the sequence. 
-     It suffices to place the sequence of commands between parentheses to force it into a subshell, which may be stopped as a unit.
- (6) Array variables may not (yet) be exported.
- (7 )There may be only one active coprocess at a time.
+              •      Bash-5.1 changed the way $RANDOM is generated to introduce slightly more randomness. If the shell compatibility level is set to 50 or lower, it reverts to the method from bash-5.0 and previous versions, so seeding the random number generator by assigning a value to  RANDOM  will  produce  the same sequence as in bash-5.0
+              •      If  the  command  hash  table is empty, bash versions prior to bash-5.1 printed an informational message to that effect, even when producing output that can be reused as input. Bash-5.1 suppresses that message when the -l option is supplied.
