@@ -1,0 +1,31 @@
+Document Database: -
+-----------------
+	(1) It is a document which can be stored different types of based environment: cloud (Atlas); subscription (Enterprise); free (Community).
+	(2) Document are composed of field and value pairs similar to JSON objects.
+	(3) The values of fields may include other documents, arrays, and arrays of documents.
+	(4) It stores data records as BSON (Binary JSON) document.
+	(5) $$ is use for system variable in MongoDB.
+
+DATABASE AND COLLECTION: -
+-----------------------
+	To select database: use [database name]
+
+	Note: -
+		(1) There is no command to create empty database. We should have to enter atleast one document to create database.
+		(2) UUID (Universally Unique Identifier) are assigned to collections that are same across over all database.
+
+VIEWS: -
+-----
+	To create views: db.createView("[view name]","[collection name]",[aggregation pipeline],{"field":"value"})
+
+	Note: -
+		(1) It is a read-only query object.
+		(2) It is not stored in temporary files because allowDiskUse is false bydefault.
+		(3) Standard views (not stored in disk) and On-demand materialised views (stored in disk).
+		(4) You can't rename views.
+
+USERS: -
+-----
+	To create role or roles: db.createRole({role: "", roles: [], privileges: [{ resource: {db: "", collection: ""}, action: ""}]})
+	To create users for role or roles: db.createUser(user: "", pwd: "", roles: [{role: "", db: ""}])
+	To create user authentication: db.auth("user name", "user password")
