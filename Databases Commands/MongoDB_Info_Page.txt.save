@@ -1,0 +1,89 @@
+Document Database: -
+-----------------
+	(1) It is a document which can be stored different types of based environment: cloud (Atlas); subscription (Enterprise); free (Community).
+	(2) Document are composed of field and value pairs similar to JSON objects.
+	(3) The values of fields may include other documents, arrays, and arrays of documents.
+	(4) It stores data records as BSON (Binary JSON) document of 16 MB. These are stored by maintaining orders.
+	(5) $$ is use for system variable in MongoDB.
+	(6) Restriction on field in structure of document: -
+		i) Field name can't be null.
+		ii) _id field value must be unique and immutable. If _id contains subfields then those name can't start with $ symbol.
+		iii) Server store field name that contain . and $ in field name.
+		iv) Field value limit - https://www.mongodb.com/docs/manual/core/document/#field-value-limit
+	(7) To access list of value use dot operation i.e., [name of field].[index]
+
+Object Id: -
+---------
+	(1) These are small, unique, fast to generate and to maintain ordered.
+	(2) Its length of value is 12 bytes i.e., 4 bytes of data and time stamp + 3 bytes of machine identifier + 2 bytes of process identifier + 3 bytes of increament counter.
+
+Note: https://www.mongodb.com/docs/manual/reference/bson-types/#bson-types
+	  https://www.mongodb.com/docs/manual/reference/bson-type-comparison-order/#comparison-sort-order
+
+DATABASE AND COLLECTION: -
+-----------------------
+	To select database: use [database name]
+
+	To create collection: db.createCollection("[collection name]")
+
+	To create capped collection: db.createCollection("[collection name]",{capped: true, size: [0 < size in byte < 1 PB], max: [maximum no. of documents]})
+	To check if its a capped collection: db.[collection name].isCapped()
+	To convert normal collection into capped collection: db.runCommand({"convertToCapped": "[normal collection name]", size: [0 < size in byte < 1 PB]});
+	To change size of capped collection: db.runCommand({collMod:"[capped collection name]", cappedSize: [0 < size in byte < 1 PB]})
+	To change maximum no. of documents in capped collection: db.runCommand({collMod:"[capped collection name]", cappedMax: [maximum no. of documents]})
+
+	To insert one document in collection: db.[collection name].insertOne({})
+	To insert multiple document in collection: db.[collection name].insertMany([{},{},...,{}])
+
+	To update one document in collection: db.[collection name].updateOne([filter],[update],[option])
+	To update all document in collection: db.[collection name].updateMany([filter],[update],[option])
+	To replace one or more document (all content except _id) in collection: db.[collection name].replaceOne([filter],[update],[option])
+
+	To display all document in collection: db.[collection name].find()
+	To display all document using equality in collection: db.[collection name].find({ field:value })
+	To display all document using query operator in collection: db.[collection name].find({ field: { [query operator]: [values]} })
+	To display all document using AND conditions in collection: db.[collection name].find({ field1:value1 , field2:value2 , ... , fieldN:valueN })
+	To display all document using OR conditions in collection: db.[collection name].find( $or : [{ field1:value1 , field2:value2 , ... , fieldN:valueN }] )
+
+	To delete one document in collection: db.[collection name].deleteOne({})
+	To delete multiple document in collection: db.[collection name].deleteMany([{},{},...,{}])
+
+	Note: -
+		(1) There is no command to create empty database. We should have to enter atleast one document to create database.
+		(2) UUID (Universally Unique Identifier) are assigned to collections that are same across over all database.
+		(3) By default capped is false i.e., we should have to set true for capped collection.
+		(4) Capped collections are fixed-size collections that support high-throughput operations that insert and retrieve documents based on insertion order. Once a collection fills its allocated space, it makes room for new documents by overwriting the oldest documents in the collection.
+		(5) If a collection doesn't exist the insert operation will create a collection.
+
+VIEWS: -
+-----
+	To create views: db.createView("[view name]","[collection name]",[aggregation pipeline],{collation: "[collation]"})
+	To delete view: db.[view name].drop()
+	To modify collMod view: db.runCommand(collMod: "[view name]", viewOn: "[collection name]", "pipeline": [])
+
+	Note: -
+		(1) It is a read-only query object.
+		(2) It is not stored in temporary files because allowDiskUse is false bydefault.
+		(3) Standard views (not stored in disk) and On-demand materialised views (stored in disk).
+		(4) You can't rename views.
+		(5) Bydefault collation is simple.
+
+USERS: -
+-----
+	To create role or roles: db.createRole({role: "", roles: [], privileges: [{ resource: {db: "", collection: ""}, action: ""}]})
+	To create users for role or roles: db.createUser(user: "", pwd: "", roles: [{role: "", db: ""}])
+	To create user authentication: db.auth("user name", "user password")
+
+
+Bulk Write Operation: -
+--------------------
+	To insert, update, delete in bulk (ordered): db.[collection name].bulkWrite()
+	To insert, update, delete in bulk (unordered): db.[collection name].bulkWrite({ordered:false})
+
+	Note: -
+		(1) It perform write operation in bulk.
+		(2) These operation affect a single collection.
+		(3) MongoDB allows applications to determine the acceptable level of acknowledgement required for bulk write operations.
+		(4) Bulk write operation can be in either ordered (serially,no process of remaining write operation if error occurs) or unordered (parallel, process of remaining write operation if error occurs).
+
+SQL TO MONGODB: https://www.mongodb.com/docs/manual/reference/sql-comparison/#sql-to-mongodb-mapping-chart
