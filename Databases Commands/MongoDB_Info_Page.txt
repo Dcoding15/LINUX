@@ -73,3 +73,54 @@ USERS: -
 	To create role or roles: db.createRole({role: "", roles: [], privileges: [{ resource: {db: "", collection: ""}, action: ""}]})
 	To create users for role or roles: db.createUser(user: "", pwd: "", roles: [{role: "", db: ""}])
 	To create user authentication: db.auth("user name", "user password")
+
+
+Bulk Write Operation: -
+--------------------
+	To insert, update, delete in bulk (ordered): db.[collection name].bulkWrite()
+	To insert, update, delete in bulk (unordered): db.[collection name].bulkWrite({ordered:false, })
+
+	Note: -
+		(1) It perform write operation in bulk.
+		(2) These operation affect a single collection.
+		(3) MongoDB allows applications to determine the acceptable level of acknowledgement required for bulk write operations.
+		(4) Bulk write operation can be in either ordered (serially,no process of remaining write operation if error occurs) or unordered (parallel, process of remaining write operation if error occurs).
+
+SQL TO MONGODB: https://www.mongodb.com/docs/manual/reference/sql-comparison/#sql-to-mongodb-mapping-chart
+
+MongoDB Tools: -
+-------------
+
+	mongoimport: Import documents from json (javascript object notation), csv (comma separated value), tsv (tab separated value) file to MongoDB.
+	-----------
+		(1) Import JSON file: mongoimport --db [Database Name] --collection [Collection Name] --file [File Name].json
+		(2) Import CSV file: mongoimport --db [Database Name] --collection [Collection Name] --type csv --headerline --file [File Name].csv
+		(3) Import TSV file: mongoimport --db [Database Name] --collection [Collection Name] --type tsv --headerline --file [File Name].tsv
+		(4) Import Bulk insert (JSON file): mongoimport --db [Database Name] --collection [Collection Name] --mode insert --file [File Name].json
+		(2) Import Bulk insert (CSV file): mongoimport --db [Database Name] --collection [Collection Name] --mode insert --type csv --headerline --file [File Name].csv
+		(3) Import Bulk insert (TSV file): mongoimport --db [Database Name] --collection [Collection Name] --mode insert --type tsv --headerline --file [File Name].tsv
+
+	mongoexport: Export documents from MongoDB to json (javascript object notation), csv (comma separated value) file.
+	-----------
+		(1) Export JSON file: mongoexport --db [Datatbase Name] --collection [Collection Name] --out [File Name].json
+		(2) Export CSV file: mongoexport --db [Database Name] --collection [Collection Name] --type csv --field [field1, field2, field3, ... , fieldN] --out [File Name].csv
+		(3) Export JSON file using query: mongoexport --db [Datatbase Name] --collection [Collection Name] --query '[query like mongodb]' --out [File Name].json
+		(4) Export JSON file in pretty-printed format: mongoexport --db [Datatbase Name] --collection [Collection Name] --pretty --out [File Name].json
+
+	mongodump: Creating backups of binary data.
+		(1) Backup specific database: mongodump --db [Database Name] --out [Directory]
+		(2) Backup specific collection: mongodump --db [Database Name] --collection [Collection Name] --out [Directory]
+		(3) Backup all databases: mongodump --out [Directory]
+		(4) Backup using compression: mongodump --db mydatabase --gzip --out [Directory]
+		(5) Backup using archive compression: mongodump --db mydatabase --archive=[Directory + Folder Name].archive
+
+	mongorestore: Restore backups created from mongodump.
+		(1) Restore specific database: mongorestore --db [Database Name] --drop [Directory]
+		(2) Backup specific collection: mongorestore --db [Database Name] --collection [Collection Name] --drop [Directory]
+		(3) Backup all databases: mongorestore --drop [Directory]
+		(4) Backup using compression: mongorestore --db mydatabase --gzip --drop [Directory]
+		(5) Backup using archive compression: mongorestore --db mydatabase --archive=[Directory + Folder Name].archive
+
+	mongostat: Real-time view of database status.
+
+	mongotop: Real-time view of read and write activity.
