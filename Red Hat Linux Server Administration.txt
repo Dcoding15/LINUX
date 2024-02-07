@@ -1,0 +1,28 @@
+SELinux Security: -
+----------------
+
+	Strict
+	Targated
+
+	Configuration File for SElinux: /etc/selinux/config
+									/etc/sysconfig/selinux (linker file)
+
+	enforcing : block + alert
+	permissive: allow + alert
+	disabled  : nothing
+	alert     : alert in log file
+
+	getenforce
+	setenforce [ 0 | 1 ]
+
+	SElinux Booleans: -
+	----------------
+		getsebool -a
+		getsebool [name of task]
+		setsebool [name of task] [ 0 | 1 ]
+
+	SElinux Context (SElinux permission): -
+	------------------------------------
+		apache
+		httpd
+		lighthttp

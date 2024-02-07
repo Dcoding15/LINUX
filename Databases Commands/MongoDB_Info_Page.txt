@@ -122,5 +122,28 @@ MongoDB Tools: -
 		(5) Backup using archive compression: mongorestore --db mydatabase --archive=[Directory + Folder Name].archive
 
 	mongostat: Real-time view of database status.
+		(1) insert: number of insert operation per second.
+		(2) query: number of query operation per second.
+		(3) update: number of update operation per second.
+		(4) delete: number of delete operation per second.
+		(5) getmore: number of cursor fetch operation per second.
+		(6) command: number of commands per second.
+		(7) dirty: amount of modified data (in cache) not saved into disk.
+		(8) used: amount of used data (in cache) saved into disk.
+		(9) flushes: number of times data transfer from cache to disk.
+		(10) vsize: amount of virtual memory (includes both physical RAM and swap space) allocated to MongoDB server.
+		(11) res: amount of resident memory (virual memory in physical RAM) allocated to MongoDB server.
+		(12) qrw: ratio of qrw = read operation (query) / write operation 
+		(13) arw: ratio of arw = read operation (active) / write operation
+		(14) net_in: amount of data transfered from clients to MongoDB server.
+		(15) net_out: amount of data transfered from MongoDB server to clients.
+		(16) conn: number of client connections with the MongoDB server.
+		(17) time: current timestamp.
 
 	mongotop: Real-time view of read and write activity.
+		Output: -
+		(1) ns (namespace): name of the operation.
+		(2) total: total time (in microseconds) taken for an operation of a ns.
+		(3) read: total time (in microseconds) taken for read operation of a ns.
+		(4) write: total time (in microseconds) taken for write operation of a ns.
+		(5) time: current timestamp.
