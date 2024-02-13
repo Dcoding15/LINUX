@@ -13,6 +13,29 @@ To reload the firewall --> sudo ufw reload
 To reset the firewall --> sudo ufw reset
 
 To setup log level entries --> sudo ufw logging [ off | low / on | medium | high | full ]
+To setup default policies --> sudo ufw default [ allow | deny | reject ] [ incoming | outgoing | routed ]
+
+Creating Rules: -
+--------------
+
+PERMISSIONS: allow | deny | reject | limit
+DIRECTIONS: in | out
+ADDRESS: IPv4 ADDRESS | IPv6 ADDRESS
+
+Specific port (inside) --> sudo ufw [ PERMISSIONS ] [ DIRECTIONS ] [ PORT NAME / PORT NUMBER ]
+Specific protocol (inside) --> sudo ufw [ PERMISSIONS ] [ DIRECTIONS ] [ PROTOCOL ]
+Both specific port and protocol (inside) --> sudo ufw [ PERMISSIONS ] [ DIRECTIONS ] [ PROTOCOL ]/[ PORT NAME / PORT NUMBER ]
+IP address (outside) --> sudo ufw [ PERMISSIONS ] from [ ADDRESS ]
+IP address and port (outside) --> sudo ufw [ PERMISSIONS ] from [ ADDRESS ]/[ PORT NUMBER ]
+IP address and port (outside) to specific port --> sudo ufw [ PERMISSIONS ] from [ ADDRESS ]/[ PORT NUMBER ] to any port [ PORT NUMBER ]
+IP address and port (outside) to specific port, protocol --> sudo ufw [ PERMISSIONS ] proto [ PROTOCOL ] from [ ADDRESS ]/[ PORT NUMBER ] to any port [ PORT NUMBER ]
+IP address and port (outside) to specific address, port, protocol --> sudo ufw [ PERMISSIONS ] proto [ PROTOCOL ] from [ ADDRESS ]/[ PORT NUMBER ] to [ ADDRESS ] port [ PORT NUMBER ]
+Any address to specific port, protocol --> sudo ufw [ PERMISSIONS ] proto [ PROTOCOL ] from any to any port [ PORT NUMBER ]
+
+
+Modifying Rules: -
+---------------
+Deleting Rules: sudo ufw delete [ SERIAL NUMBER FROM STATUS NUMBERED OUTPUT ]
 
 NOTE: -
 	1. We use --dry-run to display the change, but not to modify.
@@ -21,4 +44,4 @@ NOTE: -
 		(i) ufw is disabled
 		(ii) incoming and forward policy is denied
 		(iii) outgoing policy is allowed
-	4.
+	4. If no direction is specified then by default incoming direction is considered.

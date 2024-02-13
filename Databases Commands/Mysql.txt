@@ -1,0 +1,137 @@
+Introduction: -
+------------
+	1. SQL stands for Structured Query Language. It's original name (given by IBM) was SEQUEL (Structured English Query Language) 
+	2. It was developed by IBM computer scientiest in 1970s.
+	3. Database is a organised collection of structure data which is controlled by Database Management System (DBMS).
+	4. It is a tool for organising, managing and retrieving archived data.
+
+Rules for SQL: -
+-------------
+	1. semicolon ( ; ) is used to end SQL statement.
+	2. Statements may be split across lines, but keywords may not.
+	3. Identifiers, operator names, and literals are separated by one or more spaces or other delimiters.
+	4. A comma ( , ) separates parameters without a clause.
+	5. A space separates a clause.
+	6. Reserved words cannot be used as identifiers unless enclosed with double quotes.
+	7. Identifiers can contain up to 30 characters.
+	8. Identifiers must start with an alphabetic character.
+	9. Characters and date literals must be enclosed within single quotes.
+	10. Numeric literals can be represented by simple values.
+	11. Comments may be enclosed between /* and */ symbols and maybe multi-line.
+
+SQL command categories: -
+----------------------
+	1. DDL (Data Definition Language): Used to create and modify database structure (column, schema).
+		CREATE: create database structure.
+		ALTER: modify database structure.
+		DROP: delete database structure.
+		TRUNCATE: delete all records from database.
+		COMMENT: add comment to data dictionary.
+		RENAME: rename existing name of database or table.
+	2. DML (Data Manipulation Language): Used to create and modify records (row) from database.
+		INSERT: insert data into table.
+		UPDATE: update data of table.
+		DELETE: delete data from table.
+		LOCK: table control concurrency.
+		CALL: Call PL/SQL subprogram.
+		EXPLAIN PLAN: describe access path.
+	3. DQL (Data Query Language): Used to retrive records from database.
+		SELECT: retrive data from table.
+	4. DCL (Data Control Language): Used to provide or remove privilege to other users.
+		GRANT: give user's access privileges.
+		REVOKE: withdraw user's access privileges.
+	5. TCL (Transaction Control Language): Used to automatically save transaction and undo wrong transactions.
+		COMMIT: saves a transaction.
+		SAVEPOINT: set a save point within a transaction.
+		ROLLBACK: undo a transaction.
+		RELEASE SAVEPOINT: 
+
+SQL Data Types: -
+--------------
+	1. Numeric: bigint, int, smallint, tinyint, bit, decimal, numeric, money, smallmoney, float, real
+	2. Date and Time: date, time, datetime
+	3. String: char, varchar, varchar(max), text, nchar, nvarchar, nvarchar(max), binary, varbinary, varbinary(max)
+	4. Boolean: true, false
+	5. Binary: blob, bytea
+	6. Interval: interval year, interval month, interval day
+	7. Array: array, json
+	8. XML: xml
+	9. Spatial: point, line, polygon
+
+SQL Comments: -
+------------
+	1. Single Line Comments: -
+			-- This is an example of single line comment
+			-- This is an example of another single line comment
+	2. Multiline or Inline Comments: -
+			/* This is an example
+					of multiline or inline comments */
+
+SQL Transactions: -
+----------------
+Transactions group a set of tasks into a single execution unit. Each transaction begins with a specific job and ends when all the tasks in the group successfully completed. If any of the tasks fail, the transaction fails. Therefore, a transaction has only two results: success or failure. A database transaction must be ACID properties. These properties can ensure the concurrent execution of multiple transactions without conflict.
+	1. Atomicity: Transaction can either be completely successful or unsuccessful. The whole transaction must be rolled back if one part of it fails.
+	2. Consistency: Transactions maintain integrity restrictions by moving the database from one valid state to another.
+	3. Isolation: Concurrent transactions are isolated from one another, assuring the accuracy of the data.
+	4. Durability: Once a transaction is committed, its modifications remain in effect even in the event of a system failure.
+
+SQL Views: -
+---------
+	1. It is a kind of virtual tables.
+	2. It can also have whole / specific rows and columns of an original table.
+
+	Creating view table (row specific): CREATE VIEW [view name] AS SELECT * FROM [table name] WHERE [condition];
+	Creating view table (column specific): CREATE VIEW [view name] AS SELECT [col1, col2, ... , colN] FROM [table name];
+	Creating view table (whole row and column): CREATE VIEW [view name] AS SELECT * FROM [table name];
+	Deleting view table: DROP VIEW [view name];
+	Updating view table: [CREATE | REPLACE] VIEW [view name] AS SELECT [col1, col2, ... , colN] FROM [table name] WHERE [condition];
+
+	Note: -
+	----
+		1. Rules of updating views: -
+			(a) No use of GROUP BY or ORDER BY clause.
+			(b) No use of DISCTICT keyword.
+			(c) No use of NULL values.
+			(d) No use of nested or complex queries.
+			(e) No use of multiple tables.
+		2. Advantages of using views: -
+			(a) Restricting or hiding data.
+			(b) Multiple view facility.
+			(c) Rename columns.
+
+SQL Users: -
+---------
+	Creating user: CREATE USER "[user name]"@"[host name]" IDENTIFIED BY "[password]";
+	Creating user for any host: CREATE USER "[user name]"@"%" IDENTIFIED BY "[password]";
+	Creating role: CREATE ROLE [role name];
+	Granting privileges to role: GRANT [NAME OF PRIVILEGES] ON [database name].[table name] TO [role name];
+	Granting role privileges to user: GRANT [role name] TO [user1, user2, ..., userN];
+	Granting all privileges to user: GRANT ALL PRIVILEGES ON [database name].[table name] TO "[user name]"@"[host name]";
+	Granting specific privileges to user: GRANT [NAME OF PRIVILEGES] PRIVILEGES ON [database name].[table name] TO "[user name]"@"[host name]";
+	Remove all privileges from user: FLUSH PRIVILEGES;
+	Remove privileges from role: REVOKE [NAME OF PRIVILEGES] FROM [role name];
+	Deleting user: DROP USER "[user name]"@"[host name]";
+	Deleting role: DROP ROLE [role name];
+	Listing user: SELECT user, host FROM mysql.user;
+	Listing role: SELECT DISTINCT Grantee FROM mysql.role-edges;
+
+
+SQL Indexes: -
+-----------
+	1. It is an schema of an object.
+	2. It is used to speed to retrival process using pointer. But slow downs input process.
+	3. Faster join operations.
+	4. Faster data retrival.
+	5. Optimised sorting and grouping.
+	6. Prevent duplicate or inconsistent data entries.
+
+	Creating index: CREATE INDEX [index name] ON TABLE [col1, col2, ..., colN];
+	Creating unique index: CREATE UNIQUE INDEX [index name] ON TABLE [column name];
+	Altering index: ALTER INDEX [index name] ON [table name] REBUILD;
+	Deleteing index: DROP INDEX [index name];
+
+SQL Sequence: -
+------------
+
+	Creating sequence: CREATE SEQUENCE [sequence name] START WITH [initial value] INCREMENT BY [increment value] MINVALUE [minimum value] MAXVALUE [maximum value] CYCLE|NOCYCLE;
+	Access squence values: SEQUENCE [squence name].nextval;

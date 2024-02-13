@@ -1,0 +1,193 @@
+OPTIONS
+       -a     Directs adb to listen on all interfaces for a connection.
+
+       -d     Directs command to the only one connected USB device. Returns an error if more than one USB device is present.
+
+       -e     Directs command to the only one running emulator. Returns an error if more than one emulator is running.
+
+       -s     Directs command to the device or emulator with the given serial number or qualifier. Overrides ANDROID_SERIAL environment variable.
+
+       -p     It take input as path of android device. It can be absolute or relative.
+              If -p is not specified, the ANDROID_PRODUCT_OUT environment variable is used, which must be an absolute path.
+
+       -H     Name of adb server host (By default it is localhost)
+
+       -P     Port of adb server (By default it is 5037)
+
+------------------------------------------------------------------
+CONNECT DEVICE WIRELESS
+
+Connect to a device via TCP/IP: adb connect host[:port]
+Disconnect all devices via TCP/IP: adb disconnect [host[:port]]
+
+NOTE: 5555 is default port number.
+      We should have to enable wireless debugging while
+
+------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+ENVIRONMENT VARIABLES
+  ADB_TRACE: Print debug information. A comma separated list of the following values 1 or all, adb, sockets, packets, rwx, usb, sync, sysdeps, transport, jdwp
+  ANDROID_SERIAL: The serial number to connect to. -s takes priority over this if given.
+  ANDROID_LOG_TAGS: When used with the logcat option, only these debug tags are printed.
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+NOTE:  All string value should be in upper case
+
+[string value] --> [integer value]
+
+home -->  3
+back -->  4
+call -->  5
+endcall -->  6
+
+volume_up -->  24
+volume_down -->  25
+mute -->  91
+power -->  26
+
+clear -->  28
+tab -->  61
+space -->  62
+enter -->  66
+
+menu -->  82
+notification -->  83
+search -->  84
+
+media_play_pause -->  85
+media_stop -->  86
+media_next -->  87
+media_previous -->  88
+media_rewind -->  89
+media_fast_forward -->  90
+
+sym -->  63
+explorer -->  64
+envelope -->  65
+camera -->  27
+contacts -->  207
+calendar -->  208
+music -->  209
+calculator -->  210
+
+assist -->  219
+voice_assist -->  231
+
+brightness_down -->  220
+brightness_up -->  221
+
+cut -->  277
+copy -->  278
+paste -->  279
+
+all_apps -->  284
+refresh -->  285
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+FOR CALLING: adb shell am start -a android.intent.action.CALL -d tel:[country code][phone number]
+FOR HANG UP CALL: adb shell input keyevent [ ENDCALL / 6 ]
+FOR MESSAGE: adb shell am start -a android.intent.action.SENDTO -d sms:[country code][phone number] --es sms_body "[Message Body]"
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+
+SCREENSHOT: adb shell screencap [image path with format]
+RECORD SCREEN: adb shell screenrecord [video path with format]
+
+-------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------
+
+DISPLAY PROPERTIES: adb shell getprop "[for specific properties] (Optional)"
+
+aaudio					-> high performance, low latency audio API (Android 8.0).
+build					-> build related properties.
+cache_key				-> caching mechanism.
+com						-> custom properties.
+dalvik					-> Dalvik Virtual Machine where apps are executed. 
+debug					-> debugging informations.
+dev						-> device informations.
+dumpstate				-> built-in diagnostic tool.
+gsm						-> Gobal System for Mobile Communications (GSM) i.e., cellular network for phones.
+hwservicemanager		-> Hardware System Manager i.e., system level components.
+init					-> init processes i.e., first process at the time of boot
+io						-> Input / Output (I/O) informations.
+keyguard				-> security feature prevent unauthorized access to the user.
+knox					-> Samsung Knox mobile security solutions.
+log						-> logging informations.
+mdc						-> Mobile Data Channel (MDC) configurations.
+net						-> networking.
+persist					-> persistent system.
+pm						-> Package Manager (PM).
+restore					-> backup related properties.
+ril						-> Radio Interface Layer (RIL).
+ro						-> Read Only (RO).
+security				-> security feature and information.
+selinux					-> SELinux (Security Enhanced Linux).
+service					-> running process.
+setupwizard				-> guiding users initial setup process when first set up their device or after a factory reset.
+storage					-> storage information.
+sys						-> system information.
+vendor					-> device manufacturer information.
+vold					-> Volume Daemon (VOLD) i.e., managing storage volumes on an Android device
+wifi					-> WIFI related information.
+
+
+---------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------------------------------
+DISPLAY INPUT: -
+USAGE: input [<source>] [-d DISPLAY_ID] <command> [<arg>...]
+
+TEXT: adb shell input text [MESSAGE IN STRING WITH %s AS SPACE]
+TAP: adb shell input tap [X AXIS] [Y AXIS]
+SWIPE: adb shell input swipe [X1 AXIS] [Y1 AXIS] [X2 AXIS] [Y2 AXIS]
+DRAGANDDROP: adb shell input draganddrop [X1 AXIS] [Y1 AXIS] [X2 AXIS] [Y2 AXIS] [DURATION]
+
+NOTE: above commands have default source as touchscreen
+
+KEYEVENT: adb shell input keyevent [STRING VALUE / INTEGER VALUE]
+MOTIONEVENT: adb shell input motionevent [DOWN | UP | MOVE] [X AXIS] [Y AXIS]
+
+NOTE: above commands have default source as keyboard
+
+NOTE: sources of input are dpad, keyboard, mouse, touchpad, gamepad, touchnavigation, joystick, touchscreen, stylus, trackball
+---------------------------------------------------------------------------------------------------------------------------------
+
+ADB BASICS: -
+list of commands related to adb: adb help
+list of root directory content with size: adb shell ls -s
+list of root directory content with subdirectories: adb shell ls -R
+list of connected devices: adb devices
+list of connected deveices with details: adv devices -l
+restart adbd with root permission: adb root
+reboot device:  adb reboot
+direct [COMMAND] to specific [DEVICE NAME]: adb -s [DEVICE NAME] [COMMAND]
+direct [COMMAND] to connected USB devices: adb -d [COMMAND]
+direct [COMMAND] to connected emulator: adb -e [COMMAND]
+
+ADB PACKAGE INSTALLATION: -
+install apk: adb shell install [PACKAGE NAME]
+install apk from phone path: adb shell install [PATH WITH PACKAGE NAME]
+uninstall apk: adb shell uninstall [PACKAGE NAME]
+list of installed apk: adb shell pm list packages
+
+ANDROID PATHS: -
+apk database: /data/data/[PACKAGE NAME]/databases/
+apk preferences: /data/data/[PACKAGE NAME]/shared_prefs/
+apk installed by users: /data/app/
+apk pre-installed: /system/app/
+encrypted apk (App2SD): /mmt/asec/
+internal SD card: /mmt/emmc/
+external SD card: /mmt/adcard/external_sd
+internal storage: /sdcard
+
+FILE OPERATION: -
+copy from connected device to android device: adb push [CONNECTED DEVICE] [ANDROID DEVICE]
+copy from android deveice to connected device: adb pull [ANDROID DEVICE] [CONNECTED DEVICE]
+sync file between both devices: adb sync [ all | data | odm | oem | product | system | system_ext | vendor ]
