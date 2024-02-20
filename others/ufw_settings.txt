@@ -31,6 +31,7 @@ IP address and port (outside) to specific port --> sudo ufw [ PERMISSIONS ] from
 IP address and port (outside) to specific port, protocol --> sudo ufw [ PERMISSIONS ] proto [ PROTOCOL ] from [ ADDRESS ]/[ PORT NUMBER ] to any port [ PORT NUMBER ]
 IP address and port (outside) to specific address, port, protocol --> sudo ufw [ PERMISSIONS ] proto [ PROTOCOL ] from [ ADDRESS ]/[ PORT NUMBER ] to [ ADDRESS ] port [ PORT NUMBER ]
 Any address to specific port, protocol --> sudo ufw [ PERMISSIONS ] proto [ PROTOCOL ] from any to any port [ PORT NUMBER ]
+Outgoing address --> sudo ufw [ PERMISSION ] out to [ ADDRESS ] port [ PORT NAME / PORT NUMBER ] proto [ PROTOCOL ]
 
 
 Modifying Rules: -

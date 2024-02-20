@@ -106,7 +106,7 @@ Command Line Argument:
 
 		$*  ---->  Display all characters with IFS (Internal Field Seperator). By default the IFS value is whitespace.
 		$@  ---->  Display all character with whitespace seperator
-		$?  ---->  Represent exit code of previously executed command or scripts.
+		$?  ---->  Display exit code of previously executed command or scripts.
 	
 	Note: -
 	----

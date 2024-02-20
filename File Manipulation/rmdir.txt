@@ -1,0 +1,9 @@
+Command: rmdir
+remove empty directories
+
+Usage: rmdir [OPTION]... DIRECTORY...
+
+[OPTION]
+--ignore-fail-on-non-empty --> ignore each failure that is solely because a directory is non-empty
+-p, --parents --> remove DIRECTORY and its ancestors
+-v, --verbose --> output a diagnostic for every directory processed
