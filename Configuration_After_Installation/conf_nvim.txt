@@ -1,0 +1,21 @@
+Step 1: su - root
+
+Step 2: apt install nodejs npm
+
+Step 3: npm install -g [yarn | ci]		# Which ever is required
+
+Step 4: exit
+
+Step 5: mkdir .config/nvim/
+
+Step 6: cd .config/nvim/
+
+Step 7: nvim init.vim
+
+Step 8: Copy and Paste all from this link --> https://github.com/NeuralNine/config-files/blob/master/init.vim
+
+Step 9: Copy and Paste, then run          --> sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
+Step 10: cd ~/.local/share/nvim/plugged/coc.nvim
+
+Step 11: [ yarn | ci ] install && [ yarn | ci ] build

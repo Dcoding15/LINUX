@@ -1,0 +1,20 @@
+Make .muttrc file and copy all below commands
+
+# Basic settings
+set realname = "Debrishi Biswas"
+set from = "dungeonhunter927@gmail.com"
+
+# IMAP settings
+set imap_pass = "[app password]"
+set imap_user = "dungeonhunter927@gmail.com"
+set folder = "imaps://imap.gmail.com/"
+set spoolfile = "+INBOX"
+
+set imap_user = "debrishibiswas2003@gmail.com"
+set imap_pass = "[app password]"
+set folder = "imaps://imap.gmail.com/"
+set spoolfile = "+INBOX"
+
+# SMTP settings
+set smtp_url = "smtps://dungeonhunter927@gmail.com@smtp.gmail.com:465/"
+set smtp_pass = "[app password]"

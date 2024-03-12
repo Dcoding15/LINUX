@@ -1,0 +1,15 @@
+Install Mysql
+Install MongoDB
+Install Python3-pip
+Install neofetch
+Install build-essential  OR Install C/C++
+Install net-tools
+Install openssh
+Install mutt
+Install BigBlueTermianl nerd font --> https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/BigBlueTerminal.zip
+Install Symbol nerd font --> https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/NerdFontsSymbolsOnly.zip
+Install ProggyClean nerd font --> https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/ProggyClean.zip
+Install GohuFont nerd font --> https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/Gohu.zip
+
+Configue github and local with ssh-key. Take help of web.
+sudo visudo ---> At line 9 and column 25 ---> feedback (with no whitespace)

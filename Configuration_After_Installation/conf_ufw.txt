@@ -1,0 +1,29 @@
+Step 1: su - root
+
+Step 2: apt intall ufw
+
+Step 3: systemctl enable ufw && systemctl start ufw
+
+Step 4: ufw enable
+
+Step 5: ufw default deny outgoing
+
+Step 6: Allow these one by one: -
+			ufw allow https
+			ufw allow http
+			ufw allow ssh
+			ufw allow dns
+			ufw allow smtps
+			ufw allow imaps
+			
+			ufw allow out https
+			ufw allow out http
+			ufw allow out ssh
+			ufw allow out ssh
+			ufw allow out dns
+			ufw allow out smtps
+			ufw allow out imaps
+
+Step 7: ufw reload
+
+Step 8: exit
