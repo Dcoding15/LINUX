@@ -1,0 +1,87 @@
+Listing Supported Algorithms: -
+----------------------------
+List digest algorithms                : openssl list -digest-algorithms
+List cipher algorithms                : openssl list -cipher-algorithms
+List public key algorithms            : openssl list -public-key-algorithms
+List available options for algorithms : openssl list -option [ algorithms ]
+
+
+Verifying Intigrity (to check weather a file is modified or not): -
+----------------------------------------------------------------
+To display checksum of a file  : [ name of checksum with sum as postfix ] [ file name ]
+To calculate checksum of a file: openssl [ name of checksum ] [ file name ]
+To create checksum of a file   : openssl [ name of checksum ] -hex [ input file ]
+
+Encryption: -
+----------
+Generate randomly hexadecimal key   : openssl rand -hex [ key size in bytes ]
+Generate randomly base64 key        : openssl rand -base64 [ key size in bytes ]
+Generate private key                : openssl [ encrypt algorithms with gen prefix ]
+Generate private key with limited size  : openssl [ encrypt algorithms with gen prefix] [ key size in bits ]
+Examining generated private key : openssl [ encrypt algorithms ] -in [ file name ] -noout -text
+Generate public key             : openssl [ encrypt algorithms ] -in [ private key file name ] -pubout -out [ public key file name ]
+
+In binary format: -
+----------------
+Encrypt a file : openssl [ encrypt algorithms ] -in [ file name ] -out [ encrypt file name ] -e -kfile [ encryption file name ]
+Decrypt a file : openssl [ encrypt algorithms ] -in [ encrypt file name ] -out [ file name ] -d -kfile [ encryption file name ]
+
+In base64 format: -
+----------------
+Encrypt a file : openssl [ encrypt algorithms ] -in [ file name ] -out [ encrypt file name ] -e -a
+Decrypt a file : openssl [ encrypt algorithms ] -in [ encrypt file name ] -out [ file name ] -d -a
+
+Encrypt and Decrypt using enc: -
+-----------------------------
+Encrypt a file :  openssl enc -[ encrypt algorithms ] -in [ file name ] -out [ encrypt file name ] -e [
+
+Note: -
+	1. If we don't put -hex flag after any check sum it will generate binary data.
+	2. Maximum size of RSA key is 2048 bit long.
+	3. -out [ file name ] is used to store output in file.
+	4. -in [ file name ] is used to take input as a file.
+	5. If we don't provide key file then openssl would ask for password.
+	6. When encryption and decryption use -pbkdf2
+	7. 
+		Symmetric Encryption Algorithms:
+			AES (Advanced Encryption Standard)
+			DES (Data Encryption Standard)
+			3DES (Triple DES)
+			Blowfish
+			RC4
+			ChaCha20
+
+		Asymmetric Encryption Algorithms:
+			RSA (Rivest-Shamir-Adleman)
+			DSA (Digital Signature Algorithm)
+			Diffie-Hellman Key Exchange
+			Elliptic Curve Cryptography (ECC)
+			ElGamal
+		
+		Hashing Algorithms:
+			MD5
+			SHA-1 (Secure Hash Algorithm 1)
+			SHA-2 (SHA-224, SHA-256, SHA-384, SHA-512)
+			SHA-3
+		
+		Digital Signature Algorithms:
+			RSA
+			DSA
+			ECDSA (Elliptic Curve Digital Signature Algorithm)
+
+		Key Exchange Algorithms:
+			Diffie-Hellman
+			Elliptic Curve Diffie-Hellman (ECDH)
+			Message Authentication Codes (MAC):
+
+		HMAC (Hash-based Message Authentication Code)
+			CMAC (Cipher-based Message Authentication Code)
+		
+		Random Number Generation:
+			Pseudo-Random Number Generators (PRNG)
+			True Random Number Generators (TRNG)
+
+		Key Derivation Functions (KDF):
+			PBKDF2 (Password-Based Key Derivation Function 2): Derive secret key from password. It will generate hash of that password and mix it with some salt and again hash that salted data to derive a new secret key. This process repeated multiple times ( bydefault 100,000 times in openssl )
+			HKDF (HMAC-based Key Derivation Function)
+			SCrypt
