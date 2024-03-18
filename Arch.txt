@@ -1,0 +1,144 @@
+Setting Font: -
+------------
+setfont -d
+
+Keyboard Layout: -
+---------------
+loadkeys us
+
+Unblocking Devices: -
+------------------
+rfkill unblock bluetooth wlan
+
+Internet Connection: -
+-------------------
+iwctl
+	device list
+	station [ device name ] scan
+	station [ device name ] get-networks
+	station [ device name ] connect [ SSID ]
+
+Check Connections: -
+-----------------
+ping google.com
+ping archlinux.org
+
+Setting Time and Date: -
+---------------------
+timedatectl set-timezone [ TIME ZONE (Press tab for options) ]
+timedatectl set-local-rtc [ BOOL (0 -> no | 1 -> yes) ]
+
+Creating Partition: -
+------------------
+fdisk -l --> for listing disk partition
+fdisk /dev/nvme0n1 (For efi and root partition)
+	d --> delete partition
+	n --> new partition
+	w --> save and exit
+	q --> exit without saving
+fdisk /dev/nvem1n1 (For swap partition)
+	d --> delete partition
+	n --> new partition
+	w --> save and exit
+	q --> exit without saving
+Note: -
+	EFI --> +16GB (1st disk)
+	ROOT --> Remaining space (1st disk)
+	SWAP --> ALL (2nd disk)
+
+Format Partition: -
+----------------
+lsblk --> list those created partition
+mkfs.ext4 /dev/[root partition]
+mkfs.fat -F 32 /dev/[efi partition]
+mkswap /dev/[swap partition]
+
+Mounting Partition: -
+------------------
+mkdir -p /mnt/boot/efi
+mount /dev/[root partition] /mnt
+mount /dev/[efi partition] /mnt/boot/efi
+swapon /dev/[swap partition]
+
+Base System Installation: -
+------------------------
+pacstrap /mnt base linux linux-firmware sof-firmware base-devel grub efibootmgr nano vim networkmanager
+
+Generating File System Table (fstab): -
+------------------------------------
+genfstab /mnt
+genfstab /mnt > /mnt/etc/fstab
+
+System Configuration: -
+--------------------
+arch-chroot /mnt
+ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
+date
+hwclock --systohc
+vim /etc/locale.gen
+	en_IN.UTF-8
+	en_US.UTF-8
+	en_US.ISO-8859-1
+vim /etc/vconsole.conf
+	KEYMAPS=us
+vim /etc/hostname
+	db
+vim /etc/sudoers
+	[user name] ALL=(ALL:ALL) ALL
+pacman -Syu
+systemctl enable NetworkManager
+
+Grub Configuration: -
+------------------
+grub-install /dev/[1st disk]
+grub-mkconfig -o /boot/grub/grub.cfg
+
+Unmounting and Rebooting: -
+------------------------
+umount -a
+reboot
+
+Adding User and giving it Root power: -
+------------------------------------
+adduser arch
+sudo vim /etc/sudoers
+	arch ALL=(ALL:ALL) ALL
+
+Bluetooth Connections: -
+---------------------
+bluetoothctl
+	power on
+	pairable on
+	discoverable on
+	agent on
+	scan on
+	list                            --> show your bluetooth device
+	scan                            --> to scan for devices
+	devices                         --> device you want to pair
+	trust [device MAC address]      --> trust that device (optional)
+	pair [device MAC address]       --> pair using device MAC address
+	connect [device MAC address]    --> works only for connected devices
+	disconnect [device MAC address] --> works only for connected devices
+	remove [device MAC address]     --> works only for connected devices
+	block [device MAC address]      --> if you want to block devices (optional)
+	unblock [device MAC address]    --> if you want to unblock devices (optional)
+
+Wifi Connections: -
+----------------
+nmcli d
+nmcli r wifi on
+nmcli --ask d wifi connect [ SSID ]
+
+Customise the environment: -
+-------------------------
+pacman -Syu
+pacman -S python3, python-pip, python-virtualenv, gcc, g++, unzip, man-db, git, bluez, blueman, pipewire-pulse, pipewire, lxqt, sddm, power-profiles-daemon, unzip, openssh, sshguard
+For arch user --> git clone /home/arch/https://github.com/SolDoesTech/HyprV4.git
+				  ./home/arch/HyprV4/set-hypr
+(No sudo)		  yay -Syu
+Note: (1) Set no only to asus rog laptop.
+	  (2) Need of a desktop environment for sound process
+
+Customizing Kitty: -
+-----------------
+/home/arch/.config/HyprV/kitty/kitty.conf
