@@ -132,13 +132,61 @@ nmcli --ask d wifi connect [ SSID ]
 Customise the environment: -
 -------------------------
 pacman -Syu
-pacman -S python3, python-pip, python-virtualenv, gcc, g++, unzip, man-db, git, bluez, blueman, pipewire-pulse, pipewire, lxqt, sddm, power-profiles-daemon, unzip, openssh, sshguard
+pacman -S python3, python-pip, python-virtualenv, gcc, g++, unzip, man-db, git, bluez, blueman, pipewire-pulse, pipewire, lxqt, power-profiles-daemon, unzip, openssh, sshguard
 For arch user --> git clone /home/arch/https://github.com/SolDoesTech/HyprV4.git
 				  ./home/arch/HyprV4/set-hypr
 (No sudo)		  yay -Syu
 Note: (1) Set no only to asus rog laptop.
 	  (2) Need of a desktop environment for sound process
 
+Hyprdots Installation: -
+---------------------
+Clone repo: git clone --depth 1 https://github.com/prasanthrangan/hyprdots ~/Hyprdots
+Change directory: cd ~/Hyprdots/Scripts
+Install Hyprldots: ./install.sh
+
+Note: Install everything in hyprdots. For more info of keybindings: https://github.com/prasanthrangan/hyprdots#keybindings
+
 Customizing Kitty: -
 -----------------
-/home/arch/.config/HyprV/kitty/kitty.conf
+/home/arch/.config/kitty/kitty.conf
+
+Disabling and Enabling in-built camera: -
+--------------------------------------
+To disable: cat "blacklist uvcvideo" > /etc/modprob.d/nowebcam.conf
+To enable: rm -rf /etc/modprob.d/nowebcam.conf
+
+Installing yay package manager: -
+------------------------------
+Clone repo: git clone https://aur.archlinux.org/yay.git
+Change direcotry: cd /home/arch/yay
+Build yay: makepkg -si
+
+	OR
+[Recommended]
+Clone repo: git clone https://aur.archlinux.org/yay-bin.git
+Change directory: cd /home/arch/yay-bin
+Build yay-bin: makepkg -si
+
+Note: -
+	1. Difference between yay and yay-bin is that yay-bin is pre-compiled.
+	2. Don't install yay in root or use it in root.
+
+Installing MongoDB: -
+------------------
+MongoDB: yay -S mongodb-bin
+To start: -
+	1. sudo systemctl enable mongodb.service
+	2. sudo systemctl status mongodb.service
+	3. Start mongodb shell: mongosh
+
+Installing Mysql: -
+----------------
+MySQL: yay -S mysql
+To start: -
+	1. sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+	2. sudo systemctl start mysqld
+	3. sudo systemctl enable mysqld
+	4. sudo systemctl status mysqld
+	5. sudo mysql_secure_installation	(Just give Y or press enter option to all prompt)
+	6. mariadb -u root -p
