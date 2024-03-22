@@ -100,7 +100,7 @@ reboot
 
 Adding User and giving it Root power: -
 ------------------------------------
-adduser arch
+adduser -m arch
 sudo vim /etc/sudoers
 	arch ALL=(ALL:ALL) ALL
 
