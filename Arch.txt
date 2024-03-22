@@ -132,7 +132,7 @@ nmcli --ask d wifi connect [ SSID ]
 Customise the environment: -
 -------------------------
 pacman -Syu
-pacman -S python3, python-pip, python-virtualenv, gcc, g++, unzip, man-db, git, bluez, blueman, pipewire-pulse, pipewire, lxqt, power-profiles-daemon, unzip, openssh, sshguard
+pacman -S python3, python-pip, python-virtualenv, gcc, g++, unzip, man-db, git, bluez, blueman, pipewire-pulse, pipewire, lxqt, power-profiles-daemon, unzip, openssh, sshguard, sddm
 For arch user --> git clone /home/arch/https://github.com/SolDoesTech/HyprV4.git
 				  ./home/arch/HyprV4/set-hypr
 (No sudo)		  yay -Syu
@@ -147,6 +147,16 @@ Install Hyprldots: ./install.sh
 
 Note: Install everything in hyprdots. For more info of keybindings: https://github.com/prasanthrangan/hyprdots#keybindings
 
+Configure SDDM: -
+--------------
+Install dependencies: sudo pacman -Syu qt5-graphicaleffects qt5-svg qt5-quickcontrols2
+Clone repo: git clone https://github.com/catppuccin/sddm.git
+Move folder from src to /use/share/sddm/themes/: sudo mv sddm/src/* /usr/share/sddm/themes/
+Edit /etc/sddm.conf file:
+	[Theme]
+	Current=catppuccin-[flavour]
+Note: [flavour] are latte/frappe/macchiato/mocha
+
 Customizing Kitty: -
 -----------------
 /home/arch/.config/kitty/kitty.conf
@@ -155,6 +165,7 @@ Disabling and Enabling in-built camera: -
 --------------------------------------
 To disable: cat "blacklist uvcvideo" > /etc/modprob.d/nowebcam.conf
 To enable: rm -rf /etc/modprob.d/nowebcam.conf
+cd /usr/share/sddm/themes/
 
 Installing yay package manager: -
 ------------------------------
