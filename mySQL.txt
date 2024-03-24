@@ -1,0 +1,164 @@
+Database: -
+--------
+To display all databases                                 : SHOW DATABASES;
+
+To create database                                       : CREATE DATABASE [database name];
+To create database(if exits it will not create)          : CREATE DATABASE IF NOT EXISTS [database name];
+
+To change database                                       : USE [database name];
+
+To remove database                                       : DROP DATABASE [database name];
+To remove database(if exits it will remove)              : DROP DATABASE IF EXISTS [database name];
+
+
+Table: -
+-----
+To display all tables inside database                    : SHOW TABLES;
+
+To create table                                          : CREATE TABLE [table name] ( [column name] [data type] [constraint], ... );
+To create table using primary key                        : CREATE TABLE [table name] ( [column name] [data type] PRIMARY KEY, ...);
+To create table using foriegn key                        : CREATE TABLE [table name] ( [column name] [data type] FORIEGN KEY REFERENCES [other table name](other column name), ... );
+To create table using foriegn key (cascading)            : CREATE TABLE [table name] ( [column name] [data type] FORIEGN KEY REFERENCES [other table name](other column name) ON UPDATE CASCADE ON DELETE CASCADE, ... );
+
+To describe schema of tables                             : DESCRIBE TABLES;
+
+To insert single row value                               : INSERT INTO [table name] [column name], ... VALUES (column values);
+To insert multiple row values                            : INSERT INTO [table name] [column name], ... VALUES (column values 1), (column values 2), ...;
+
+To select all columns                                    : SELECT * FROM [table name];
+To select selected columns                               : SELECT [column name], ... FROM [table name];
+To select different values in a column                   : SELECT DISTINCT [column name] FROM [table name];
+To select columns using conditions                       : SELECT * FROM [table name] WHERE [conditions];
+To select columns with limit no of rows                  : SELECT * FROM [table name] LIMIT [number of rows];
+To select columns in ascending order                     : SELECT * FROM [table name] ORDER BY [column name] ASC;
+To select columns in descending order                    : SELECT * FROM [table name] ORDER BY [column name] DESC;
+To select one column(int) max value                      : SELECT MAX(column name) FROM [table name];
+To select one column(int) min value                      : SELECT MIN(column name) FROM [table name];
+To select one column(int) sum of values                  : SELECT SUM(column name) FROM [table name];
+To select one column(int) count no. of values            : SELECT COUNT(column name) FROM [table name];
+To select one column(int) average values                 : SELECT AVG(column name) FROM [table name];
+To select columns into one row                           : SELECT [column name], ... FROM [table name] GROUP BY [column name], ...;
+To select column into one row using column               : SELECT [column name], ... FROM [table name] GROUP BY [column name] HAVING [condition];
+To select column using nested queries (WHERE)            : SELECT [column name], ... FROM [table name] WHERE [column name] [operator] ([sub queries);
+To select column using nested queries (FROM)             : SELECT [column name], ... FROM ([sub queries]);
+
+To delete all table's data only                          : TURNCATE TABLE [table name];
+To drop whole table                                      : DROP TABLE [table name];
+To delete an existing data                               : DELETE FROM [table name] WHERE [condition];
+To drop column                                           : ALTER TABLE [table name] DROP COLUMN [column name];
+
+To update an existing row                                : UPDATE [table name] SET [column name] = [column value] WHERE [condition];
+To add column                                            : ALTER TABLE [table name] ADD COLUMN [column name] [data type] [constraint];
+To rename old table name into new table name             : ALTER TABLE [table name] RENAME TO [new column name];
+To rename old column name into new column name           : ALTER TABLE [table name] CHANGE COLUMN [old column name] [new column name] [data type] [constraint];
+To modify column data type or constraints                : ALTER TABLE [table name] MODIFY [column name] [new data type] [new constraint];
+
+SQL Joins: Join is used to combine rows from two or more tables, based on a related column between them.
+---------
+Let A and B are tables: -
+
+Inner Join: A ∩ B, it returns records that have matching values in both side.
+Syntax: SELECT * FROM [left table name] INNER JOIN [right table name] ON [left table name].[column name] = [right table name].[column name];
+
+Exclusive Inner Join: (A ∩ B)', it return records with all records from both tables excluding matching values of both table.
+Syntax: SELECT * FROM [left table name] LEFT JOIN [right table name] ON [left table name].[column name] = [right table name].[column name]
+		UNION
+		SELECT * FROM [left table name] RIGHT JOIN [right table name] ON [left table name].[column name] = [right table name].[column name]
+		WHERE [left table name].[column name] IS NULL OR [right table name].[column name] IS NULL;
+
+Outer Join:
+	Left Join: B - A, it return records that have matching values in both side and whole left side table.
+	Syntax: SELECT * FROM [left table name] LEFT JOIN [right table name] ON [left table name].[column name] = [right table name].[column name];
+
+	Left Exclusive Join: (B - A)', it return records of whole left table excluding matching values of both side.
+	Syntax: SELECT * FROM [left table name] LEFT JOIN [right table name] ON [left table name].[column name] = [right table name].[column name] WHERE [right table name].[column name] IS NULL;
+
+	Right Join: A - B, it return records that have matching values in both side and whole right side table.
+	Syntax: SELECT * FROM [left table name] RIGHT JOIN [right table name] ON [left table name].[column name] = [right table name].[column name];
+
+	Right Exclusive Join: (A - B)', it return records of whole right table excluding matching values of both side.
+	Syntax: SELECT * FROM [left table name] RIGHT JOIN [right table name] ON [left table name].[column name] = [right table name].[column name] WHERE [left table name].[column name] IS NULL;
+
+	Full Join: A ∪ B, it return records with all records from both tables.
+    Syntax: SELECT * FROM [left table name] LEFT JOIN [right table name] ON [left table name].[column name] = [right table name].[column name]
+			UNION
+			SELECT * FROM [left table name] RIGHT JOIN [right table name] ON [left table name].[column name] = [right table name].[column name
+
+Self Join: It is a regular join but the table is joined with itself.
+Syntax: SELECT * FROM [table name] JOIN [table name] ON [table name].[column name] = [table name].[another column name];
+
+Views: A view is a virtual table based on the result-set of an SQL statement.
+-----
+To create view : CREATE VIEW [view name] AS [queries];
+To select view : SELECT * FROM [view name];
+To drop view   : DROP VIEW [view name];
+
+Index (BTree data structure): These are used to find values within a specific column are quickly. UPDATE take more operation time than SELECT.
+To create an index : CREATE INDEX [index name] on [table name]([column name], ...);
+To display index   : SHOW INDEXES FROM [table name];
+To drop index      : ALTER TABLE [table name] DROP INDEX [index name];
+
+Notes: -
+-----
+Data types: -
+    1. CHAR(n), where n is no. of characters [0 - 255]
+    2. VARCHAR(n), where n is no. of characters [0 - 255]
+    3. BLOB(n), where n is size of binary object [range: 0 - 65535]
+    4. TINYINT [range: ]
+    5. INT [range: ]
+    6. BIGINT [range: ]
+    7. BIT(n), where n is no. of bits can store
+    8. FLOAT [range: with precision to 23 digits]
+    9. DOUBLE [range: with precision to 24 to 53 digits]
+    10. BOOLEAN [range: 0 or 1]
+    11. DATE [range: 1000-01-01 to 9999-12-31] [format: yyyy-mm-dd]
+    12 YEAR [range: 1901 to 2155] [format: yyyy]
+
+Types of SQL commands: -
+---------------------
+DDL (data definition language): create, alter, rename, turncate, drop
+DQL (data query language): select
+DML (data manipulation language): insert, update, delete
+DCL (data control language): grant, revoke
+TCL (transaction control language): start transaction, commit, rollback
+
+Constraints: -
+-----------
+AUTO_INCREMENT: value increment by 1 per insertion.
+NOT NULL: column can't have null values.
+NULL: column have null values.
+UNIQUE: column have different values.
+PRIMARY KEY: column have unique and not null values within entire table.
+FOREIGN KEY: prevent action that would destroy links between tables.
+DEFAULT: set the default value of a column.
+CHECK: it can limit the values allowed in a column.
+
+Keys: -
+----
+Primary Key: It is a column in a table that uniquely identifies each row. (unique, NOT NULL)
+Foreign Key: It is a column in a table that refers to the primary key of another table. (duplicate, NULL)
+
+Cascading in Foriegn Keys: -
+-------------------------
+ON DELETE CASCADE : deletes the referencing rows in child table when affect parent table which has a primary key.
+ON UPDATE CASCADE : updates the referencing rows in child table when affect parent table which has a primary key.
+
+Operators in WHERE clause: -
+-------------------------
+Arithmetic Operator: +    -   *    /   %
+Comparison Operator: =    !=  >    >=  <        <=
+Logical Operator:    AND  OR  NOT  IN  BETWEEN  ALL  LIKE  ANY
+
+General Order: -
+-------------
+SELECT [columns name]
+FROM [table name]
+WHERE [condition]
+GROUP BY [columns name]
+HAVING [condition]
+ORDER BY [column name] ASC | DESC;
+
+Safe Mode: -
+---------
+To disable safe mode : SET SQL_SAFE_UPDATES=0;
+To enable safe mode: SET SQL_SAFE_UPDATES=1;
