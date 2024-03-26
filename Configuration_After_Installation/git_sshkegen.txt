@@ -1,0 +1,3 @@
+To generate ssh key of ed25519 algorithm : ssh-keygen -t ed25519 -C "debrishibiswas2003@gmail.com"
+To add ssh key : ssh-add ~/.ssh/id_ed25519
+To display ssh public key: cat ~/.ssh/id_ed25519.pub
