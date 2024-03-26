@@ -1,0 +1,4 @@
+For root ==> nano /etc/bash.bashrc ==> Give value to PS1 at last line of the text
+For home ==> nano ~/.bashrc ==> Give value to PS1 at last line of the text
+
+PS1 will change the indicator bar of the terminal.
