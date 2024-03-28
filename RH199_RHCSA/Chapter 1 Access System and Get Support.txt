@@ -1,0 +1,124 @@
+Edit text file from the Shell Prompt: -
+------------------------------------
+	1. Vim is an improved version of the vi editor.
+	2. Vim is a highly configurable and efficient editor.
+	3. Vim is by default installed on server for editing text-based files.
+	4. Vim has various modes of operation: command, extended command, edit, visual.
+
+	Vim: -
+	---
+	At start vim is in command mode which is used for navigation, cut and paste and other modification.
+	
+	Keystroke   :   Meaning
+	---------       -------
+	i           :   insert before character
+	a           :   insert after character
+	o           :   insert below cursor
+	I			:   insert begin of line
+	A			:   insert end of line
+	O			:   insert above line
+	R           :   replace mode
+	Esc         :   returns to command mode or reset command mode
+	v           :   visual mode
+	Shift + V   :   multiline selection in visual mode
+	Ctrl + V    :   block selection in visual mode
+	:           :   extended command mode
+	u           :   undo most recent edit
+	Ctrl + r    :   redo most recent edit
+	x           :   delete single character (first delete all characters of right part of cursor then delete the left part of cursor)
+	y           :   copy characters
+	p           :   paste characters
+	d           :   cut characters
+	h			:   move cursor left
+	j			:   move cursor down
+	k			:   move cursor up
+	l			:   move cursor right
+	e           :   move cursor to the end of the word
+	G           :   move cursor to the end of the line
+	gg          :   move cursor to the first line
+	/           :   regex searches forward
+	?           :   regex searches backward
+	n           :   find the next occurrence in the same direction
+	N           :   find the next occurrence in the opposite direction of n
+	Ctrl + o    :   move cursor to older position
+	Ctrl + i    :   move cursor to new posiion
+	%           :   jump to matching brackets
+
+	Extended Command               :   Meaning
+	----------------                   -------
+	:w                             :   save the edited file
+	:wq                            :   save the edited file and exit file
+	:q!                            :   don't save the edited file
+	:s/[old regex]/[new regex]     :   replace first regex
+	:s/[old regex]/[new regex]/g   :   replace all regex in that line
+	:%s/[old regex]/[new regex]/g  :   replace all regex in that file
+    :%s/[old regex]/[new regex]/gc :   replace all regex in that file with every prompt
+	:! [external command]          :   execute an external command
+	:r [File name / Directory]     :   read that file and put it below cursor
+	:r ![external command]         :   read external executed command and put it below cursor
+	:set [option]                  :   set vim option temporarily
+
+	
+	Command         :   Meaning
+	-------             -------
+	r[C]            :   replace the character at the cursor with character C
+	wd              :   delete a word
+	de              :   delete to the end of the current word
+	d$              :   delete to the end of the line
+	dd              :   delete a whole line
+	d[N]w           :   delete N no. of UPPPER CASE WORDS.
+	[N]w            :   move cursor to begin of Nth words forward
+	[N]e            :   move cursor to end of Nth word forward
+	ce / cw         :   change word
+	c[N]e / c[N]w   :   change N no. of words
+	cc              :   change all character in that line
+	c$              :   change character to the end of the line
+
+	Vim Configuration Files (Permanently): -
+	-----------------------
+		/etc/vimrc for root user
+		/home/[user name]/.vimrc for normal user
+
+	Note: -
+		1. We should always rearrange characters in visual mode.
+		2. In vim delete means cut characters.
+
+	Exercise: -
+	--------
+	To start exercise : lab start edit-editfile
+	To end exercise   : lab finish edit-editfile
+
+Configure SSH Key-based Authentication: -
+--------------------------------------
+ 	1. SSH Key-based Authentication is based on Public Key Encryption (PKI).
+	2. First we have to generate a pair of key.
+	3. Private key which is a secret key and acts as an authentication credential.
+	4. Public key which is a copied to server accounts to encrypt data securely.
+	5. SSH client first receive a request in enrypted message from remote server and it try to decrypt message using associated private key from actual server. It SSH client enables to decrypt the message then verification succeeds and request is trusted.
+	6. If remote server request is trusted then it can access without giving a password.
+	7. During ssh key generation it is recommended to use passphrase key. Passphrase key is used to locally decrypt that encrypted private key.
+	8. If there is a passphrase for private key then it will prompt at the time of private key use. SSH agent cached passphrase of private key which means we have to provide passphrase for one time after each login. After logout all cached passphrases are cleared from memory.
+	9. SSH has three verbose level options i.e., -v, -vv, -vvv
+
+	SSH Key Generation: -
+	------------------
+	To generate a pair of ssh key     : ssh-keygen
+	To copy ssh key to remote server  : ssh-copy-id [user name]@[host name]
+	To start ssh agent                : ssh-agent
+	To load passphrase to key manager : ssh-add
+	To access remove SSH server       : ssh [user name]@[host name]
+
+	Note: -
+	----
+		1. ~/.ssh/id_rsa       --> By default store private key and have octal permission of 600
+		   ~/.ssh/id_rsa.pub   --> By default store public key and have octal permission of 644
+		2. ~/.ssh/config       --> We can create user wide preconfiguration SSH connections file
+		  /etc/ssh/ssh_config  --> We can create system wide preconfiguration SSH connections file
+	
+	Exercise: -
+	--------
+	To start exercise : lab start ssh-configure
+	To end exercise : lab finish ssh-configure
+
+Create a Diagnostic Report: -
+--------------------------

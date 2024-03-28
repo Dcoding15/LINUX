@@ -1,0 +1,151 @@
+Listing Supported Algorithms: -
+----------------------------
+List digest algorithms                : openssl list -digest-algorithms
+List cipher algorithms                : openssl list -cipher-algorithms
+List public key algorithms            : openssl list -public-key-algorithms
+List available options for algorithms : openssl list -option [ algorithms ]
+List of all ECDSA curves              : openssl ecparam -list_curvers
+
+
+Verifying Intigrity (to check weather a file is modified or not): -
+----------------------------------------------------------------
+To display checksum of a file   : [ name of checksum with sum as postfix ] [ file name ]
+To calculate checksum of a file : openssl [ name of checksum ] [ file name ]
+To create checksum of a file    : openssl [ name of checksum ] -hex [ input file ]
+
+Encryption: -
+----------
+Generate randomly hexadecimal key      : openssl rand -hex [ key size in bytes ]
+Generate randomly base64 key           : openssl rand -base64 [ key size in bytes ]
+Generate private key                   : openssl [ encrypt algorithms with gen prefix ]
+Generate private key with limited size : openssl [ encrypt algorithms with gen prefix] [ key size in bits ]
+
+Generate public key                    : openssl [ encrypt algorithms ] -in [ private key file name ] -pubout -out [ public key file name ]
+
+In binary format: -
+----------------
+Encrypt a file : openssl [ encrypt algorithms ] -in [ file name ] -out [ encrypt file name ] -e -kfile [ encryption file name ]
+Decrypt a file : openssl [ encrypt algorithms ] -in [ encrypt file name ] -out [ file name ] -d -kfile [ encryption file name ]
+
+In base64 format: -
+----------------
+Encrypt a file : openssl [ encrypt algorithms ] -in [ file name ] -out [ encrypt file name ] -e -a
+Decrypt a file : openssl [ encrypt algorithms ] -in [ encrypt file name ] -out [ file name ] -d -a
+
+Encrypt and Decrypt using enc: -
+-----------------------------
+Encrypt a file : openssl enc -[ encrypt algorithms ] -in [ file name ] -out [ encrypt file name ] -e -a -pbkdf2
+Decrypt a file : openssl enc -[ encrypt algorithms ] -in [ encrypt file name ] -out [ file name ] -d -a -pbkdf2
+
+Encrypt and Decrypt using RSA key: -
+---------------------------------
+Encrypt a file : openssl rsautl -encrypt -inkey [ public key ] -pubin -in [ file name ] -out [ encrypt file name ]
+Decrypt a file : openssl rsautl -decrypt -inkey [ private key ] -in [ encrypt file name ] -out [ file name ]
+
+Generate RSA key pair: -
+---------------------
+Generate private key           : openssl genrsa -out [ file name ]
+Examining private key          : openssl rsa -in [ private key file name ] -noout -text
+Generate public key            : openssl rsa -in [ private key file name ] -pubout -out [ file name ]
+Examining public key           : openssl rsa -in [ public key file name ] -pubin -noout -text
+Generate encrypted private key : openssl genrsa -[ encryption algorithms ] -out [ file name ] [ size of private key (optional) ]
+Generate decrypted private key : openssl rsa -in [ encrypted private key file name ] -out [ file name ]
+
+Generating DSA key pair: -
+------------------------
+Generate parameter key         : openssl dsaparam -out [ file name ] [ size of key (in bits) ]
+Generate private key           : openssl gendsa -out [ file name ] [ parameter key file name ]
+Examine private key            : openssl dsa -in [ private key file name ] -noout -text
+Generate public key            : openssl dsa -in [ private key file name ] -pubout -out [ file name ]
+Examine public key             : openssl dsa -in [ public key file name ] -pubin -noout -text
+Generate encrypted private key : openssl gendsa -[ encryption algorithms ] -out [ file name ] [ parameter key file name ]
+Generate decrypted private key : openssl dsa -in [ encrypted key file name ] -out [ file name ]
+
+Generate ECDSA key pair: -
+-----------------------
+Generate parameter key                                              : openssl ecparam -name [ name of ec curves ] -out [ file name ]
+Generate private key                                                : openssl ecparam -genkey -in [ parameter key file name ] -noout -out [ file name ]
+Examine private key                                                 : openssl ec -in [ private key file name ] -noout -text
+Generate public key                                                 : openssl ec -in [ private key file name ] -pubout -out [ public key file name ]
+Examine public key                                                  : openssl ec -in [ public key file name ] -pubin -noout -text
+Generate encrypted private key (using existing private key)         : openssl ec -[ encryption algorithms ] -in [ private key file name ] -out [ file name ]
+Generate encrypted private eky (without using existing private key) : openssl ecparam -name [ name of ec curves ] -genkey | openssl ec -[ encryption algorithms ] -out [ file name ]
+Generate decrypted private key                                      : openssl ec -in [ encrypted key file name ] -out [ file name ]
+
+Generate key pair using genpkey (PKCS8 format): -
+-------------------------------
+Generate RSA private key   : openssl genpkey -algorithm rsa -pkeyopt rsa_keygen_bits:[ no. of bits ] -out [ file name ]
+Genearate DSA private key  : openssl genpkey -algorithm dsa -pkeyopt dsa_paramgen_bits:[ no. of bits ]  -out [ file name ]
+Generate ECDSA private key : openssl genpkey -algorithm ec -pkeyopt ec_paramgen_curve:[ name of ec curves ] -out [ file name ]
+Generate public key        : openssl pkey -in [ private key file name ] -pubout -out [ file name ]
+
+Converting PEM (Privicy Enchanced Mail) to DER (Distinguished Encoding Rules): -
+-----------------------------------------------------------------------------
+For private key       : openssl rsa -in [ private key file name ] -out [ file name ] -outform DER
+Examine private key   : openssl rsa -in [ DER encoded file name ] -inform DER -noout -text
+
+Digital Signature: -
+-----------------
+Signing a file (using RSA)            : openssl rsautl -sign -inkey [ private key file name ] -in [ normal file name ] -out [ file name ]
+Examine digital signature             : openssl rsautl -verfiy [ public key file name ] -pubin -in [ signature file name ]
+Hash based signature                  : openssl [ hash algorithm ] -sign [ private key file name ] -out [ signature file name ] [ normal file name ]
+Examine hash based signature          : openssl [ hash algorithm ] -verify [ public key file name ] -signature [ signature file name ] [ normal file name ]
+Hash based signature (2nd way)        : openssl dgst -[ digest algorithm ] -sign [ private key file name ] -out [ signature file name ] [ normal file name ]
+Examin hash based signature (2nd way) : openssl dgst -[ digest algorithm ] -verify [ public key file name ] -signature [ signature file name ] [ normal file name ]
+openssl pkeyutl option to sign        :	-
+		openssl [ digest algorithm ] -binary -out hash [ normal file name ]
+		openssl pkeyutl -sign -in [ hash file name ] -inkey [ private key file name ] -out [ signature file name ] -pkeyopt digest:[ digest algorithm ]
+		openssl pkeyutl -verify -inkey [ public key file name ] -pubin -sigfile [ signature file name ] -in [ hash file name ] -pkeyopt digest:[ digest algorithm ]
+
+Note: -
+	1. If we don't put -hex flag after any check sum it will generate binary data.
+	2. Maximum size of RSA key is 2048 bit long.
+	3. -out [ file name ] is used to store output in file.
+	4. -in [ file name ] is used to take input as a file.
+	5. If we don't provide key file then openssl would ask for password.
+	6. When encryption and decryption use -pbkdf2
+	7. According to RSA padding PKCS1 RSA key can encrypt 245 bytes of data.
+	8. PEM is in base 64 format and DER is in binary format.
+	9. 
+		Symmetric Encryption Algorithms (Use single key to encrypt and decrypt):
+			AES (Advanced Encryption Standard)
+			DES (Data Encryption Standard)
+			3DES (Triple DES)
+			Blowfish
+			RC4
+			ChaCha20
+
+		Asymmetric Encryption Algorithms (Use public key to encrypt and private key to decrypt):
+			RSA (Rivest-Shamir-Adleman)
+			DSA (Digital Signature Algorithm)
+			Diffie-Hellman Key Exchange
+			Elliptic Curve Cryptography (ECC)
+			ElGamal
+		
+		Hashing Algorithms (Use to calculate checksum):
+			MD5
+			SHA-1 (Secure Hash Algorithm 1)
+			SHA-2 (SHA-224, SHA-256, SHA-384, SHA-512)
+			SHA-3
+		
+		Digital Signature Algorithms:
+			RSA
+			DSA
+			ECDSA (Elliptic Curve Digital Signature Algorithm)
+
+		Key Exchange Algorithms:
+			Diffie-Hellman
+			Elliptic Curve Diffie-Hellman (ECDH)
+			Message Authentication Codes (MAC):
+
+		HMAC (Hash-based Message Authentication Code)
+			CMAC (Cipher-based Message Authentication Code)
+		
+		Random Number Generation:
+			Pseudo-Random Number Generators (PRNG)
+			True Random Number Generators (TRNG)
+
+		Key Derivation Functions (KDF):
+			PBKDF2 (Password-Based Key Derivation Function 2): Derive secret key from password. It will generate hash of that password and mix it with some salt and again hash that salted data to derive a new secret key. This process repeated multiple times ( bydefault 100,000 times in openssl )
+			HKDF (HMAC-based Key Derivation Function)
+			SCrypt
