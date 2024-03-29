@@ -10,6 +10,7 @@ To commit with message (vim)                --> git commit
 To commit with message                      --> git commit -m "[enter your message]"
 To display specific changes after commit    --> git log
 To display specific changes before commit   --> git diff
+To display changes with last commit         --> git diff --staged
 
 Notes: -
 -----
