@@ -1,0 +1,19 @@
+Create a folder                             --> mkdir [folder name]
+change directory                            --> cd [folder name]
+To initailise empty git repo                --> git init
+To check git status                         --> git status
+To add files or folder                      --> git add [file name / folder name]
+To add all files or folder                  --> git add -A
+To discard changes to previous commit       --> git checkout [file name / folder name]
+To discard all change to previous commit    --> git checkout -f
+To commit with message (vim)                --> git commit
+To commit with message                      --> git commit -m "[enter your message]"
+To display specific changes after commit    --> git log
+To display specific changes before commit   --> git diff
+
+Notes: -
+-----
+	Untracked  : Those files or folder which are not added to local git repo and those which are removed from unmodified stage
+	Unmodified : Those files or folder which are commit to local git repo
+	Modified   : Those files or folder which are edited
+	Staged     : Those files or folder which are added to local git repo and have a tracked record
