@@ -11,6 +11,16 @@ To commit with message                      --> git commit -m "[enter your messa
 To display specific changes after commit    --> git log
 To display specific changes before commit   --> git diff
 To display changes with last commit         --> git diff --staged
+To ignore some files or folder              --> .gitignore
+To create branch                            --> git branch [branch name]
+To list branch                              --> git branch
+To change branch                            --> git checkout [branch name]
+To merge branch                             --> git merge [branch name]
+To add remote origin                        --> git remote add origin git@github.com:[github user name]/[remote repo name].git 
+To display remote repo                      --> git remote -v
+To push remote repo                         --> git push origin [remote repo name]
+To pull remote repo                         --> git pull origin [remote repo name]
+To clone remote repo                        --> git clone [ssh remote repo url]
 
 Notes: -
 -----
@@ -18,3 +28,5 @@ Notes: -
 	Unmodified : Those files or folder which are commit to local git repo
 	Modified   : Those files or folder which are edited
 	Staged     : Those files or folder which are added to local git repo and have a tracked record
+
+	To ignore some files or folder then create .gitignore file. Then add those folder and files which are not required to track.

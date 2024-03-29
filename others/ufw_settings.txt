@@ -33,7 +33,6 @@ IP address and port (outside) to specific address, port, protocol --> sudo ufw [
 Any address to specific port, protocol --> sudo ufw [ PERMISSIONS ] proto [ PROTOCOL ] from any to any port [ PORT NUMBER ]
 Outgoing address --> sudo ufw [ PERMISSION ] out to [ ADDRESS ] port [ PORT NAME / PORT NUMBER ] proto [ PROTOCOL ]
 
-
 Modifying Rules: -
 ---------------
 Deleting Rules: sudo ufw delete [ SERIAL NUMBER FROM STATUS NUMBERED OUTPUT ]
@@ -46,3 +45,4 @@ NOTE: -
 		(ii) incoming and forward policy is denied
 		(iii) outgoing policy is allowed
 	4. If no direction is specified then by default incoming direction is considered.
+	5. Default ufw logging files: /var/log/ufw.log
