@@ -86,6 +86,8 @@ Edit text file from the Shell Prompt: -
 	Exercise: -
 	--------
 	To start exercise : lab start edit-editfile
+	vimtutor
+	[learn from vimtutor]
 	To end exercise   : lab finish edit-editfile
 
 Configure SSH Key-based Authentication: -
@@ -118,7 +120,46 @@ Configure SSH Key-based Authentication: -
 	Exercise: -
 	--------
 	To start exercise : lab start ssh-configure
+	ssh-keygen
+	ssh-copy-id [user name]@[host name] (also password)
 	To end exercise : lab finish ssh-configure
 
 Create a Diagnostic Report: -
 --------------------------
+
+	Prepare Support Case: -
+	--------------------
+		1. State the problem and its symptoms specifically.
+		2. Background information like product name and version, diagnostic information, information of 'sos report' command, system's 'kdump' crash dump.
+		3. Red Hat uses four severity levels to classify issues: -
+			(a) Low (severity level 4)    : problems involves low / medium to no impact on your business environment.
+			(b) Medium (severity level 3) : problems involves partial / non-critical loss of use of the software in production environment or development environment.
+			(c) High (severity level 2)   : problem where the software is functioning but its use in a production environment is severely reduced.
+			(d)Urgent (severity level 1) : problem that severly impacts your use of the software in a production enviromment.
+		4.List of information that can be collected in a report: -
+			(a) The running kernel version
+			(b) Loaded kernel modules
+			(c) System and service configuration files
+			(d) Diagnostic command output
+			(e) A list of installed packages
+	
+	sos Report Utility: -
+	------------------
+	First install sos : # dnf install sos
+	sos report stores : # ls -l /var/tmp/
+	use sos clean     : # sos clean /var/tmp/[sos report name]
+	upload sos report : # sos report --upload
+		sos report  : collects various debugging information from one or more systems.
+		sos collect : collect individual sos report from a specified set of nodes.
+		sos clean   : make potentially sensetive information like user name, host name, IP or MAC address, etc to difficult to understand.
+	
+	Man pages: sosreport
+
+	Exercise: -
+	--------
+	lab start support-portal
+	systemctl start cockpit.socket
+	systemctl status cockpit.socket
+	[ create sos report and upload ]
+	lab finish support-portal
+
