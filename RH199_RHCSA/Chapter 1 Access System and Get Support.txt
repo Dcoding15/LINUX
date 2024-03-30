@@ -104,11 +104,12 @@ Configure SSH Key-based Authentication: -
 
 	SSH Key Generation: -
 	------------------
-	To generate a pair of ssh key     : ssh-keygen
-	To copy ssh key to remote server  : ssh-copy-id [user name]@[host name]
-	To start ssh agent                : ssh-agent
-	To load passphrase to key manager : ssh-add
-	To access remove SSH server       : ssh [user name]@[host name]
+	To generate a pair of ssh key               : ssh-keygen
+	To copy public ssh key to remote server     : ssh-copy-id -i [public key file] [user name]@[host name]
+	To start ssh agent for key manager          : ssh-agent
+	To load passphrase to key manager           : ssh-add
+	To access remote SSH server with verbosity  : ssh -[verbose level] [user name]@[host name]
+	To access remove SSH server                 : ssh [user name]@[host name]
 
 	Note: -
 	----
