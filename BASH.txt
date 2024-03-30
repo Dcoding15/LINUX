@@ -78,20 +78,10 @@ Compability
    -----------------
        A compound command is one of the following. In most cases a list in a command's description may be separated from the rest of the command by one or more newlines, and may be followed by a newline in place of a semicolon.
 
-       (list)
-              1. list is executed in a subshell environment. Variable assignments and builtin commands that affect the shell's environment do not remain in effect after the command completes. The return status is the exit status of list.
-
-       { list; }
-              1. list is simply executed in the current shell environment. list must be terminated with a newline or ;. This is known as a group command. The return status is the exit status of list.
-
-       ((expression))
-              1. The expression is evaluated according to the rules described below under ARITHMETIC EVALUATION. If the value of the expression is non-zero, the return status is 0, otherwise 1.
-
-       [[ expression ]]
-              1. Return a status of 0 or 1 depending on the evaluation of the conditional expression expression. Expressions are composed of the primaries described below under CONDITIONAL EXPRESSIONS.
-              2. Word splitting and pathname expansion are not performed on the words between the [[ and ]]; tilde expansion, parameter and variable expansion, arithmetic expansion, command substitution, process substitution, and quote removal are performed.
-              3. Conditional operators such as -f must be unquoted to be recognized as primaries.
-              4. When used with [[ the < and > operators sort lexicographically using the current locale.
+       (list)				--> list expression with subshell environment
+       { list; }            --> list expression with no subshell environment
+       ((expression))		--> arithematic expression
+       [[ expression ]]		--> conditional expression
 
        1. When the == and != operators are used, the string (right side) of the operator is considered a pattern and matched according to the rules described below under Pattern Matching.
        2. If the extglob shell option were enabled. The = operator is equivalent to ==.

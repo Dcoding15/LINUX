@@ -118,9 +118,9 @@ Types of SQL commands: -
 ---------------------
 DDL (data definition language): create, alter, rename, turncate, drop
 DQL (data query language): select
-DML (data manipulation language): insert, update, delete
+DML (data manipulation language): insert, update, delete, lock, call, explain plan
 DCL (data control language): grant, revoke
-TCL (transaction control language): start transaction, commit, rollback
+TCL (transaction control language): start transaction, commit, rollback, savepoint, release savepoint
 
 Constraints: -
 -----------
