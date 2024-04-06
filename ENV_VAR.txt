@@ -1,0 +1,114 @@
+$_                                              --> display previous command
+
+$?                                              --> display exit status of current command
+
+$BASH                                           --> display full pathname of bash command
+
+$BASH_ALIASES                                   --> variable store hash table of command alias
+
+$BASH_ARGC                                      --> variable store number of arguments executed
+
+$BASH_ARGV                                      --> variable store name of last arguments executed
+
+$BASH_ARGV0                                     --> variable store name of command executed with arguments
+
+$BASH_CMDS                                      --> variable used by bash to store hash table of recently executed commands
+
+$BASH_COMMAND                                   --> display currently executed command
+
+$BASH_COMPLETION_VERSINFO                       --> display version information about bash completion system
+
+$BASH_LINENO                                    -->
+$BASH_LOADABLES_PATH                            -->
+$BASHOPTS                                       -->
+$BASHPID                                        -->
+$BASH_REMATCH                                   -->
+$BASH_SOURCE                                    -->
+$BASH_SUBSHELL                                  -->
+$BASH_VERSINFO                                  -->
+$BASH_VERSION                                   -->
+$COLORTERM                                      -->
+$COLUMNS                                        -->
+$COMP_CWORD                                     -->
+$COMP_KEY                                       -->
+$COMP_LINE                                      -->
+$COMP_POINT                                     -->
+$COMPREPLY                                      -->
+$COMP_TYPE                                      -->
+$COMP_WORDBREAKS                                -->
+$COMP_WORDS                                     -->
+$DBUS_SESSION_BUS_ADDRESS                       -->
+$DESKTOP_SESSION                                -->
+$DIRSTACK                                       -->
+$DISPLAY                                        -->
+$EPOCHREALTIME                                  -->
+$EPOCHSECONDS                                   -->
+$EUID                                           -->
+$FUNCNAME                                       -->
+$GDM_LANG                                       -->
+$GDMSESSION                                     -->
+$GNOME_DESKTOP_SESSION_ID                       -->
+$GNOME_KEYRING_CONTROL                          -->
+$GNOME_SETUP_DISPLAY                            -->
+$GNOME_TERMINAL_SCREEN                          -->
+$GNOME_TERMINAL_SERVICE                         -->
+$GROUPS                                         -->
+$GTK_MODULES                                    -->
+$HISTCMD                                        -->
+$HISTCONTROL                                    -->
+$HISTFILE                                       -->
+$HISTFILESIZE                                   -->
+$HISTSIZE                                       -->
+$HOME                                           -->
+$HOSTNAME                                       -->
+$HOSTTYPE                                       -->
+$IFS                                            -->
+$IM_CONFIG_PHASE                                -->
+$LANG                                           -->
+$LANGUAGE                                       -->
+$LINENO                                         -->
+$LINES                                          -->
+$LOGNAME                                        -->
+$LS_COLORS                                      -->
+$MACHTYPE                                       -->
+$MAILCHECK                                      -->
+$OLDPWD                                         -->
+$OPTERR                                         -->
+$OPTIND                                         -->
+$OSTYPE                                         -->
+$PATH                                           -->
+$PIPESTATUS                                     -->
+$PPID                                           -->
+$prev                                           -->
+$PS1                                            -->
+$PS2                                            -->
+$PS4                                            -->
+$PWD                                            -->
+$QT_ACCESSIBILITY                               -->
+$QT_IM_MODULE                                   -->
+$QTWEBENGINE_DICTIONARIES_PATH                  -->
+$RANDOM                                         -->
+$SECONDS                                        -->
+$SESSION_MANAGER                                -->
+$SHELL                                          -->
+$SHELLOPTS                                      -->
+$SHLVL                                          -->
+$SRANDOM                                        -->
+$SSH_AGENT_LAUNCHER                             -->
+$SSH_AUTH_SOCK                                  -->
+$SYSTEMD_EXEC_PID                               -->
+$TERM                                           -->
+$UID                                            -->
+$USER                                           -->
+$USERNAME                                       -->
+$VTE_VERSION                                    -->
+$WAYLAND_DISPLAY                                -->
+$XAUTHORITY                                     -->
+$XDG_CURRENT_DESKTOP                            -->
+$XDG_DATA_DIRS                                  -->
+$XDG_MENU_PREFIX                                -->
+$XDG_RUNTIME_DIR                                -->
+$XDG_SESSION_CLASS                              -->
+$XDG_SESSION_DESKTOP                            -->
+$XDG_SESSION_TYPE                               -->
+$XMODIFIERS                                     -->

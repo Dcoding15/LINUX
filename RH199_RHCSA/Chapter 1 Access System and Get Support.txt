@@ -154,8 +154,6 @@ Create a Diagnostic Report: -
 		sos collect : collect individual sos report from a specified set of nodes.
 		sos clean   : make potentially sensetive information like user name, host name, IP or MAC address, etc to difficult to understand.
 	
-	Man pages: sosreport
-
 	Exercise: -
 	--------
 	lab start support-portal
@@ -164,3 +162,4 @@ Create a Diagnostic Report: -
 	[ create sos report and upload ]
 	lab finish support-portal
 
+Man pages: ssh-kegen, ssh-copy-id, ssh-agent, ssh-add, sosreport
