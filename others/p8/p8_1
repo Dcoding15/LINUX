@@ -1,6 +1,6 @@
 #! /usr/bin/bash
 
-# Write a script to define function in p8_1.sh file and calling those function from p8_2.sh file
+# Write a script to define function in p8_1 file and calling those function from p8_2 file
 
 add()
 {

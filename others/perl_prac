@@ -1,0 +1,66 @@
+#!/usr/bin/perl
+
+# perl –MCPAN –e'install <module_name>' 
+# These are paragmas
+use strict;
+use warnings;
+use Data::Dumper;  # Debugger module of perl
+
+# Program 1
+# print "hello world!\n";
+
+# Note: -
+#     1. single quotation is for printing non-formated output
+#     2. double quotation is for printing formated output
+#     3. $ use to declare normal variable
+#     4. @ use to declare array variable
+
+# Program 2
+# my $num = 1234;
+# my $frac = 265.214;
+# my $string = 'this is my string';
+# print "This is number format --> $num\n";
+# print "This is fractional format --> $frac\n";
+# print "This is string format --> $string\n";
+
+# Program 3
+# my $num1 = 123;
+# my $num2 = 234;
+# print "Addition: ",$num1 + $num2."\n";
+# print "Substraction: ",$num1 - $num2."\n";
+# print "MUltiplication: ",$num1 * $num2."\n";
+# print "Division: ",$num1 / $num2."\n";
+# print "Remainder: ",$num1 % $num2."\n";
+
+# Program 4
+# my $str1 = 'abc';
+# my $str2 = 'def';
+# print "This is the example of string concatenation --> ".$str1.$str2."\n";
+
+# Program 5
+# my $a = 'this is string';
+# my $b = 1234.345;
+# print Dumper($a, $b);
+
+# Program 6
+# my @arr = (123, 'this is string', 65.47);  # normal array
+# my @arr1 = qw/ this is example of quad word /; # quad-word array
+# my @arr2 = ( 1 .. 10 ); # range array ( starting value ..  ending value )
+# @arr[2] = 14.78;         # we can modify array value
+# @arr1[10] = 'hello';     # other unassigned value below this index will be undef (which is a value)
+# print @arr."\n";         # this print no. of element storing in array variable
+# print @arr1."\n";        # this print no. of element storing in array variable
+# print $#arr."\n";         # this print last index in array variable
+# print $#arr1."\n";        # this print last index in array variable
+# print $arr[-1]."\n";     # with negative value in index we can retrive value from last
+
+# Program 7
+# my @arr = (1 .. 5);
+# push @arr, 11;      # insert value from last position in array
+# pop @arr;           # remove value from last position in array
+# unshift @arr, 11;   # insert value from first position in array
+# shift @arr;         # remove value from first position in array
+# print Dumper(@arr);
+
+1;  # When using modules the last statement must return true value, otherwise the compilation fails.
+    # If you don't use module you don;t required to return true value.

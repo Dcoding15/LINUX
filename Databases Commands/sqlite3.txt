@@ -1,0 +1,45 @@
+To install sqlite3: sudo apt install sqlite3
+
+To create database: sqlite3 [database name].sqlite3
+To open database file: .open [database file name]
+To create backup: .backup [file name]
+To resotore backup: .backup [backup file name]
+To import file: .import [file name] [table name]
+To export file: .output [file name]
+
+To display help infomation: .help
+To display list of database: .databases
+To display existed tables: .tables
+To display table schema: .schema
+
+To exit from SQLite3 shell with 0 exit status: .quit
+To exit from SQLite3 shell with NUM exit status: .exit NUM
+
+To export SQLite file to CSV file: -
+    1) sqlite3 [database file name]
+    2) .headers on
+    3) .mode csv
+    4) .output [file name].csv
+    5) SQL query
+    6) .quit
+
+    or 
+
+    1) sqlite3 [database file name]
+    2) .excel
+    3) SQL query
+    4) .quit
+
+To import SQLite3 file from CSV file: -
+    1) sqlite [database file name]
+    2) .mode csv
+    3) .import [path with file name].csv [table name]
+
+To execute external commands in SQLite3: .shell args
+To set output mode: .mode [mode name]
+To set header on/off: .header [ on / off ]
+To set verbose on/off: .changes [ on / off ]
+To set binary output on/off: .binary [ on / off ]
+
+Note: -
+    CRUD operation are same as MySQL or MariaDB

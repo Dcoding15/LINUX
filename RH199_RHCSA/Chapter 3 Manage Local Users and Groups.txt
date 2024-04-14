@@ -1,0 +1,9 @@
+Describe User and Group Concepts: -
+--------------------------------
+	1. User accounts identify by unique identification number i.e., UID (User ID).
+	2. System assigns a secret password for the user to prove that they are the authorized user to log in.
+	3. User that is associated with a running process determines the files and directories that are accessible to the process.
+	4. Types of user accounts: -
+		(i) superuser account: It's name is root and UID is 0. This superuser has full system access.
+		(ii) system user account: It is used by processes that provide supporting services. It can't be interactively log in with a system user account.
+		(iii) regular user account: It is used for their day to day work and doesn't have full system access like superuser account.
