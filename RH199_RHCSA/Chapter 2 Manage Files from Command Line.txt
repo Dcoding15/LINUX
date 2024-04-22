@@ -1,100 +1,84 @@
  Linux File System Hierarchy: -
  ---------------------------
-
-/ (It is top most directory of entire LINUX filesystem)
-|
-|_ bin (Binary Files required for system boot and repair)
-|
-|_ sbin (System specific binary files used by system administrator)
-|
-|_ boot (Files to start boot process)
-|
-|_ dev (Device files represent physical and virtual devices)
-|
-|_ etc (System wide configuration files)
-|
-|_ proc (Provides information about processes and system resources)
-|
-|_ mnt (Mounting point for external filesystem)
-|
-|_ media (Mounting point for removeable media)
-|
-|_ home (Home directory for regular user)
-|
-|_ root (Home directory for administrativ superuser)
-|
-|_ run (Temporary filesystem containing system runtime data)
-|
-|_ opt (Installed optional third-party software)
-|
-|_ srv (Storing data files associated with services provided by the system)
-|
-|_ sys (Provide information about the system hardware's and their configurations)
-|
-|_ tmp (Writeable space for temporary files)
-|
-|_ usr (Installed software, shared libraries, including files and read-only program data)
-|
-|_ var (System specific variable data files that dynamically changes)
-
+	/ (It is top most directory of entire LINUX filesystem)
+	|
+	|_ bin (Binary Files required for system boot and repair)
+	|
+	|_ sbin (System specific binary files used by system administrator)
+	|
+	|_ boot (Files to start boot process)
+	|
+	|_ dev (Device files represent physical and virtual devices)
+	|
+	|_ etc (System wide configuration files)
+	|
+	|_ proc (Provides information about processes and system resources)
+	|
+	|_ mnt (Mounting point for external filesystem)
+	|
+	|_ media (Mounting point for removeable media)
+	|
+	|_ home (Home directory for regular user)
+	|
+	|_ root (Home directory for administrativ superuser)
+	|
+	|_ run (Temporary filesystem containing system runtime data)
+	|
+	|_ opt (Installed optional third-party software)
+	|
+	|_ srv (Storing data files associated with services provided by the system)
+	|
+	|_ sys (Provide information about the system hardware's and their configurations)
+	|
+	|_ tmp (Writeable space for temporary files)
+	|
+	|_ usr (Installed software, shared libraries, including files and read-only program data)
+	|
+	|_ var (System specific variable data files that dynamically changes)
 
 
 
 Make Links Between Files: -
 ------------------------
-ln --> Make link between files
+	ln --> Make link between files
 
-	Create Hard Links           : ln [file-1 name] [hard link name]
-	Create Soft / Symbolic Links: ln -s [file-1 name] [file-2 name]
+		Create Hard Links           : ln [file-1 name] [hard link name]
+		Create Soft / Symbolic Links: ln -s [file-1 name] [file-2 name]
 
-Note: -
-	
-	1. Hard links reference same file because each hard link points to the same data on storage device.
-	2. Use hard link only with regular files and both files are on same filesystem.
-	3. Removing orginal file can have access data in hard link file.
-	4. Symbolic or soft links points to the existing file or directory. It doesn't create any regular file like hard link.
-	5. Use soft link only with directory or special file and both files are on different filesystem.
-	6. Removing original file can't have access data in soft link file.
-	7. Dangling Symbolic Link: A symbolic link that points to a missing file.
+	Note: -
 
-Exercise: -
---------
-lab start files-make
-lab finish files-make
+		1. Hard links reference same file because each hard link points to the same data on storage device.
+		2. Use hard link only with regular files and both files are on same filesystem.
+		3. Removing orginal file can have access data in hard link file.
+		4. Symbolic or soft links points to the existing file or directory. It doesn't create any regular file like hard link.
+		5. Use soft link only with directory or special file and both files are on different filesystem.
+		6. Removing original file can't have access data in soft link file.
+		7. Dangling Symbolic Link: A symbolic link that points to a missing file.
 
 
 
 Match File Names with Shell Expansions: -
 --------------------------------------
+	Brace expansion --> generate multipli strings of characters. Using () or {}
+	Tilde expansion --> expand to a path to a user home directory.Using ~directory_name
+	Variable expansion --> replaces text with value that is stored in a shell variable. Using ${variable_name}
+	Command substitution --> replaces text with the output of a command. Using $(variable_name) or 'variable_name'
+	Pathname expansion --> which helps to select one or more by pattern matching. It is also called as globbing. Using wild cards
 
-Brace expansion --> generate multipli strings of characters. Using () or {}
-Tilde expansion --> expand to a path to a user home directory.Using ~directory_name
-Variable expansion --> replaces text with value that is stored in a shell variable. Using ${variable_name}
-Command substitution --> replaces text with the output of a command. Using $(variable_name) or 'variable_name'
-Pathname expansion --> which helps to select one or more by pattern matching. It is also called as globbing. Using wild cards
+	Pattern Matching: -
+	----------------
 
-Pattern Matching: -
-----------------
-
-Pattern          Matches
--------          -------
-*                Any zero or more character
-?                Any single character
-[abc...]         Any single character which is enclosed between square brackets
-[!abc...]        Any single character which is not enclosed between square brackets
-[^abc...]        Any single character which is not enclosed between square brackers
-[[:alpha:]]      Any alphabetic character
-[[:lower:]]      Any lowercase character
-[[:upper:]]      Any uppercase character
-[[:alnum:]]      Any alphabetic character or digit
-[[:punct:]]      Any printable character except whitespace or alphanumeric
-[[:digit:]]      Any digit from 0 to 9
-[[:spae:]]       Any whitespace character
-
-Exercise: -
---------
-lab start files-review
-lab grade files-review
-lab finish files-review
-
-References: hier, ln, bash, cd, glob, isalpha, ls, path_resolution, pwd.
+	Pattern          Matches
+	-------          -------
+	*                Any zero or more character
+	?                Any single character
+	[abc...]         Any single character which is enclosed between square brackets
+	[!abc...]        Any single character which is not enclosed between square brackets
+	[^abc...]        Any single character which is not enclosed between square brackers
+	[[:alpha:]]      Any alphabetic character
+	[[:lower:]]      Any lowercase character
+	[[:upper:]]      Any uppercase character
+	[[:alnum:]]      Any alphabetic character or digit
+	[[:punct:]]      Any printable character except whitespace or alphanumeric
+	[[:digit:]]      Any digit from 0 to 9
+	[[:spae:]]       Any whitespace character

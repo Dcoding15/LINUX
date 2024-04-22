@@ -1,9 +1,83 @@
 Describe User and Group Concepts: -
 --------------------------------
-	1. User accounts identify by unique identification number i.e., UID (User ID).
-	2. System assigns a secret password for the user to prove that they are the authorized user to log in.
+	1. User accounts identify by unique identification number i.e., UID (User ID) and user name.
+	2. System assigns a secret password for the user to prove that they are the authorized user to login.
 	3. User that is associated with a running process determines the files and directories that are accessible to the process.
 	4. Types of user accounts: -
 		(i) superuser account: It's name is root and UID is 0. This superuser has full system access.
-		(ii) system user account: It is used by processes that provide supporting services. It can't be interactively log in with a system user account.
+		(ii) system user account: It is used by processes that provide supporting services. It can't be interactively login with a system user account.
 		(iii) regular user account: It is used for their day to day work and doesn't have full system access like superuser account.
+	5. Group: It is a collection of users and shares files and system resources with each other.
+	6. Groups identified by unique identification number i.e., GID (Group ID) and group name
+	7. Every user has one primary group and one or more supplementary groups.
+
+	Commands: -
+	--------
+		id					: show information about currently logged-in user.
+		id [user name] 		: show information about another user which may be logged-in.
+		ls -l				: view owner of a files.
+		ls -ld				: view owner of a directories.
+		ps -au				: view process infomation of all processes that is associated with a process.
+		cat /etc/passwd		: file contains information about one user.
+		cat /etc/group		: file contains information about one group.
+		groups [user name]	: show list of groups involved by specified user.
+
+
+
+Gain Superuser Access: -
+---------------------
+	1. Superuser has unlimited privileges on the file system which use to manage and administer the system file , it is also known as root user.
+	2. If root user is compromised with administrative tasks the system will be in danger.
+	3. Always first login to normal user then change to superuser (if needed).
+	4. We can change to superuser like su, sudo. PolicyKit.
+	5. su   --> start shell of new user with current user environment settings.
+	   su - --> start shell of new user with new user environment settings. [Recommended]
+	6. sudo --> Uses to get root access without login into root user.
+	            User uses current user's password for authentication which running in current users enviroment.
+				It's privileges are defined by configurations file i.e., /etc/sudoers.
+	7. sudo configurations: -
+		vi /etc/sudoers
+		[user name]		ALL=(ALL:ALL) ALL	NOPASSWD: ALL 
+
+		1st ALL is applied to all hosts
+		2nd ALL is applied to all users
+		3rd ALL is applied to all groups
+		4th ALL is applied to all commands
+		NOPASSWD: ALL --> optional because it compromise security risks
+
+	Commands: -
+	--------
+		su - [user name]	: change to another user after providing another user's password.
+		sudo [command ...]	: execute command as per privileges.
+		sudo -i				: To run shell with interactive login scripts.
+		sudo -s				: To run shell without interactive scripts.
+
+Manage Local User Accounts: -
+--------------------------
+	useradd -c [comment] [user name]				: To add comment
+
+	usermod -c [comment] [user name]				: To add comment
+	
+	usermod -g [primary group] [user name]			: To replacing primary group for user account
+	usermod -aG [supplementary group] [user name]	: To append supplementary group instead of replacing them
+	usermod -G [supplementary group] [user name]	: To replace supplementary group for user account
+	usermod -rG [supplementary group] [user name]	: To remove supplementary group for user account
+	
+
+	usermod -e [YYYY-MM-DD] [user name]				: To specify date in which user account will be disabled
+	usermod -f [inactive days] [user name]			: To specify maximum days after inactive of user account
+	usermod -L [user name]							: To lock user's password
+	usermod -U [user name]							: To unlock user's password
+	usermod -p [user name]							: To set password for user account
+	
+	usermod -d [home directory] [user name]			: To specify home directory for user account
+	usermod -md [home directory] [user name]		: To move home directory for user account or create new if not there
+
+	userdel -rf [user name]							: To forcely remove user's home directory itself and user's mail spool
+
+	UID Ranges: -
+	----------
+		UID 0			--> root user account
+		UID 1 to 200	--> system process account (statically assigned)
+		UID 201 to 999	--> unprivileged process account (dynamically assigned)
+		UID 1000+		--> regular / unprivileged user account

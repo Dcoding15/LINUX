@@ -4,6 +4,6 @@ Create the directorires, if they do not already exit.
 Usage: mkdir [OPTION]... DIRECTORY...
 
 [OPTION]
--m, --mode=MODE --> set file mode (in octal mode)
--p, --parents --> use to create subdirectories
--v, --verbose --> create directory and print message
+-m      set file mode (in octal mode)
+-p      use to create subdirectories
+-v      create directory and print message

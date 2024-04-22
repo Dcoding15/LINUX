@@ -83,12 +83,6 @@ Edit text file from the Shell Prompt: -
 		1. We should always rearrange characters in visual mode.
 		2. In vim delete means cut characters.
 
-	Exercise: -
-	--------
-	To start exercise : lab start edit-editfile
-	vimtutor
-	[learn from vimtutor]
-	To end exercise   : lab finish edit-editfile
 
 Configure SSH Key-based Authentication: -
 --------------------------------------
@@ -117,13 +111,7 @@ Configure SSH Key-based Authentication: -
 		   ~/.ssh/id_rsa.pub   --> By default store public key and have octal permission of 644
 		2. ~/.ssh/config       --> We can create user wide preconfiguration SSH connections file
 		  /etc/ssh/ssh_config  --> We can create system wide preconfiguration SSH connections file
-	
-	Exercise: -
-	--------
-	To start exercise : lab start ssh-configure
-	ssh-keygen
-	ssh-copy-id [user name]@[host name] (also password)
-	To end exercise : lab finish ssh-configure
+
 
 Create a Diagnostic Report: -
 --------------------------
@@ -153,13 +141,3 @@ Create a Diagnostic Report: -
 		sos report  : collects various debugging information from one or more systems.
 		sos collect : collect individual sos report from a specified set of nodes.
 		sos clean   : make potentially sensetive information like user name, host name, IP or MAC address, etc to difficult to understand.
-	
-	Exercise: -
-	--------
-	lab start support-portal
-	systemctl start cockpit.socket
-	systemctl status cockpit.socket
-	[ create sos report and upload ]
-	lab finish support-portal
-
-Man pages: ssh-kegen, ssh-copy-id, ssh-agent, ssh-add, sosreport

@@ -4,45 +4,65 @@
 # These are paragmas
 use strict;
 use warnings;
-use Data::Dumper;  # Debugger module of perl
 
-# Program 1
+=pod
+Note: -
+    1. single quotation is for printing non-formated output
+    2. double quotation is for printing formated output
+    3. $ use to declare scalar variable
+    4. @ use to declare array variable
+    5. % use to declare hash variable. Hash keys are unique but value can be repeated.
+    6. \ to return reference value of that variable.
+    7. -> to dereference all element in that variable (i.e., to access elements of reference variable).
+    8. _ to take argument of subroutine
+    9. Without subroutine ' signatures ' we can only use scalar and array varialble
+    10. $@ use to assigned or store value of exception;
+    11. $a and $b are exempt global variables. These are allowed to use anywhere without being declared.
+=cut
+
+# Program 1 - printing hello world
 # print "hello world!\n";
 
-# Note: -
-#     1. single quotation is for printing non-formated output
-#     2. double quotation is for printing formated output
-#     3. $ use to declare normal variable
-#     4. @ use to declare array variable
-
-# Program 2
-# my $num = 1234;
-# my $frac = 265.214;
-# my $string = 'this is my string';
+# Program 2 - data types
+# my $num = 1234;                       # this is number format
+# my $frac = 265.214;                   # this is fraction format
+# my $string = 'this is my string';     # this is string format
+# my undefval = undef;                  # this is undefined format (which means can't contain any value)
 # print "This is number format --> $num\n";
 # print "This is fractional format --> $frac\n";
 # print "This is string format --> $string\n";
 
-# Program 3
-# my $num1 = 123;
-# my $num2 = 234;
+# Program 3 - mathematical operations
+# my $num1 = 10;
+# my $num2 = 2;
 # print "Addition: ",$num1 + $num2."\n";
 # print "Substraction: ",$num1 - $num2."\n";
 # print "MUltiplication: ",$num1 * $num2."\n";
 # print "Division: ",$num1 / $num2."\n";
 # print "Remainder: ",$num1 % $num2."\n";
+# print "Exponent: ",$num1 ** $num2,"\n";
+# print "Pre-increament: ",++$num1,"\n";
+# $num1++;
+# print "Post-increament: ",$num1,"\n";
+# print "Pre-decreament: ",--$num1,"\n";
+# $num1--;
+# print "Post-decreament: ",$num1,"\n";
 
-# Program 4
+# Program 4 - string operations 1 (using dot operator and repeatation operator ' lowercase x ')
+# [Recommed]: use comma ',' instead of  period '.'
 # my $str1 = 'abc';
 # my $str2 = 'def';
 # print "This is the example of string concatenation --> ".$str1.$str2."\n";
+# print "This is the example of string concatenation --> ",$str1,$str2,"\n";
+# print "This is the example of repetation operator -->".($str1 x 6)."\n";
 
-# Program 5
+# Program 5 - displaying output using Dumper
+use Data::Dumper;  # Debugger module of perl
 # my $a = 'this is string';
 # my $b = 1234.345;
 # print Dumper($a, $b);
 
-# Program 6
+# Program 6 - array
 # my @arr = (123, 'this is string', 65.47);  # normal array
 # my @arr1 = qw/ this is example of quad word /; # quad-word array
 # my @arr2 = ( 1 .. 10 ); # range array ( starting value ..  ending value )
@@ -54,13 +74,357 @@ use Data::Dumper;  # Debugger module of perl
 # print $#arr1."\n";        # this print last index in array variable
 # print $arr[-1]."\n";     # with negative value in index we can retrive value from last
 
-# Program 7
+# Program 7 - array operations
 # my @arr = (1 .. 5);
 # push @arr, 11;      # insert value from last position in array
 # pop @arr;           # remove value from last position in array
 # unshift @arr, 11;   # insert value from first position in array
 # shift @arr;         # remove value from first position in array
 # print Dumper(@arr);
+
+# Program 8 - array sorting
+# my @arr = qw/ a 6 4 b 3 1 /;
+# @arr = sort @arr;   # bydefault sort method sort only string (lexologicallyk)
+# print Dumper(@arr);
+
+# Program 9 - hash map
+# my %hmap = ( a => 123654, b => 'hello world', c => 11.22);
+# print "value of key a : ",$hmap{a}."\n";    # printing value of key a
+# print "value of key b : ",$hmap{b}."\n";    # printing value of key b
+# print "value of key c : ",$hmap{c}."\n";    # printing value of key c
+# $hmap{d} = 'new value added';               # adding new key-value to hash map
+# print "value of key d : ",$hmap{d},"\n";    # printing value of key d
+# $hmap{c} = 65.147;
+# print "value of new key c : ",$hmap{c},"\n";
+# $hmap{'another way @#@%'} = 'this is another way of key value pair';
+# print "value of key 'another way @#@%' : ",$hmap{'another way @#@%'}."\n";    # printing value of key 'another way @#@%'
+# print Dumper( @hmap{'a','b'});                    # printing multiple values of hash map using array
+                                                    # key always be number / fraction / string
+# print Dumper(%hmap);
+
+# Program 10 - merging hash map
+# my %hmap1 = ( key1 => 12365, key2 => 'abcd1234', key3 => 32.665);
+# my %hmap2 = ( key4 => 'jkl534', %hmap1 );   # merge one hash map to another hash map
+# print Dumper(%hmap2);
+
+# Program 11 - using keys and exists on array and hash map
+# my %hmap = ( a => 123654, b => 'hello world', c => 11.22, d => undef);
+# my @arr = keys %hmap;   # assign array of keys
+# my $size = keys %hmap;  # assign no. of key-value pair are stored
+# my $key_exists = exists $hmap{'d'};     # if key value exists then return 1
+# my $key_exists1 = exists $hmap{'e'};    # if key value exists then return ''
+# delete $hmap{'d'};                      # delete d key from hash map
+# print Dumper(@arr);
+# print Dumper($size);
+# print Dumper(%hmap);
+# print Dumper($key_exists);
+# print Dumper($key_exists1);
+
+# Program 12 - reference variable
+# my %hmap = ( a => 1, b => 2, c => 3 );
+# my @arr1 = qw/ hello world i do perl /;
+# my @arr2 = (1,2,3,4,5,6,7);
+# my $var = 325;
+# print \@arr1,"\n";
+# print \@arr2,"\n";
+# print \%hmap,"\n";
+# print \$var,"\n";
+# print Dumper(\%hmap);
+
+# Program 13 - dereference variable
+# my $hmap_ref = { 'a' => 1, 'b' => 2, 'c' => 3 };    # hash reference variable
+# my $arr_ref = [1,2,'abc',2.36,'str1',547.2];        # array reference variable
+# my $mix_ref = {
+#     a=>1,
+#     b=>2,
+#     c=>{
+#         c1=>'this is c1 within c',
+#         c2=>'this is c2 within c',
+#         c3=>[11,12,13,14,15]
+#     },
+#     d=>[1,2,'abc',2.36,'str1',547.2]
+# };                                                  # hash nested array variable
+# print Dumper($hmap_ref->{'a'});      # accessing single hash reference variable
+# print Dumper($arr_ref->[2]);         # accessing single array reference variable
+# print Dumper($hmap_ref->%*);         # accessing multiple hash reference variable
+# print Dumper($arr_ref->@*);          # accessing multiple array reference variable
+# print Dumper($hmap_ref);    # deference hash map variable
+# print Dumper($arr_ref);     # dereference array variable
+# print Dumper($mix_ref);       # displaying all elements
+# print Dumper($mix_ref->{'c'}->{'c3'}->[0]);     # Example of accessing single elements using dereference operator
+# print Dumper(ref($mix_ref->{'c'}->{'c3'}));     # display which type of reference
+# print Dumper(ref($mix_ref));
+
+# Program 14 - subroutines (it is same as functions)
+# sub fun1 {
+#     print "hello, world!\n";
+# }
+# sub fun2 {
+#     # my @arg0 = @_;      # @_ takes all argument input as array
+#     my $arg1 = $_[0];    # takes 1st argument as input
+#     # #       .                           .
+#     # #       .                           .
+#     # #       .                           .
+#     # # my $argN = $_[N-1]   # takes Nth argument as input
+
+#     #       OR
+
+#     # my $arg1 = shift @_;        # takes 1st argument as input
+#     # #       .                           .
+#     # #       .                           .
+#     # #       .                           .
+#     # # my $argN = $arg0[N-1]     # takes Nth argument as input
+#     print "This is argument -> $arg1\n";
+# }
+# my @arr = qw/ a 1 b c 3 5 /;
+# sub fun3 {
+#     print Dumper(@_);
+# }
+
+# fun1();
+# fun2('hello',' how are you ? ');
+# fun3(\@arr);
+
+# Program 15 - calling one subroutine from another subroutine
+# sub fun1 {
+#     print "This is subroutine A\n";
+# }
+# sub fun2 {
+#     fun1();
+#     print "This is subroutine B\n";
+# }
+# fun2();
+
+# Program 16 - returning value from subroutine
+# sub add {
+#     return $_[0] + $_[1];
+# }
+# print Dumper(add(232,342));
+
+# Program 17 - subroutine signatures
+# use feature qw/ signatures /;   # Subroutine signatures
+# Providing argument and parameter like
+# sub add($num1, $num2) {
+#     print $num1+$num2."\n";
+# }
+# sub fun1(@arg0) {
+#     # my %arg0 = %_;
+#     print Dumper(@arg0);
+# }
+# add(12,12);
+# fun1(1,2,3,4);
+
+# Program 18 - variable scope
+# use feature qw/ state /;    # this feature will initialise variable only one time
+# require './perl_prac2';     # import another file
+# our ($c);                   # import variable from imported file
+# sub fun1 {
+#     state $num1 = 1;        # initialise variable $num1 only one time
+#     my $num2 = 1;
+#     $num1 += 1;
+#     $num2 += 1;
+#     print $num2," | ",$num1,"\n";
+# }
+# print $a,"\n";              # variable from another file can't be used because it is not global
+# print $c."\n";
+# fun1();
+# fun1();
+# fun1();
+# fun1();
+
+# Program 19 -= Error handling
+# Within one script only one die keyword can execute.
+# die;                          # this will exit the script
+# die "exiting script\n";       # this will exit the script and display output
+# my $num1 = 'declared outside eval';
+# eval {
+#     $num1 = 'deeclared inside eval';
+#     die "exiting script";
+# };   # use ' eval ' to handle error
+# Within one script multiple warn keyword can execute
+# warn;                                       # this will display warning message and continue the script
+# warn "This is warning message 1 !!!";       # this will display custom message and continue the script
+# warn "This is warning message 2 !!!";
+# print "Exception values: $@";
+# print "$num1\n";
+# print "error handling\n";
+
+# Program 20 - logical operators with numbers
+# && , || , !   OR   and , or , not
+# Ternary operator --> [condition] ? [if true] :  [if false];
+use feature qw/ say /;      # it automatically display new line character at output
+# my $num1 = 100;
+# my $num2 = 20;
+# print 'Greater than: ';
+# say $num1 > $num2 ? "True" : "False";
+# print 'Greater than or Equal: ';
+# say $num1 >= $num2 ? "True" : "False";
+# print 'Lesser than: ';
+# say $num1 < $num2 ? "True" : "False";
+# print 'Lesser than or Equal: ';
+# say $num1 <= $num2 ? "True" : "False";
+# print 'Equal: ';
+# say $num1 == $num2 ? "True" : "False";
+# print 'Not Equal: ';
+# say $num1 != $num2 ? "True" : "False";
+# print 'Spaceship Operator: ';
+# say $num1 <=> $num2;    # if both side are equal value then return 0.
+#                         # if only left hand side is larger value then return 1.
+#                         # if only right hand side is larger value then return -1.
+
+# Program 21 - logical operator with strings (lexicological order)
+# Ternary operator -->	[condition] ? [if true] :  [if false];
+#						[value] if [condition]		<-- if ' condition ' is true then return ' value '
+#						[value] unless [condition]	<-- if ' condition ' is true then return ' value '
+# my $str1 = 'string 2';
+# my $str2 = 'string 1';
+# print 'Greater than: ';
+# say $str1 gt $str2 ? "True" : "False";
+# print 'Greater than or Equal: ';
+# say $str1 ge $str2 ? "True" : "False";
+# print 'Lesser than: ';
+# say $str1 lt $str2 ? "True" : "False";
+# print 'Lesser than or Equal: ';
+# say $str1 le $str2 ? "True" : "False";
+# print 'Equal: ';
+# say $str1 eq $str2 ? "True" : "False";
+# print 'Not Equal: ';
+# say $str1 ne $str2 ? "True" : "False";
+
+# Program 22 - assignment operator
+# # main variable
+# my $num3 = 20;
+# my $num4 = 10;
+# my $str1 = 'assignment of string append';
+# my $str2 = 'This is the example of ';
+# # variable use for operation
+# my $num1 = $num3;
+# my $num2 = $num4;
+# say "Addition: ",($num1 += $num2);
+# $num1 = $num3;
+# $num2 = $num4;
+# say "Subtraction: ",($num1 -= $num2);
+# $num1 = $num3;
+# $num2 = $num4;
+# say "Multiplication: ",($num1 *= $num2);
+# $num1 = $num3;
+# $num2 = $num4;
+# say "Division: ",($num1 /= $num2);
+# $num1 = $num3;
+# $num2 = $num4;
+# say "Remainder: ",($num1 %= $num2);
+# say $str2 .= $str1;
+
+# Program 23 - conditional statement
+# my $marks = 39;
+# if ($marks > 90 && $marks <= 100 ) {
+# 	say "GRADE: O";
+# }elsif ($marks > 80 && $marks <= 90 ) {
+# 	say "GRADE: A";
+# }elsif ($marks > 70 && $marks <= 80 ) {
+# 	say "GRADE: B";
+# }elsif ($marks > 60 && $marks <= 70 ) {
+# 	say "GRADE: C";
+# }elsif ($marks > 50 && $marks <= 60 ) {
+# 	say "GRADE: D";
+# }elsif ($marks >= 40 && $marks <= 50 ) {
+# 	say "GRADE: E";
+# }else {
+# 	say "GRADE: F (FAIL)";
+# }
+
+# Program 24 - loop statemnt
+# While loop - exits loop when condition in false
+# while ( conditions ) {
+# 	statement
+# }
+# my $i = 1;
+# while ($i <= 10) {
+# 	say $i;
+# 	$i++;
+# }
+# Until loop - exits loop when condition is true
+# until ( conditions ) {
+# 	statement
+# }
+# my $i = 1;
+# until ($i > 10) {
+# 	say $i;
+# 	$i++;
+# }
+# For loop
+# for ( initialisation ; conditional ; increment / decrement ) {
+# 	statement
+# }
+# for (my $i = 1; $i <= 10; $i++) {
+# 	say $i;
+# }
+# For each loop
+# foreach scalar variable ( iterator variable ) {
+# 	statement
+# }
+# my @arr = (1 .. 10);		# (start .. end) <-- this will insert sequence range of value.
+# foreach my $i (@arr) {
+# 	say $i;
+# }
+
+# Program 25 - loop operations
+# label1:
+# my @arr = (1 .. 10);
+# foreach my $i (@arr) {
+# 	say $i;
+# 	# next if $i == 4;			# use to skip iterations if given conditions are true
+# 	# last if $i == 4;			# use to stop iterations if given conditions are true
+# 	# redo if $i == 4;			# use to repeat iterations if given conditions are true
+# 	# goto label1 if $i == 4;		# use to jump between labels if given conditions are ture
+# 	say "hello";
+# }
+
+# Program 26 - regular expressions
+# if there is ' / ' in any expression then we have to provide ' \ ' in front of ' / ' (IN CASE OF USING / regex pattern /)
+my $str1 = 'hello';
+if ($str1 =~ /world\/1231/) {
+	say "Expression Matches !";
+}else {
+	say "Expression Not Matches !";
+}
+if ($str1 !~ m{^hello*$}) {
+	say "Expression Matches !";
+}else {
+	say "Expression Not Matches !";
+}
+=regex_note
+
+regex operator: -
+=~		--> return true if condition of regex matches, otherwise false
+!~		--> return true if condition of regex not matches, otherwise false 
+
+regex wrapper format: -
+//		--> regex wrapper with no actual format
+m{}		--> case-sensetive regex wrapper format
+m{}i	--> incase-sensetive regex wrapper format
+
+3. \w				--> only alphanumeric character.
+4. \W				--> any character but no alphanumeric character.
+5. \d				--> digit.
+6. \D				--> any character but no digit
+10. \s				--> only whitespace character.
+11. \S				--> any character but no whitespace characters.
+
+1. ^				--> pattern should start with ' regex_pattern '
+2. $				--> pattern should end with ' regex_pattern '
+3. []				--> any pattern within square bracket may be matched
+4. ()				--> any patter within curve bracket must be matched
+5. -				--> allow to specify a sequential list of characters within the ascii character set.
+3. +				--> one or more occurance
+4. *				--> zero or more occurance
+5. .				--> any character except new line character
+6. ?				--> one or zero occurance
+7. {N}				--> N times occurance
+8. {N, M}			--> N to M times occurance
+9. {N,}				--> minimum N times occurance
+
+=cut
 
 1;  # When using modules the last statement must return true value, otherwise the compilation fails.
     # If you don't use module you don;t required to return true value.

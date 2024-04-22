@@ -1,7 +1,0 @@
-Name: ps - report a snapshot of the current procoesses.
-
-Usage: ps [options]
-
-[options]
-
-

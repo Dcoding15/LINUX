@@ -1,0 +1,36 @@
+man vim
+man ssh-keygen
+man ssh-copy-id
+man ssh-agent
+man ssh-add
+man sosreport
+man ln
+man bash
+man cd
+man ls
+man pwd
+man id
+man su
+man chage
+man 3 isalhpa
+man 3 crypt
+man 5 passwd
+man 5 group
+man 5 groups
+man 5 sudoers
+man 5 shadow
+man 5 login.defs
+man 7 hier
+man 7 path_resolution
+man 7 glob
+man 8 sudo
+man 8 visudo
+man 8 useradd
+man 8 usermod
+man 8 userdel
+man 8 groupadd
+man 8 groupdel
+man 8 groupmod
+
+man 8 insights-client       (Redhat only)
+man 5 insights-client.conf  (Redhat only)

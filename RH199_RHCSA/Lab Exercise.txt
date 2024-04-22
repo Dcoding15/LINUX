@@ -1,0 +1,47 @@
+Edit text file from the Shell Prompt: -
+------------------------------------
+    Exercise: -
+    --------
+    	lab start edit-editfile
+    	vimtutor
+    	[learn from vimtutor]
+    	lab finish edit-editfile
+
+Configure SSH Key-based Authentication: -
+-------------------------------------
+    Exercise: -
+    --------
+    	lab start ssh-configure
+    	ssh-keygen
+    	ssh-copy-id [user name]@[host name] (also password)
+    	lab finish ssh-configure
+
+Create a Diagnostic Report: -
+--------------------------	
+	Exercise: -
+	--------
+	    lab start support-portal
+	    systemctl start cockpit.socket
+	    systemctl status cockpit.socket
+	    [ create sos report and upload ]
+	    lab finish support-portal
+
+Manage Files from the Command Line: -
+----------------------------------
+        lab start files-review
+        lab grade files-review
+        lab finish files-review
+
+
+Manage Local Users and Groups: -
+-----------------------------
+		lab start users-review
+		lab grade users-review
+		lab finish users-review
+
+
+Control Access to Files: -
+-----------------------
+		lab start prems-review
+		lab grade prems-review
+		lab finish prems-review
