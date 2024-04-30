@@ -12,6 +12,10 @@ man pwd
 man id
 man su
 man chage
+man chmod
+man chown
+man chgrp
+man umask
 man 3 isalhpa
 man 3 crypt
 man 5 passwd

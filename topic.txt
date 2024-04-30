@@ -27,3 +27,14 @@ Command to compare two files: -
 3. sdiff
 4. vdiff
 5. comm
+
+Network Config: ip dig arp tc iw ping ifconfig host nmcli ethtool brctl nslookup iwconfig resolvectl traceroute dhclient netplan
+Security: nmap chown chmod chattr auditctl ssh gpg nft ufw iptables cryptsetup setfacl chroot fail2ban
+Performance Monitoring: top htop lsof iftop sar ss iotop atop perf nmon dstat strace netstat vmstat iostat glances mpstat blktrace
+File System Configuration: df du mkfs file stat tar fsck zfs zpool resize2fs tune2fs find btrfs xfs_admin xfs_repair xfs_growfs mount
+Logging: grep awk less lnav tail sed journalctl logroute multitail dmseg logger
+User/Group Control: useradd usermod userdel passwd getent gpasswd id groupadd groupmod groupdel groups
+Disk: fdisk cfdisk parted lsblk lvm dd
+LMV Configure: lvm pvs vgs pvscan vgscan lvextend pvcreate pvdisplay vgcreate vgdisplay lvcreate lvdisplay
+Hardware: lspci lsusb lshw lscpu hwinfo sensors dmidecode ethtool smartctl hdparm powertop hwloc-ls
+System: systemctl timedatectl tmux rsync sudo uptime uname su screen

@@ -1,0 +1,56 @@
+Manage File System Permission from Command Line: -
+-----------------------------------------------
+
+chmod [ugoa][+-=][rwxXsStT] [file / folder name]
+
+WHO		SET	
+===		===
+ u		user
+ g		group
+ o		other
+ a		all of above
+
+WHAT	OPERATION
+====	=========
+ +		add
+ -		remove
+ =		replace
+
+WHICH	MODE
+=====	====
+  r		read
+  w		write
+  x		execute file
+  X		execute folder
+  s		enable SUID and SGID with execution
+  S		enable only SUID and SGID
+  t		sticky bit with execution permission
+  T		sticky bit only
+
+
+chmod [user][group][other] [file / folder name]
+
+Octal Number	-		Permission
+============			==========
+
+				-	read	write	execute
+					====	=====	=======
+
+	0			-	 0		  0		   0
+	1			-	 0		  0		   1
+	2			-	 0		  1		   0
+	3			-	 0		  1		   1
+	4			-	 1		  0		   0
+	5			-	 1		  0		   1
+	6			-	 1		  1		   0
+	7			-	 1		  1		   1
+
+Note: -
+	0 -> disable
+	1 -> enable
+
+Change File and Directory User or Group Ownership: -
+-------------------------------------------------
+	1. To change file or folder user ownership use chown command like chown [user name]:[group name] [file / folder name] or chown [user name].[group name] [file / folder name]. It is recommended for using ' : ' instead of ' . '
+	2. To change file or folder group ownership use chown or chgrp command
+

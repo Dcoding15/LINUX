@@ -52,10 +52,48 @@ Gain Superuser Access: -
 		sudo -i				: To run shell with interactive login scripts.
 		sudo -s				: To run shell without interactive scripts.
 
+
+Manage Local Group Accounts: -
+---------------------------
+	Primary Group: -
+		1. A user can have only one primary group.
+		2. It can be viewed on /etc/passwd file.
+		3. It is used for assigning group ownership.
+		4. Using newgrp command we can temporarily change primary group of an user. That temporary primary group will be there until we logout.
+	Supplementary Group: -
+		1. A user can have multiple supplementary group.
+		2. It can be viewed on /etc/group file.
+
+	groupadd
+	groupmod
+	groupdel
+	newgrp
+
+	Note: -
+	----
+	/etc/group --> This file contain group's information
+
 Manage Local User Accounts: -
 --------------------------
-	useradd -c [comment] [user name]				: To add comment
+	useradd -c [comment] [user name]				: To add user with comment
 
+	useradd -m [user name]							: To add user as home directory (/home)
+	useradd -b [path] [user name]					: To add user as home directory after concatenating base dir and user name
+	useradd -d [path] [user name]					: To add user as home directory with specifying path of home dir
+	
+	useradd -M [user name]							: Don't create user home directory
+	useradd -N [user name]							: Don't create same name primary group as user
+
+	useradd [user name]								: To add user with primary group as user name
+	useradd -g [primary group] [user name]			: To add user with primary group as other name
+	useradd -G [supplementary group] [user name]	: To add user with supplymentary group and primary group as user name
+	useradd -s [shell path] [user name]				: To add user with customise shell (changing path of shell)
+
+	useradd -e [YYYY-MM-DD] [user name]				: To specify date on which user account will be disabled
+	useradd -f [inactive days] [user name]			: To specify maximum days after inactive of user account
+	useradd -D -[b /e /f /g /s ] [...]				: To change default value of any one opions
+	useradd -K KEY=VALUE [user name]				: To change /etc/login.defs
+	
 	usermod -c [comment] [user name]				: To add comment
 	
 	usermod -g [primary group] [user name]			: To replacing primary group for user account
@@ -64,7 +102,7 @@ Manage Local User Accounts: -
 	usermod -rG [supplementary group] [user name]	: To remove supplementary group for user account
 	
 
-	usermod -e [YYYY-MM-DD] [user name]				: To specify date in which user account will be disabled
+	usermod -e [YYYY-MM-DD] [user name]				: To specify date on which user account will be disabled
 	usermod -f [inactive days] [user name]			: To specify maximum days after inactive of user account
 	usermod -L [user name]							: To lock user's password
 	usermod -U [user name]							: To unlock user's password
@@ -81,3 +119,66 @@ Manage Local User Accounts: -
 		UID 1 to 200	--> system process account (statically assigned)
 		UID 201 to 999	--> unprivileged process account (dynamically assigned)
 		UID 1000+		--> regular / unprivileged user account
+	
+	Note: -
+	----
+	/etc/passwd --> This file contain user's information
+
+
+Manage User Passwords: -
+---------------------
+	1. /etc/passwd file store user related information.
+	2. /etc/shadow file store user password in cryptogrphically hashed format to protect fro dictionary attack.
+	3. /etc/shadow file code block: -
+		[user name]:[user password]:[password last changed days]:[minimum days before password change]:[no. of warning days before password expire]:[no. of days before account expires]:[]
+	4. Last field in /etc/shadow reserved for future use.
+	5. Format of an cryptographically hashed password: -
+		(a) There are 3 pieces of information: hashing algorithm, salt, user password hashed with salt respectively.
+		(b) Each piece of information is separated by $ character.
+	6. Password verfication: -
+		Step 1: User try to enter password.
+		Step 2: System then convert password into text to cryptographical hash.
+		Step 3: System then fetch cryptographical hash in /etc/shadow file.
+		Step 4: System then compare two cryptographical hash.
+		Step 5: If both are same then success, otherwise failure.
+	7. We can change password using chage command. It is also known as change age.
+	8. /sbin/nologin shell is used when account doesn't require to login interactive session.
+	
+	chage -d [YYYY-MM-DD] [user name]				: last date of password change
+	chage -m [days] [user name]						: minimum days of password
+	chage -M [days] [user name]						: maximum days of password
+	chage -W [days] [user name]						: warning days before password expiration
+	chage -E [YYYY-MM-DD] [user name]				: date of password expiration
+	chage -I [days] [user name]						: inactive days before password of that account get locked
+
+	chage -l [user name]							: show account aging info
+	chage -E -1 [user name]							: remove account expire date
+
+	passwd -aS [user name]							: show account status info
+														1. user login name
+														2. password usability -> if L then account is locked
+																				 if NP then account has no password
+																				 if P then account has password
+														3. date of last password change
+														4. minimum days of password
+														5. maxmimum days of password
+														6. password warning days
+														7. password inactivity days
+	passwd -d [user name]							: delete user's password
+	passwd -e [user name]							: immediately expire an account
+	passwd -k [user name]							: user can change password only if password expires
+	passwd -l [user name]							: lock user account
+	passwd -u [user name]							: unlock user account
+
+
+	passwd -n [days] [user name]					: minimum days of password
+	passwd -x [days] [user name]					: maxmimum days of password
+	passwd -w [days] [user name]					: warning days of password
+	passwd -i [days] [user name]					: inactive days of pasword
+
+	usermod -s /sbin/nologin [user name]			: disable interactive session for that user account
+
+	Note: -
+	/etc/shadow --> This file contain users's password in an encrypted format
+	/etc/login.defs --> This file contain specific configuration for shadow password suite
+	/sbin/nologin --> This is binary file use to disable user interactive session on shell

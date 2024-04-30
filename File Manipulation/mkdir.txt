@@ -1,9 +1,0 @@
-Command: mkdir
-Create the directorires, if they do not already exit.
-
-Usage: mkdir [OPTION]... DIRECTORY...
-
-[OPTION]
--m      set file mode (in octal mode)
--p      use to create subdirectories
--v      create directory and print message
