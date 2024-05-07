@@ -10,6 +10,7 @@ Git: -
 	8. Always commit before switching to another branch.
 	9. Merging branch is to merge with master branch.
 	10. Git diff shows same file of different versions.
+	11. 
 
 .git/      -> A hidden folder to keep history of all files and sub folders.
 .gitignore -> A hidden file which tells git to ignore. Only write name of that sub folder or file.
@@ -33,8 +34,8 @@ To create and move to new branch			-> git checkout/swtich -c [branch name]
 To merge branch								-> git checkout/switch [branch name to merge with] && git merge [branch name getting merge]
 To delete branch							-> git branch -d [branch name]
 
-To show compare details						-> git diff
-To show compare details of staged area		-> git diff --staged
+To show compare details	before stagging		-> git diff
+To show compare details after stagging		-> git diff --staged
 
 Git .ignore generator link: -
 1. https://www.toptal.com/developers/gitignore
