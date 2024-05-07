@@ -167,6 +167,9 @@ To disable: cat "blacklist uvcvideo" > /etc/modprob.d/nowebcam.conf
 To enable: rm -rf /etc/modprob.d/nowebcam.conf
 cd /usr/share/sddm/themes/
 
+sudo modprobe -r uvcvideo	: To disable built-in camera
+sudo modprobe uvcvideo		: To enable built-in camera
+
 Installing yay package manager: -
 ------------------------------
 Clone repo: git clone https://aur.archlinux.org/yay.git

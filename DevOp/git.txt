@@ -1,0 +1,16 @@
+Git: -
+---
+	1. It is a distributed version control system designed to handle everything from small to very large projects with speed and efficiency.
+	2. It is free and open-source.
+
+Repo -> Tracked files and other sub folders in a git folder.
+.git -> A hidden folder to keep history of all files and sub folders.
+
+
+To show tracking status						-> git status
+To initialise git repo						-> git init
+To mark check point							-> git commit -m "[Commit Message]"
+To mark file to staging area				-> git add [file name]
+To mark sub folder file to staging area		-> git add [sub folder name]/[file name]
+To mark all items within that folder		-> git add -A
+To show all commit details					-> git log

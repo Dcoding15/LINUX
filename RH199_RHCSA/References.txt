@@ -16,6 +16,12 @@ man chmod
 man chown
 man chgrp
 man umask
+man kill
+man killall
+man pkill
+man pgrep
+man pstree
+man w
 man 3 isalhpa
 man 3 crypt
 man 5 passwd
@@ -27,6 +33,7 @@ man 5 login.defs
 man 7 hier
 man 7 path_resolution
 man 7 glob
+man 7 signal
 man 8 sudo
 man 8 visudo
 man 8 useradd

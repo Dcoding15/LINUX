@@ -1,0 +1,13 @@
+Process Control with Signals: -
+----------------------------
+	1. Signal is software interrupt deliveeered to processes.
+	2. Signal can be an error, an external event or an explicit command or keyboard sequence.
+	3. Signal has one of the following actions: -
+		i. TERM -> exit program
+		ii. CORE -> core dump and exit
+		iii. STOP -> suspend and resume
+	4. Signal through keyboard sequence: -
+		i. ctrl + c		-> exit program
+		ii. ctrl + \	-> core dump and exit
+		iii. ctrl + z	-> suspend and resume
+	5. kill command uses a PID number to send signal to a process.

@@ -1,0 +1,45 @@
+Firewall: -
+	1. A firewall is a network security system that controls and monitors incoming and outgoing network packects based on rules defined.
+	2. There are types of firewall: -
+		a. Software based
+		b. Hardware based
+	3. Types of firewall tools: -
+		i.		ufw (default in Ubuntu)
+		ii.		nftables (default in Debian)
+		iii.	iptables (default in any linux)
+		iv.		firewalld
+
+Firewalld system service: -
+	systemctl enable  firewalld
+	systemctl start   firewalld
+	systemctl disable firewalld
+	systemctl stop    firewalld
+	systemctl status  firewalld
+	systemctl restart firewalld
+
+Firewalld commands: -
+	To display rules					--> firewall-cmd --list-all
+	To display services					--> firewall-cmd --get-services
+	To display zones					--> firewall-cmd --get-zones
+	To display active zones				--> firewall-cmd --get-active-zones
+	To display specific zone			--> firewall-cmd --zone="ZONE NAME" --list-all
+
+	To add service temporary			--> firewall-cmd --add-service="SERVICE NAME"
+	To add service permanent			--> firewall-cmd --add-service="SERVICE NAME" --permanent
+	To remove service temporary			--> firewall-cmd --remove-service="SERVICE NAME"
+	To remove service permanent			--> firewall-cmd --remove-service="SERVICE NAME" --permanent
+
+	To add port temporary				--> firewall-cmd --add-port="PORT NUMBER"/"PROTOCOL"
+	To add port permanent				--> firewall-cmd --add-port="PORT NUMBER"/"PROTOCOL" --permanent
+	To remove port temporary			--> firewall-cmd --remove-port="PORT NUMBER"/"PROTOCOL"
+	To remove port permanent			--> firewall-cmd --remove-port="PORT NUMBER"/"PROTOCOL" --permanent
+	
+	To block incoming traffic using IP	--> firewall-cmd --add-rich-rule='rule
+																		  family="ipv4"
+																		  source address="IPV4 ADDRESS"
+																		  reject
+																		 '
+	To block outgoing traffic using IP	--> firewall-cmd --direct --add-rule ipv4 fileter OUTPUT 0 -d "IP ADDRESS" -j drop
+	To block ICMP incoming traffic		--> firewall-cmd --add-icmp-block-inversion
+
+	To reload configuration				--> firewall-cmd --reload

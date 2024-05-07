@@ -28,13 +28,28 @@ WHICH	MODE
   T		sticky bit only
 
 
-chmod [user][group][other] [file / folder name]
+chmod [special permission][user][group][other] [file / folder name]
 
 Octal Number	-		Permission
 ============			==========
 
 				-	read	write	execute
 					====	=====	=======
+
+	0			-	 0		  0		   0
+	1			-	 0		  0		   1
+	2			-	 0		  1		   0
+	3			-	 0		  1		   1
+	4			-	 1		  0		   0
+	5			-	 1		  0		   1
+	6			-	 1		  1		   0
+	7			-	 1		  1		   1
+
+Octal Number	-		Special Permission
+============			==================
+
+				-	SUID	 SGID	sticky
+					====	 ====	======
 
 	0			-	 0		  0		   0
 	1			-	 0		  0		   1
@@ -54,3 +69,36 @@ Change File and Directory User or Group Ownership: -
 	1. To change file or folder user ownership use chown command like chown [user name]:[group name] [file / folder name] or chown [user name].[group name] [file / folder name]. It is recommended for using ' : ' instead of ' . '
 	2. To change file or folder group ownership use chown or chgrp command
 
+
+Manage Default Permissions and File Access: -
+------------------------------------------
+	1. Default permission of root user for creating file is 644 and folder is 755.
+	2. Default permission of normal user for creating file is 644 and folder is 755.
+	3. Default umask permission is 0022.
+
+Permission		Description
+==========		===========
+   u+s			Set only on file execute as a user who owns that file.
+   g+s			If set on file then execute as a group who own that file
+   				If set on folder then group ownership of that folder is applied to all files (created under that folder).
+   o+t			Set only on folder then user with write access can modify those files.
+
+Calculate umask for file: -
+		Initial umask			:	000		110		110		110
+(XOR)	Modify umask		    :	xxx		xxx		xxx		xxx
+		-------------------------------------------------------
+		Result umask		    :	xxx		xxx		xxx		xxx
+		-------------------------------------------------------
+
+Calculate umask for folder: -
+		Initial umask			:	000		111		111		111
+(XOR)	Modify umask			:	xxx		xxx		xxx		xxx
+		-------------------------------------------------------
+		Result umask			:	xxx		xxx		xxx		xxx
+		-------------------------------------------------------
+
+Note: -
+	For performing XOR on base 10 digits then,
+		even  XOR  even  ->  +
+		odd   XOR  odd   ->  -
+		even  XOR  odd   ->  -
