@@ -2,15 +2,40 @@ Git: -
 ---
 	1. It is a distributed version control system designed to handle everything from small to very large projects with speed and efficiency.
 	2. It is free and open-source.
+	3. Repo (repository) are tracked files and other sub folders in a git folder.
+	4. Commit is like a checkpoint for repo
+	5. HEAD is a pointer which points to current branch.
+	6. Staged files or sub folders are those which are tracked
+	7. Branch acts an independent repo. Default branch name is master (main repo).
+	8. Always commit before switching to another branch.
+	9. Merging branch is to merge with master branch.
+	10. Git diff shows same file of different versions.
 
-Repo -> Tracked files and other sub folders in a git folder.
-.git -> A hidden folder to keep history of all files and sub folders.
+.git/      -> A hidden folder to keep history of all files and sub folders.
+.gitignore -> A hidden file which tells git to ignore. Only write name of that sub folder or file.
 
+To setup user name							-> git config --global user.name "[user name]"
+To setup user email							-> git config --global user.email "[user email]"
+To setup user editor						-> git config --global core.editor "vi"
 
 To show tracking status						-> git status
 To initialise git repo						-> git init
-To mark check point							-> git commit -m "[Commit Message]"
+To mark commit that repo					-> git commit -m "[Commit Message]"
 To mark file to staging area				-> git add [file name]
 To mark sub folder file to staging area		-> git add [sub folder name]/[file name]
 To mark all items within that folder		-> git add -A
 To show all commit details					-> git log
+
+To show all available branch				-> git branch
+To create new branch						-> git branch [branch name]
+To change branch							-> git checkout/switch [branch name]
+To create and move to new branch			-> git checkout/swtich -c [branch name]
+To merge branch								-> git checkout/switch [branch name to merge with] && git merge [branch name getting merge]
+To delete branch							-> git branch -d [branch name]
+
+To show compare details						-> git diff
+To show compare details of staged area		-> git diff --staged
+
+Git .ignore generator link: -
+1. https://www.toptal.com/developers/gitignore
+2. https://mrkandreev.name/snippets/gitignore-generqator/
