@@ -10,33 +10,42 @@ Git: -
 	8. Always commit before switching to another branch.
 	9. Merging branch is to merge with master branch.
 	10. Git diff shows same file of different versions.
-	11. 
+	11. Rebasing is the process of moving or combining a sequence of commits to a new base commit. Don't perform rebasing in master branch.
 
 .git/      -> A hidden folder to keep history of all files and sub folders.
 .gitignore -> A hidden file which tells git to ignore. Only write name of that sub folder or file.
-
-To setup user name							-> git config --global user.name "[user name]"
-To setup user email							-> git config --global user.email "[user email]"
-To setup user editor						-> git config --global core.editor "vi"
-
-To show tracking status						-> git status
-To initialise git repo						-> git init
-To mark commit that repo					-> git commit -m "[Commit Message]"
-To mark file to staging area				-> git add [file name]
-To mark sub folder file to staging area		-> git add [sub folder name]/[file name]
-To mark all items within that folder		-> git add -A
-To show all commit details					-> git log
-
-To show all available branch				-> git branch
-To create new branch						-> git branch [branch name]
-To change branch							-> git checkout/switch [branch name]
-To create and move to new branch			-> git checkout/swtich -c [branch name]
-To merge branch								-> git checkout/switch [branch name to merge with] && git merge [branch name getting merge]
-To delete branch							-> git branch -d [branch name]
-
-To show compare details	before stagging		-> git diff
-To show compare details after stagging		-> git diff --staged
-
 Git .ignore generator link: -
 1. https://www.toptal.com/developers/gitignore
 2. https://mrkandreev.name/snippets/gitignore-generqator/
+
+To setup user name									-> git config --global user.name "[user name]"
+To setup user email									-> git config --global user.email "[user email]"
+To setup user editor								-> git config --global core.editor "vi"
+
+To show tracking status								-> git status
+To initialise git repo								-> git init
+To mark commit that repo							-> git commit -m "[Commit Message]"
+To mark file to staging area						-> git add [file name]
+To mark sub folder file to staging area				-> git add [sub folder name]/[file name]
+To mark all items within that folder				-> git add -A
+To show all commit details							-> git log
+
+To show all available branch						-> git branch
+To create new branch								-> git branch [branch name]
+To change branch									-> git checkout/switch [branch name]
+To create and move to new branch					-> git checkout/swtich -c [branch name]
+To merge branch										-> git checkout/switch [branch name to merge with] && git merge [branch name getting merge]
+To delete branch									-> git branch -d [branch name]
+
+To show compare details	before stagging				-> git diff
+To show compare details after stagging				-> git diff --staged
+
+To merge all commits into new base commit			-> git rebase [branch name]
+To restart rebasing after solving merge conflicts	-> git rebase --continue
+To skip rebase merge conflicts						-> git rebase --skip
+To abort and get back before rebase state			-> git rebase --abort
+
+Github Setup: -
+------------
+ssh-keygen -t ed25519 -C "[user github email]"
+
