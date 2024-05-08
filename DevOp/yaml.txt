@@ -1,0 +1,37 @@
+YAML - Yet Another Markup Language
+----------------------------------
+	1. It can only store data.
+	2. It is a data format used to exchange data.
+	3. Process of converting an object into a stream of bytes is called data serialisation.
+	4. Process of reversing data serialisation is called data deserialisation.
+	5. It is data serialisation language.
+
+Create ymal file:	file_name.ymal
+
+Basic Syntax: -
+------------
+name : debrishi			<-- this is key value pair
+age : 21
+server :				<-- this is object
+	name : apache2
+	version : 2.4.59
+social_media :			<-- this is list
+	- dbv_93.92.3.9
+	- debrishibiswas
+	- Dcoding15
+misc : |				<-- this is multi-line string
+	my name
+	is
+	debrishi
+	biswas
+	and i am
+	currently
+	doing BCA
+server_lists :			<-- this is list of objects
+  - server_1 :
+      name : "EC2"
+      volume : "1TB"
+  - server_2 :
+      name : "E2E"
+      volume : "1TB"
+	

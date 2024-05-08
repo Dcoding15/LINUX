@@ -1,0 +1,22 @@
+name : debrishi
+age : 21
+server :
+  name : apache2
+  version : 2.4.59
+social_media :
+  - dbv4_73.72.9.3
+  - Dcoding15
+  - debrishi-biswas
+misc : |
+  my name
+  is debrishi
+  biswas and
+  i am currently
+  doing BCA
+server_lists :
+  - server_1 :
+      name : "EC2"
+      volume : "1TB"
+  - server_2 :
+      name : "E2E"
+      volume : "1TB"
