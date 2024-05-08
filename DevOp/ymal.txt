@@ -1,0 +1,7 @@
+YMAL - Yet Another Markup Language
+----------------------------------
+	1. It can only store data.
+	2. It is a data format used to exchange data.
+	3. The process of converting an object into a stream of bytes is called data serialization.
+	4. The reverse process of data serialisation is called data deserialisation.
+

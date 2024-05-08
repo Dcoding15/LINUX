@@ -28,6 +28,7 @@ To mark commit that repo							-> git commit -m "[Commit Message]"
 To mark file to staging area						-> git add [file name]
 To mark sub folder file to staging area				-> git add [sub folder name]/[file name]
 To mark all items within that folder				-> git add -A
+To mark staging item as unstage						-> git restore --staged [file name/sub folder name]
 To show all commit details							-> git log
 
 To show all available branch						-> git branch
@@ -45,7 +46,13 @@ To restart rebasing after solving merge conflicts	-> git rebase --continue
 To skip rebase merge conflicts						-> git rebase --skip
 To abort and get back before rebase state			-> git rebase --abort
 
+To clone remote repo to local						-> git clone [GITHUB REPO URL]
+To push source code to github						-> git push
+To push local branch to another remote				-> git push [remote name] [local branch name]
+
 Github Setup: -
 ------------
-ssh-keygen -t ed25519 -C "[user github email]"
-
+Generate new SSH key								-> ssh-keygen -t ed25519 -C "[user github email]"
+Start ssh-agent in background						-> ssh-agent -s
+Add your ssh private key to ssh-agent				-> ssh-add ~/.ssh/[private key]
+Display ssh public key and copy to git SSH section	-> cat ~/.ssh/[public key].pub
