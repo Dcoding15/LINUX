@@ -8,17 +8,23 @@ YAML - Yet Another Markup Language
 
 Create ymal file:	file_name.ymal
 
-Basic Syntax: -
-------------
+Syntax with example: -
+-------------------
+
+---						<-- this is start of a document
+#Section 1				<-- this is comment
 name : debrishi			<-- this is key value pair
 age : 21
+#Section 2
 server :				<-- this is object
 	name : apache2
 	version : 2.4.59
+#Section 3
 social_media :			<-- this is list
 	- dbv_93.92.3.9
 	- debrishibiswas
 	- Dcoding15
+# Section 4
 misc : |				<-- this is multi-line string
 	my name
 	is
@@ -27,6 +33,7 @@ misc : |				<-- this is multi-line string
 	and i am
 	currently
 	doing BCA
+#Section 5
 server_lists :			<-- this is list of objects
   - server_1 :
       name : "EC2"
@@ -34,4 +41,7 @@ server_lists :			<-- this is list of objects
   - server_2 :
       name : "E2E"
       volume : "1TB"
-	
+...						<-- this is end of document
+
+
+JSON - JavaScript Object Notation
