@@ -17,9 +17,9 @@ Encryption: -
 ----------
 Generate randomly hexadecimal key      : openssl rand -hex [ key size in bytes ]
 Generate randomly base64 key           : openssl rand -base64 [ key size in bytes ]
+Generate randomly binary key           : openssl rand [ key size in bytes ]
 Generate private key                   : openssl [ encrypt algorithms with gen prefix ]
 Generate private key with limited size : openssl [ encrypt algorithms with gen prefix] [ key size in bits ]
-
 Generate public key                    : openssl [ encrypt algorithms ] -in [ private key file name ] -pubout -out [ public key file name ]
 
 In binary format: -
@@ -73,7 +73,7 @@ Generate encrypted private eky (without using existing private key) : openssl ec
 Generate decrypted private key                                      : openssl ec -in [ encrypted key file name ] -out [ file name ]
 
 Generate key pair using genpkey (PKCS8 format): -
--------------------------------
+----------------------------------------------
 Generate RSA private key   : openssl genpkey -algorithm rsa -pkeyopt rsa_keygen_bits:[ no. of bits ] -out [ file name ]
 Genearate DSA private key  : openssl genpkey -algorithm dsa -pkeyopt dsa_paramgen_bits:[ no. of bits ]  -out [ file name ]
 Generate ECDSA private key : openssl genpkey -algorithm ec -pkeyopt ec_paramgen_curve:[ name of ec curves ] -out [ file name ]
@@ -99,14 +99,15 @@ openssl pkeyutl option to sign        :	-
 
 Note: -
 	1. If we don't put -hex flag after any check sum it will generate binary data.
-	2. Maximum size of RSA key is 2048 bit long.
+	2. Size of RSA key is from 512 bit to 16384 bit long. Bydefault it is 2048 bits long.
 	3. -out [ file name ] is used to store output in file.
 	4. -in [ file name ] is used to take input as a file.
 	5. If we don't provide key file then openssl would ask for password.
 	6. When encryption and decryption use -pbkdf2
 	7. According to RSA padding PKCS1 RSA key can encrypt 245 bytes of data.
 	8. PEM is in base 64 format and DER is in binary format.
-	9. 
+	9. A digital signature is a mathematical scheme for verifying the authenticity of digital messages or documents. A valid digital signature on a message gives a recipient confidence that the message came from a sender known to the recipient.
+	10. 
 		Symmetric Encryption Algorithms (Use single key to encrypt and decrypt):
 			AES (Advanced Encryption Standard)
 			DES (Data Encryption Standard)

@@ -3,6 +3,9 @@ man ssh-keygen
 man ssh-copy-id
 man ssh-agent
 man ssh-add
+man ssh
+man sshd
+man sshd_config
 man sosreport
 man ln
 man bash

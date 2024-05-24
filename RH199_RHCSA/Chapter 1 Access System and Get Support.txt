@@ -89,7 +89,7 @@ Configure SSH Key-based Authentication: -
  	1. SSH Key-based Authentication is based on Public Key Encryption (PKI).
 	2. First we have to generate a pair of key.
 	3. Private key which is a secret key and acts as an authentication credential.
-	4. Public key which is a copied to server accounts to encrypt data securely.
+	4. Public key which is a copied to remote server accounts to encrypt data securely and login to remote ssh without password prompt.
 	5. SSH client first receive a request in enrypted message from remote server and it try to decrypt message using associated private key from actual server. It SSH client enables to decrypt the message then verification succeeds and request is trusted.
 	6. If remote server request is trusted then it can access without giving a password.
 	7. During ssh key generation it is recommended to use passphrase key. Passphrase key is used to locally decrypt that encrypted private key.
@@ -99,18 +99,22 @@ Configure SSH Key-based Authentication: -
 	SSH Key Generation: -
 	------------------
 	To generate a pair of ssh key               : ssh-keygen
-	To copy public ssh key to remote server     : ssh-copy-id -i [public key file] [user name]@[host name]
+	To copy public ssh key to remote server     : ssh-copy-id -i [public key file] [remote server username@localhost]
 	To start ssh agent for key manager          : ssh-agent
 	To load passphrase to key manager           : ssh-add
 	To access remote SSH server with verbosity  : ssh -[verbose level] [user name]@[host name]
 	To access remove SSH server                 : ssh [user name]@[host name]
+	To copy from local to remote SSH server     : scp -i [pem file] [local server file with path name] [remote server username@localhost]:[file with path name]
+	To copy from remote to local SSH server     : scp -i [pem file] [remote server username@localhost]:[file with path name] [local server file with path name]
 
 	Note: -
 	----
-		1. ~/.ssh/id_rsa       --> By default store private key and have octal permission of 600
-		   ~/.ssh/id_rsa.pub   --> By default store public key and have octal permission of 644
-		2. ~/.ssh/config       --> We can create user wide preconfiguration SSH connections file
-		  /etc/ssh/ssh_config  --> We can create system wide preconfiguration SSH connections file
+		1. ~/.ssh/[private key]     --> By default store private key and have octal permission of 600
+		   ~/.ssh/[public key].pub  --> By default store public key and have octal permission of 644
+		   ~/.ssh/authorized_keys   --> By default store public key of local server into remote server
+		2. ~/.ssh/config            --> We can create user wide preconfiguration SSH connections file
+		   /etc/ssh/ssh_config      --> We can create system wide preconfiguration SSH client connections file
+		   /etc/ssh/sshd_config     --> File to configure SSH daemon connection file
 
 
 Create a Diagnostic Report: -
@@ -124,7 +128,7 @@ Create a Diagnostic Report: -
 			(a) Low (severity level 4)    : problems involves low / medium to no impact on your business environment.
 			(b) Medium (severity level 3) : problems involves partial / non-critical loss of use of the software in production environment or development environment.
 			(c) High (severity level 2)   : problem where the software is functioning but its use in a production environment is severely reduced.
-			(d)Urgent (severity level 1) : problem that severly impacts your use of the software in a production enviromment.
+			(d) Urgent (severity level 1) : problem that severly impacts your use of the software in a production enviromment.
 		4.List of information that can be collected in a report: -
 			(a) The running kernel version
 			(b) Loaded kernel modules
@@ -138,6 +142,6 @@ Create a Diagnostic Report: -
 	sos report stores : # ls -l /var/tmp/
 	use sos clean     : # sos clean /var/tmp/[sos report name]
 	upload sos report : # sos report --upload
-		sos report  : collects various debugging information from one or more systems.
-		sos collect : collect individual sos report from a specified set of nodes.
-		sos clean   : make potentially sensetive information like user name, host name, IP or MAC address, etc to difficult to understand.
+		sos report    : collects various debugging information from one or more systems.
+		sos collect   : collect individual sos report from a specified set of nodes.
+		sos clean     : make potentially sensetive information like user name, host name, IP or MAC address, etc to difficult to understand.

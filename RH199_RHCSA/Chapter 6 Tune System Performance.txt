@@ -11,3 +11,53 @@ Process Control with Signals: -
 		ii. ctrl + \	-> core dump and exit
 		iii. ctrl + z	-> suspend and resume
 	5. kill command uses a PID number to send signal to a process.
+	6. To display running process use ps and jobs command.
+	7. To display user logins and currently running processes use w command.
+	8. We can send any processes to background by using Ctrl+z and '[command name] &'.
+
+To display background processes					-> jobs
+To kill a backgroun process using kill command	-> kill -s [signal] %[job number]
+
+To display all available signals         		-> kill -l
+To kill a process using process ID       		-> kill -s [signal] [process ID]
+To kill a process using naming pattern   		-> pkill -s [signal] [process naming pattern]
+To kill all process and logout           		-> pkill -
+To search specific process using pattern 		-> pgrep [option] [pattern]
+To kill multiple process using command name		-> killall [command name]
+
+Note: -
+====
+Kill Signal	 -	Meaning
+-----------		-------
+	HUP		 -	hangup
+	INT		 -	interrupt
+	QUIT	 -	quit
+	ILL		 -	illegal instruction
+	TRAP	 -	trace / breakpoint trap
+	ABRT	 -	abort
+	BUS		 -	bus error
+	FPE		 -	floating point exception
+	KILL	 -	kill process
+	USR1	 -	user defined signal 1
+	SEGV	 -	segmentation fault
+	USR2	 -	user defined signal 2
+	PIPE	 -	broken pipe
+	ALRM	 -	alarm clock
+	TERM	 -	terminate
+	TKFLT	 -	stack fault
+	CHLD	 -	child status changed
+	CONT	 -	continue
+	STOP	 -	pause the process
+	TSTP	 -	terminal stop
+	TTIN	 -	background read from TTY
+	TTOU	 -	background write to TTY
+	URG		 -	urgent condition on socket
+	XCPU	 -	CPU time limit exceeded
+	XFSZ	 -	file size limit exceeded
+	VTALRM	 -	virtual timer expired
+	PROF	 -	profiling timer expired
+	WINCH	 -	window size change
+	IO		 -	I/O now possible
+	PWR		 -	power failure restart
+	SYS		 -	bad system call
+	UNUSED	 -	reserved
