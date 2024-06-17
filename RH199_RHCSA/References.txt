@@ -1,3 +1,14 @@
+Manual Sections		-->		Which Type
+===============				==========
+man 1 				--> 	User Commands
+man 2 				--> 	System Calls
+man 3 				--> 	Library Functions
+man 4 				--> 	Kernel Interfaces
+man 5 				--> 	File Formats and Conventions
+man 6 				--> 	Games
+man 7 				--> 	Miscellaneous Informations
+man 8 				-->		Root User Commands
+
 man vim
 man ssh-keygen
 man ssh-copy-id
