@@ -6,7 +6,6 @@ List public key algorithms            : openssl list -public-key-algorithms
 List available options for algorithms : openssl list -option [ algorithms ]
 List of all ECDSA curves              : openssl ecparam -list_curvers
 
-
 Verifying Intigrity (to check weather a file is modified or not): -
 ----------------------------------------------------------------
 To display checksum of a file   : [ name of checksum with sum as postfix ] [ file name ]
@@ -97,6 +96,15 @@ openssl pkeyutl option to sign        :	-
 		openssl pkeyutl -sign -in [ hash file name ] -inkey [ private key file name ] -out [ signature file name ] -pkeyopt digest:[ digest algorithm ]
 		openssl pkeyutl -verify -inkey [ public key file name ] -pubin -sigfile [ signature file name ] -in [ hash file name ] -pkeyopt digest:[ digest algorithm ]
 
+Message Authentication Code / Authentication Tag: -
+---------------------------   ------------------
+HMAC (Hash Based MAC)	: -
+	1. openssl [ checksum algorithm ] -hmac [ randomly generated hex key ] -out [ file name ] [ message file name ]
+	2. openssl dgst -[ checksum algorithm ] -hmac [ randomly generated hex key ] -out [ file name ] [ message file name ]
+	3. openssl dgst -mac -[ mac type ] -[ checksum algorithm ] -macopt hexkey:[ randomly generated hex key ] -out [ file name ] [ message file name ]
+CMAC (Cipher Based MAC) : -
+	1. openssl dgst -mac -[ mac type ] -[ checksum algorithm ] -macopt cipher:[ cipher algorithm ] -macopt hexkey:[ randomly generated hex key ] -out [ file name ] [ message file name ]
+
 Note: -
 	1. If we don't put -hex flag after any check sum it will generate binary data.
 	2. Size of RSA key is from 512 bit to 16384 bit long. Bydefault it is 2048 bits long.
@@ -106,8 +114,9 @@ Note: -
 	6. When encryption and decryption use -pbkdf2
 	7. According to RSA padding PKCS1 RSA key can encrypt 245 bytes of data.
 	8. PEM is in base 64 format and DER is in binary format.
-	9. A digital signature is a mathematical scheme for verifying the authenticity of digital messages or documents. A valid digital signature on a message gives a recipient confidence that the message came from a sender known to the recipient.
-	10. 
+	9. A digital signature is a mathematical scheme for verifying the authenticity of digital messages or documents.
+	10. A message authentication code is a short piece of information used for authenticating and integrity-checking a message.
+	11. 
 		Symmetric Encryption Algorithms (Use single key to encrypt and decrypt):
 			AES (Advanced Encryption Standard)
 			DES (Data Encryption Standard)
@@ -139,7 +148,8 @@ Note: -
 			Elliptic Curve Diffie-Hellman (ECDH)
 			Message Authentication Codes (MAC):
 
-		HMAC (Hash-based Message Authentication Code)
+		Message Authentication Algorithm:
+			HMAC (Hash-based Message Authentication Code)
 			CMAC (Cipher-based Message Authentication Code)
 		
 		Random Number Generation:

@@ -55,8 +55,8 @@ mkswap /dev/[swap partition]
 
 Mounting Partition: -
 ------------------
-mkdir -p /mnt/boot/efi
 mount /dev/[root partition] /mnt
+mkdir -p /mnt/boot/efi
 mount /dev/[efi partition] /mnt/boot/efi
 swapon /dev/[swap partition]
 
