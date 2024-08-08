@@ -93,6 +93,10 @@ Grub Configuration: -
 grub-install /dev/[1st disk]
 grub-mkconfig -o /boot/grub/grub.cfg
 
+Setting Password for root: -
+-------------------------
+passwd root
+
 Unmounting and Rebooting: -
 ------------------------
 umount -a
@@ -101,8 +105,7 @@ reboot
 Adding User and giving it Root power: -
 ------------------------------------
 adduser -m arch
-sudo vim /etc/sudoers
-	arch ALL=(ALL:ALL) ALL
+passwd arch
 
 Bluetooth Connections: -
 ---------------------
@@ -129,17 +132,24 @@ nmcli d
 nmcli r wifi on
 nmcli --ask d wifi connect [ SSID ]
 
-Customise the environment: -
+Customise the environment(Compulsory): -
 -------------------------
 pacman -Syu
-pacman -S python3, python-pip, python-virtualenv, gcc, g++, unzip, man-db, git, bluez, blueman, pipewire-pulse, pipewire, lxqt, power-profiles-daemon, unzip, openssh, sshguard, sddm
-For arch user --> git clone /home/arch/https://github.com/SolDoesTech/HyprV4.git
-				  ./home/arch/HyprV4/set-hypr
-(No sudo)		  yay -Syu
-Note: (1) Set no only to asus rog laptop.
-	  (2) Need of a desktop environment for sound process
+pacman -S python3, gcc, unzip, man-db, git, bluez, bluez-utlis, blueman, pipewire-pulse, pipewire, power-profiles-daemon, openssh, xorg-utils
+git config --global user.email "debrishibiswas2003@gmail.com"
+git config --global user.name "Dcoding15"
+git config --global core.editor "vim"
+mkdir suckless
+cd suckless
+git clone https://git.suckless.org/dwm
+git clone https://git.suckless.org/dmenu
+git clone https://git.suckless.org/st
+cd ~/suckless/dwm   : make clean install
+cd ~/suckless/st    : make clean install
+cd ~/suckless/dmenu : make clean install
+cat "exec dwm" > ~/.xinit
 
-Hyprdots Installation: -
+Hyprdots Installation (Optional): -
 ---------------------
 Clone repo: git clone --depth 1 https://github.com/prasanthrangan/hyprdots ~/Hyprdots
 Change directory: cd ~/Hyprdots/Scripts
@@ -147,28 +157,14 @@ Install Hyprldots: ./install.sh
 
 Note: Install everything in hyprdots. For more info of keybindings: https://github.com/prasanthrangan/hyprdots#keybindings
 
-Configure SDDM: -
---------------
-Install dependencies: sudo pacman -Syu qt5-graphicaleffects qt5-svg qt5-quickcontrols2
-Clone repo: git clone https://github.com/catppuccin/sddm.git
-Move folder from src to /use/share/sddm/themes/: sudo mv sddm/src/* /usr/share/sddm/themes/
-Edit /etc/sddm.conf file:
-	[Theme]
-	Current=catppuccin-[flavour]
-Note: [flavour] are latte/frappe/macchiato/mocha
-
 Customizing Kitty: -
 -----------------
-/home/arch/.config/kitty/kitty.conf
+/home/arch/.config/kitty/
 
 Disabling and Enabling in-built camera: -
 --------------------------------------
 To disable: cat "blacklist uvcvideo" > /etc/modprob.d/nowebcam.conf
 To enable: rm -rf /etc/modprob.d/nowebcam.conf
-cd /usr/share/sddm/themes/
-
-sudo modprobe -r uvcvideo	: To disable built-in camera
-sudo modprobe uvcvideo		: To enable built-in camera
 
 Installing yay package manager: -
 ------------------------------

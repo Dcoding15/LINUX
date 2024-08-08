@@ -36,6 +36,10 @@ man pkill
 man pgrep
 man pstree
 man w
+man tuned-adm
+man nice
+man renice
+man 2 sched_setscheduler
 man 3 isalhpa
 man 3 crypt
 man 5 passwd
@@ -44,6 +48,8 @@ man 5 groups
 man 5 sudoers
 man 5 shadow
 man 5 login.defs
+man 5 tuned.conf
+man 5 tuned-main.conf
 man 7 hier
 man 7 path_resolution
 man 7 glob
@@ -56,6 +62,7 @@ man 8 userdel
 man 8 groupadd
 man 8 groupdel
 man 8 groupmod
+man 8 tuned
 
 man 8 insights-client       (Redhat only)
 man 5 insights-client.conf  (Redhat only)

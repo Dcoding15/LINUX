@@ -25,6 +25,49 @@ To kill all process and logout           		-> pkill -
 To search specific process using pattern 		-> pgrep [option] [pattern]
 To kill multiple process using command name		-> killall [command name]
 
+Monitor Process Activity: -
+------------------------
+To display current load average						-> uptime
+To display no. of CPU's on a system					-> lscpu
+To display a dynamic view of the system's process	-> top
+
+Adjust Tuning Profiles: -
+----------------------
+Use tuned daemon to optimise system performance by selectin a tuning profile. There are two types of tuning: -
+(i) Static Tuning: Adjusts system settings based on fixed conditions which require manual updates and are not adaptive to real-time variations.
+(ii) Dynamic Tuning: Continuously adjusts settings in real-time based on current performance data, adapting to changing conditions automatically. Bydefault dynamic tuning is disabled. To enable it set dynamic_tuning variable to 1 in the /etc/tuned/tuned-main.conf configuration file.
+
+Tuned monitor three things: -
+(i) disk	-> disk load based on no. of I/O operations for per disk device.
+(ii) net	-> network load based on no. of transferred packets per network card.
+(iii) load	-> cpu load based on no. of processes using per cpu
+
+Tuned application provides profiles in the following categories: -
+(i) Power-saving profiles
+(ii) Performance-boosting profiles
+
+Configuration file for tuned daemon				-> /etc/tuned/tuned-main.conf
+Configuration file for tuned profiles			-> /usr/lib/tuned/[tuned profile name]/tuned.conf
+To identify currently active profiles			-> tuned-adm active
+To display all related commands					-> tuned-adm list
+To display infomation related to given profile	-> tuned-adm profile-info [tuned profile name]
+To switch tuned profile							-> tuned-adm profile [tuned profile name]
+To display recommended tuned profile			-> tuned-adm recommend
+To turn off tuned application					-> tuned-adm off
+
+Linux Process Scheduling: -
+------------------------
+Nice value				-> the priority of a process
+Highest nice value		-> -20
+Lowest nice value		-> 19
+Processes inherit their starting nice value from their parent process.
+Regular user can increase nice value.
+Root user can both increase and decrease nice value.
+
+To start a process with modified nice value		-> nice -n [number] [command]
+To modify nice value of a running process		-> renice -n [number] [process id]
+
+
 Note: -
 ====
 Kill Signal	 -	Meaning
@@ -61,3 +104,20 @@ Kill Signal	 -	Meaning
 	PWR		 -	power failure restart
 	SYS		 -	bad system call
 	UNUSED	 -	reserved
+
+top command: -
+-----------
+Key				Purpose
+---				-------
+h				display help
+l/t/m			toggle of load/thread/memory header lines
+1				toggle for individual CPU
+s				change refrehing rate
+shift+b			toggle bold rext for runing processes
+shift+h			display process summary of threads
+u, shift+u		filter username
+shift+m			sort process listing by memory usage (desceding order)
+shift+p			sort process listing by memory usage (ascending order)
+k				toggle to kill process using PID and SIGNAL
+shift+w			save the current display configuration after top restart
+q				quit from top

@@ -89,21 +89,28 @@ Signing a file (using RSA)            : openssl rsautl -sign -inkey [ private ke
 Examine digital signature             : openssl rsautl -verfiy [ public key file name ] -pubin -in [ signature file name ]
 Hash based signature                  : openssl [ hash algorithm ] -sign [ private key file name ] -out [ signature file name ] [ normal file name ]
 Examine hash based signature          : openssl [ hash algorithm ] -verify [ public key file name ] -signature [ signature file name ] [ normal file name ]
-Hash based signature (2nd way)        : openssl dgst -[ digest algorithm ] -sign [ private key file name ] -out [ signature file name ] [ normal file name ]
-Examin hash based signature (2nd way) : openssl dgst -[ digest algorithm ] -verify [ public key file name ] -signature [ signature file name ] [ normal file name ]
+Hash based signature (2nd way)        : openssl dgst -[ hash algorithm ] -sign [ private key file name ] -out [ signature file name ] [ normal file name ]
+Examin hash based signature (2nd way) : openssl dgst -[ hash algorithm ] -verify [ public key file name ] -signature [ signature file name ] [ normal file name ]
 openssl pkeyutl option to sign        :	-
-		openssl [ digest algorithm ] -binary -out hash [ normal file name ]
+		openssl [ hash algorithm ] -binary -out hash [ normal file name ]
 		openssl pkeyutl -sign -in [ hash file name ] -inkey [ private key file name ] -out [ signature file name ] -pkeyopt digest:[ digest algorithm ]
 		openssl pkeyutl -verify -inkey [ public key file name ] -pubin -sigfile [ signature file name ] -in [ hash file name ] -pkeyopt digest:[ digest algorithm ]
 
 Message Authentication Code / Authentication Tag: -
 ---------------------------   ------------------
 HMAC (Hash Based MAC)	: -
-	1. openssl [ checksum algorithm ] -hmac [ randomly generated hex key ] -out [ file name ] [ message file name ]
-	2. openssl dgst -[ checksum algorithm ] -hmac [ randomly generated hex key ] -out [ file name ] [ message file name ]
-	3. openssl dgst -mac -[ mac type ] -[ checksum algorithm ] -macopt hexkey:[ randomly generated hex key ] -out [ file name ] [ message file name ]
+	1. openssl [ hash algorithm ] -hmac [ randomly generated hex key ] -out [ file name ] [ message file name ]
+	2. openssl dgst -[ hash algorithm ] -hmac [ randomly generated hex key ] -out [ file name ] [ message file name ]
+	3. openssl dgst -mac -[ mac type ] -[ hash algorithm ] -macopt hexkey:[ randomly generated hex key ] -out [ file name ] [ message file name ]
 CMAC (Cipher Based MAC) : -
-	1. openssl dgst -mac -[ mac type ] -[ checksum algorithm ] -macopt cipher:[ cipher algorithm ] -macopt hexkey:[ randomly generated hex key ] -out [ file name ] [ message file name ]
+	1. openssl dgst -mac -[ mac type ] -[ hash algorithm ] -macopt cipher:[ cipher algorithm ] -macopt hexkey:[ randomly generated hex key ] -out [ file name ] [ message file name ]
+
+Digital Certificate / Public Key Certification / Identity Certificate: -
+-------------------   ------------------------   --------------------
+Self signed certificate       : openssl req -x509 -key [ private key file name ] -[ hash algorithm ] -days 365 -out [ file name ]
+To view digital certificate   : openssl x509 -in [ digital certificate name ] -noout -text
+RSA self signed certificate   : openssl req -x509 -newkey rsa:2048 -sha256 -nodes -days 365 -keyout [ private key file name ] -out [ file name ]
+ECDSA self signed certificate : openssl req -x509 -key [ private key file name ] -days 365 -out [ file name ] 
 
 Note: -
 	1. If we don't put -hex flag after any check sum it will generate binary data.
@@ -116,7 +123,8 @@ Note: -
 	8. PEM is in base 64 format and DER is in binary format.
 	9. A digital signature is a mathematical scheme for verifying the authenticity of digital messages or documents.
 	10. A message authentication code is a short piece of information used for authenticating and integrity-checking a message.
-	11. 
+	11. A digital certificate is a electronic document used to prove the validity of a public key. It contain information about subject and issuer
+	12. 
 		Symmetric Encryption Algorithms (Use single key to encrypt and decrypt):
 			AES (Advanced Encryption Standard)
 			DES (Data Encryption Standard)

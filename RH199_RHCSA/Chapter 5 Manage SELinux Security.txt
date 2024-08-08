@@ -1,0 +1,12 @@
+Change the SELinux Enforcement Mode: -
+-----------------------------------
+    1. Target policy: It consist of application-specific policies that the application's developers define to declare what actions and accesses.
+    2. SELinux has the following operational modes: -
+        a. Enforcing (enable)
+        b. Permissive (enable and create warning logs)
+        c. Disabled (disable)
+    3. Every resources has a SELinux label which define some security policies are called SELinux content. This label has 5 fields i.e., SELinux User, Role, Type, Level, File name.
+
+To view SELinux mode					-> getenforce
+To enable SELinux to enforcing mode		-> setenforce 1
+To enable SELinux to permissive mode	-> setenforce 0
