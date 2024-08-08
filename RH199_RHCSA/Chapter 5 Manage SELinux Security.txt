@@ -10,3 +10,4 @@ Change the SELinux Enforcement Mode: -
 To view SELinux mode					-> getenforce
 To enable SELinux to enforcing mode		-> setenforce 1
 To enable SELinux to permissive mode	-> setenforce 0
+SELinux configuration file				-> /etc/selinux/config
