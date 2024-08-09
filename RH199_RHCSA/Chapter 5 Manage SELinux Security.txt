@@ -7,7 +7,17 @@ Change the SELinux Enforcement Mode: -
         c. Disabled (disable)
     3. Every resources has a SELinux label which define some security policies are called SELinux content. This label has 5 fields i.e., SELinux User, Role, Type, Level, File name.
 
+To view selinux context					-> seinfo -t
 To view SELinux mode					-> getenforce
 To enable SELinux to enforcing mode		-> setenforce 1
 To enable SELinux to permissive mode	-> setenforce 0
 SELinux configuration file				-> /etc/selinux/config
+
+Control SELinux File Content: -
+----------------------------
+Command to chanage selinux context: -
+	1. semanage fcontext (recommened)
+	2. restorecon (recommened for relable)
+	3. chcon (temporary change)
+
+SELinux file-based directory of file labeling policies		-> /etc/selinux/targeted/contexts/files/

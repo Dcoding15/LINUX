@@ -149,6 +149,21 @@ cd ~/suckless/st    : make clean install
 cd ~/suckless/dmenu : make clean install
 cat "exec dwm" > ~/.xinit
 
+AppArmor Installation: -
+---------------------
+pacman -S apparmor audit
+systemctl enable apparmor.service
+systemctl enable auditd.service
+Copy and Paste only content between quotation : zgrep CONFIG_LSM= /proc/config.gz
+vim /etc/default/grub
+	Find key word with keyword GRUB_CMDLINE_LINUX_DEFAULT and append within quotation: lsm=landlock,lockdown,yama,integrity,apparmor,bpf (previous output with apparmor this is just example)
+grub-mkconfig -o /boot/grub/grub.cfg
+reboot
+aa-enabled	(If only output: Yes, then okay)
+aa-status
+
+
+
 Hyprdots Installation (Optional): -
 ---------------------
 Clone repo: git clone --depth 1 https://github.com/prasanthrangan/hyprdots ~/Hyprdots
