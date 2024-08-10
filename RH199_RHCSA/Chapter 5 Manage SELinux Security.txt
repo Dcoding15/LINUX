@@ -2,11 +2,18 @@ Change the SELinux Enforcement Mode: -
 -----------------------------------
     1. Target policy: It consist of application-specific policies that the application's developers define to declare what actions and accesses.
     2. SELinux has the following operational modes: -
-        a. Enforcing (enable)
+        a. Enforcing (enable and deny access if violation)
         b. Permissive (enable and create warning logs)
-        c. Disabled (disable)
-    3. Every resources has a SELinux label which define some security policies are called SELinux content. This label has 5 fields i.e., SELinux User, Role, Type, Level, File name.
+        c. Disabled (selinux is disable)
+    3. Every resources has a SELinux label which define some security policies are called SELinux content. This label has 4 fields i.e., SELinux User, Role, Type, Level.
+	4. There are 4 types of context bases: -
+		i.		user based (posfix _u)
+		ii.		rule based (postfix _r)
+		iii.	type based (postfix _t)
+		iv.		sensitivity based (postifix S0)
 
+To view selinux context file			-> ls -Z [ file path ]
+To view selinux context directory		-> ls -dZ [ directory path ]
 To view selinux context					-> seinfo -t
 To view SELinux mode					-> getenforce
 To enable SELinux to enforcing mode		-> setenforce 1
@@ -21,3 +28,24 @@ Command to chanage selinux context: -
 	3. chcon (temporary change)
 
 SELinux file-based directory of file labeling policies		-> /etc/selinux/targeted/contexts/files/
+To change context											-> chcon -t [ context name ] [ file or directory name ]
+To restore context											-> restorecon -RFvv [ file or directory name ]
+To add context using semanage fcontext						-> semanage fcontext -a -t [ context name ] [ file or directory name ]
+To delete context using semanage fcontext					-> semanage fcontext -d -t [ context name ] [ file or directory name ]
+To list context using semanage fcontext						-> semanage fcontext -l -l [ context name ] [ file or directory name ]
+
+Adjust SELinux Policy with Booleans: -
+-----------------------------------
+To view all booleans targeted policies								-> getsebool -a
+																	-> semanage boolean -l
+To view booleans which has different from default settings at boot	-> semanage boolean -l -C
+To view specific booleans targeted policies							-> getsebool [ context name ]
+To set permenant context using booleans								-> setsebool -P [ context name ] [ on | off ]
+To set temporary context using booleans								-> setsebool [ context name ] [ on | off ]
+
+Investigate and Resolve SELinux Issues: -
+--------------------------------------
+SELinux troubleshooting service packages	-> setroubleshoot-server package
+Access Vector Cache message log file		-> tail -f /var/log/audit/audit.log
+Summary event of AVC log file				-> tail -f /var/log/messages
+To set alert on even using UUID				-> sealert -l [ UUID ]

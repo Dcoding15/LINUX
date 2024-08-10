@@ -1,0 +1,34 @@
+1. Default EDITOR is vim
+2. Order and Format for crontab: [ Minutes ]  [ Hours ]  [ Day ]  [ Month ]  [ Week ] [ Command ]
+3. Week  : Sunday -> 0 / 7 to Saturday -> 6
+   Month : January -> 1 to December -> 12
+4. * means every possible instance
+5. x-y means instance range start from x to y
+6. x,y,z means instance are only of x and y and z
+7. */x means every possible instance with x interval
+8. Range of crontab of every fields: -
+	Fields	| Start | End
+	Minutes | 00    | 59
+	Hours   | 00    | 23
+	Day     | 1     | 31
+	Month   | 1     | 12
+	Week    | 0     | 6
+9. Shortcut for running script once of every: -
+	@reboot		-> run once after reboot
+	@yearly		-> run once a year			| 0 0 1 1 *
+	@annually	-> same as @yearly
+	@monthly	-> run once a month			| 0 0 1 * *
+	@weekly		-> run once a week			| 0 0 * * 0
+	@daily		-> run once a day			| 0 0 * * *
+	@hourly		-> run once an hour			| 0 * * * *
+
+To list schedule jobs						-> crontab -l
+To remove schedule jobs						-> crontab -r
+To edit schedule jobs						-> crontab -e
+To edit schedule jobs from file as input	-> crontab [ file name ]
+File stored which are edit through crontab -e 			-> /etc/cron.d/
+User made cron files are stored 						-> /etc/crontab/
+Directory contain shell script and run every hour		-> /etc/cron.hourly/
+Directory contain shell script and run every day		-> /etc/cron.daily/
+Directory contain shell script and run every week		-> /etc/cron.weekly/
+Directory contain shell script and run every month		-> /etc/cron.monthly/
