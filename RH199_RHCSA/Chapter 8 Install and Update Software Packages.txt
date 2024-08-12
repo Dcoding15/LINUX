@@ -1,0 +1,22 @@
+Subscibe a System with the Commmand Line: -
+----------------------------------------
+    1. Use subscription-manager command to register a system.
+    2. Use rct command inspect the certificates.
+
+Register a system by using credential as root user  -> subscription-manager register --username [ Full Name ]
+View available subscription                         -> subscription-manager list --available
+Auto-attach a subscription                          -> subscription-manager attach --auto
+View consumed subscription                          -> subscription-manager list --consumed
+Unregister a system                                 -> subscription-manager unregister
+
+/etc/pki/product        -> certificates indicate installed Red Hat products.
+/etc/pki/consumer       -> certificates identify the Red Hat account for registration.
+/etc/pki/entitlement    -> certificates indicate which subscription are attached.
+
+Manage Software Packages with DNF: -
+---------------------------------
+    1. DNF (Dandified YUM) replace with YUM package manager in RHE Linux 9.
+    2. YUM package is based on RPM based software installation and updates.
+
+To display help command                             -> dnf help
+To display installed and available packages         -> dnf list

@@ -95,6 +95,8 @@ Section 8: -
     semanage-boolean
     sealert
     crond
+    subscription-manager
+    rct
 
 man 8 insights-client       (Redhat only)
 man 5 insights-client.conf  (Redhat only)
