@@ -44,6 +44,7 @@ Section 1: -
     seinfo
     chcon
     crontab
+	dnf
 
 Section 2: -
     sched_setscheduler
@@ -66,6 +67,7 @@ Section 5: -
     anacron
     anacrontab
     systemd.timer
+	dnf.conf
 
 Section 7: -
     hier
@@ -97,6 +99,8 @@ Section 8: -
     crond
     subscription-manager
     rct
+	dnf
+	dnf-config-manager
 
 man 8 insights-client       (Redhat only)
 man 5 insights-client.conf  (Redhat only)

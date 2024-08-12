@@ -1,0 +1,13 @@
+Mount and Unmount File System: -
+-----------------------------
+	1. For accessing file system, we have to mount that storage device.
+	2. Mounting a storage device in file system can be done using mount command.
+	3. mount command can use in 2 ways: -
+		(a) with device file name i.e., file name stored in /dev directory.
+		(b) with UUID (Universal Unique Identifier of the Device).
+	   Also adding any mount point at end i.e., any user made directory.
+	4. Before mount we must first create out own directory within /mnt ( used for temporary mount point).
+
+To list details of all available block devices			-> lsblk
+To list details of specified block device				-> lsblk /dev/[ storage name ]
+To mount storage on file system							-> mount /dev/[ storage name ] /mnt/[ directory path name ]

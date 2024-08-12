@@ -3,20 +3,79 @@ Subscibe a System with the Commmand Line: -
     1. Use subscription-manager command to register a system.
     2. Use rct command inspect the certificates.
 
-Register a system by using credential as root user  -> subscription-manager register --username [ Full Name ]
-View available subscription                         -> subscription-manager list --available
+Register a system by using credential as root user	-> subscription-manager register --username [ Full Name ]
+View available subscription							-> subscription-manager list --available
 Auto-attach a subscription                          -> subscription-manager attach --auto
-View consumed subscription                          -> subscription-manager list --consumed
-Unregister a system                                 -> subscription-manager unregister
+View consumed subscription							-> subscription-manager list --consumed
+Unregister a system									-> subscription-manager unregister
 
-/etc/pki/product        -> certificates indicate installed Red Hat products.
-/etc/pki/consumer       -> certificates identify the Red Hat account for registration.
-/etc/pki/entitlement    -> certificates indicate which subscription are attached.
+/etc/pki/product		-> certificates indicate installed Red Hat products.
+/etc/pki/consumer		-> certificates identify the Red Hat account for registration.
+/etc/pki/entitlement	-> certificates indicate which subscription are attached.
 
 Manage Software Packages with DNF: -
 ---------------------------------
     1. DNF (Dandified YUM) replace with YUM package manager in RHE Linux 9.
     2. YUM package is based on RPM based software installation and updates.
+	3. There are 3 types of listed packages in groups of software: -
+		(a) mandatory (means packages must be installed with group)
+		(b) default (means packages normally installed with group)
+		(c) optional (means package not be installed with group unless specifically requested)
+	4. Modularity  means a single repository can host multiple  version of an application's package and its dependencies.
+	5. There are 2 main software repositories: -
+		(a) BaseOS		-> This repository provides the core operating system RPM packages.
+		(b) AppStream	-> This repository provides content with varying lifecycle as both modules and traditional RPM packages.
 
-To display help command                             -> dnf help
-To display installed and available packages         -> dnf list
+To display help command											-> dnf help
+To display installed and available packages						-> dnf list
+To display installed and available kernel packages				-> dnf list kernel
+To display information related to packages						-> dnf info [ package name ]
+To display summary of package using keyword search				-> dnf seach all [ 'KEYWORD' ]
+To display information of specified pathname					-> dnf provides [ path name ]
+
+To install package									-> dnf install [ package name ]
+To update specified package							-> dnf update [ package name ]
+To update all package								-> dnf update
+To remove package									-> dnf remove [ package name ]
+
+To display installed and available groups						-> dnf group list
+To display installed hidden groups								-> dnf group list hidden
+To display information related to group							-> dnf group info [ "group name" ]
+To display installed and removal transactions from log file		-> less /var/log/dnf.rpm.log
+To display installed and removal transactions 					-> dnf history
+
+To install group									-> dnf group install [ group name ]
+To remove group										-> dnf group remove [ group name ]
+To reverse transaction using transaction id			-> dnf history undo [ id ]
+
+To display all available modules realated information					-> dnf module list
+To display specified available module realted information				-> dnf module list [ module name ]
+To display detailed information of specified module						-> dnf module info [ module name ]
+To display detailed information of specified module and its packages	-> dnf module info [ module name ] --profile
+To display name of module of specifed package							-> dnf module provides [ package name ]
+
+DNF Software Repositories: -
+-------------------------
+	1. There are 2 ways to add third party repositories: -
+		(a) Adding .repo file in /etc/yum.repos.d/ directory. [Recommended]
+		(b) Adding [repository] section to /etc/dnf/dnf.conf file.
+	2. Basic repo file format: -
+		/etc/yum.repos.d/[ file name ].repo
+		================================================
+		[NAME]
+		name=[ repository name ]
+		baseurl=[ repository URL ]
+		enabled=[ 0 | 1 ]
+		gpgcheck=[ 0 | 1 ]
+		gpgkey=[ GPG file URL, if gpgcheck is enabled ]
+		================================================
+		Note: -
+		Here,
+			0 -> disabled
+			1 -> enabled
+
+To display all available repositories and their status		-> dnf repolist all
+To enable or disable repositories							-> dnf config-manager --[ enable | disable ] [ repository name ]
+To add repositories											-> dnf config-manager --add-repo=[ "repository URL" ]
+To import GPG public key									-> rpm --import [ GPG public key URL ]
+To install GPG public key									-> rpm install [ GPG public key URL ]
