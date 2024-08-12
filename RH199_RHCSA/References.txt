@@ -101,6 +101,10 @@ Section 8: -
     rct
 	dnf
 	dnf-config-manager
+	lsblk
+	mount
+	umount
+	lsof
 
 man 8 insights-client       (Redhat only)
 man 5 insights-client.conf  (Redhat only)

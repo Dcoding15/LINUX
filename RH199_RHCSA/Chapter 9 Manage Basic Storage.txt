@@ -7,7 +7,13 @@ Mount and Unmount File System: -
 		(b) with UUID (Universal Unique Identifier of the Device).
 	   Also adding any mount point at end i.e., any user made directory.
 	4. Before mount we must first create out own directory within /mnt ( used for temporary mount point).
+	5. Kill all the processes related to specified mount point before unmounting a storage device from file system.
 
-To list details of all available block devices			-> lsblk
-To list details of specified block device				-> lsblk /dev/[ storage name ]
-To mount storage on file system							-> mount /dev/[ storage name ] /mnt/[ directory path name ]
+To list details of all available block devices						-> lsblk
+To list details of specified block device							-> lsblk /dev/[ storage name ]
+To display detail information of all available block devices		-> lsblk -f
+To display detail information of specified block devices			-> lsblk -f /dev/[ storage name ]
+To display open files and running process on specified mount point	-> lsof [ directory path name ]
+To mount storage using storage name on file system					-> mount /dev/[ storage name ] /mnt/[ directory path name ]
+To mount storage using UUID on file system							-> mount UUID="" /mnt/[ directory path name ]
+To unmount storage from file system									-> umount /mnt/[ directory path name ]
