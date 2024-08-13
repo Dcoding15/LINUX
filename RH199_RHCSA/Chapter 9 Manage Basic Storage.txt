@@ -17,3 +17,36 @@ To display open files and running process on specified mount point	-> lsof [ dir
 To mount storage using storage name on file system					-> mount /dev/[ storage name ] /mnt/[ directory path name ]
 To mount storage using UUID on file system							-> mount UUID="" /mnt/[ directory path name ]
 To unmount storage from file system									-> umount /mnt/[ directory path name ]
+
+Partitions, File System and Persistent Mounts: -
+---------------------------------------------
+	1. MBR (Master Boot Record): -
+		(a) This partitioning scheme is standard for BIOS (Basic Input / Output System) firmware.
+		(b) It supports four primary partition and one extended partition (which can be divided into many logical partition).
+	2. GPT (GUID Partition Table): -
+		(a) This partitioning scheme is standard for UEFI (Unified Extensible Firmware Interface) firmware.
+		(b) It supports 128 partitions.
+		(c) GPT uses GUID (Globally Unique Identifier) to identify each partition of a disk.
+		(d) It has primary GPT located at header and secondary GPT located at end of disk.
+		(e) It uses checksum to detect error at GPT header and partition table.
+	3. To make partion with parted command syntax: parted /dev/[ storage name ] [ options ]
+	4. Type of partitioning scheme table: -
+		(a) aix		-> IBM's AIX OS
+		(b) amiga	-> AMIGA OS
+		(c) bsd		-> BSD based OS and SunOS
+		(d) dvh		-> WINDOWS OS
+		(e) gpt		-> WINDOWS OS / MacOS / LINUX OS
+		(f) loop	-> LINUX OS (use to manage loopback devices)
+		(g) mac		-> MacOS
+		(h) msdos	-> WINDOWS OS / LINUX OS (MBR partitioning scheme)
+		(i) pc98	-> NEC PC-98 series of personal computers like MS-DOS 6.x, WINDOWS 3.x, WINDOWS 95.
+		(j) sun		-> Sun Mirosystem's workstation and server and Solaris OS.
+	5. Type of partitions: -
+		(a) primary		-> Host operating system and system's boot loader. This parition has limit of how many could be created.
+		(b) logical		-> Created from division of extended partition and only use to store data.
+		(c) extendend	-> Special partition that acts as a container for logical partitions.
+
+To display information related to block device			-> parted /dev/[ storage name ] print
+To create new partitioning table						-> parted /dev/[ storage name ] mklable [ label name ]
+To remove partition from disk							-> parted /dev/[ storage name ] rm [ partition number ]
+To check alignment contraints of partitions				-> parted /dev/[ storage name ] align-check [ minimal | optimal ] [ partition number ]
