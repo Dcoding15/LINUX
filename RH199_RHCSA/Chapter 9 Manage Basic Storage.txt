@@ -45,8 +45,43 @@ Partitions, File System and Persistent Mounts: -
 		(a) primary		-> Host operating system and system's boot loader. This parition has limit of how many could be created.
 		(b) logical		-> Created from division of extended partition and only use to store data.
 		(c) extendend	-> Special partition that acts as a container for logical partitions.
+	6. Types of filesystem: -
+		(a) btrfs			-> B-tree file system based on copy on write principle ( linux file system )
+		(b) ext2			-> 2nd Extended File System ( linux file system )
+		(c) ext3			-> 3rd Extended File System ( linux file system )
+		(d) ext4			-> 4th Extended File System ( linux file system )
+		(e) fat16			-> 16 bit File Allocation Table ( window file system )
+		(f) fat32			-> 32 bit File Allocation Table	( window file system )
+		(g) hfs				-> Hierarchical File System          ( macos file system )
+		(i) hfs+			-> Hierarchical File System eXtended ( macos file system )
+		(j) linux-swap		-> Swap file allow secondary storage acts as primary storage i.e., RAM ( linux file system )
+		(k) ntfs			-> New Technology File System ( window file system )
+		(l) reiserfs		-> General purpose journaling file system ( linux file system )
+		(m) udf				-> Universal Disk Format which provides access to recordable media such as CD, DVD.
+		(n) xfs				-> eXtensible File System which provides high performance 64-bit journaling file system.
+	7. Types of flags: -
+		(a) boot				-> partition used as either BIOS or UEFI boot loader.
+		(b) root				-> partition used as storage of OS files and its dependencies. Also storing root user data.
+		(c) swap				-> partition used as primary storage.
+		(d) hidden				-> partition used as hidden storage and can't display using commands like df or lsblk.
+		(e) raid				-> partition used as RAID level to enhance data redundancy and performance.
+		(f) lvm					-> partition used as LVM volumes allowing for flexible disk space management and allocation.
+		(g) lba					-> partition used as accessing disk in linear addressing scheme rather than cylinder head sector addressing.
+		(h) legacy_boot			-> partition used as legacy BIOS boot loader.
+		(i) irst				-> partition used as IRST volume which provide RAID and disk management capabilities.
+		(j) nsftres				-> partition used as netware storage format reserve specific storage.
+		(k) esp					-> partition used as storing EFI boot loader, device drivers, system utilities ( use only UEFI boot loader ).
+		(l) chromeos_kernel		-> partition used as storage related to chrome OS files and its dependencies.
+		(m) bls_boot			-> partition used as storage for boot loader specifications.
+		(n) linux-home			-> partition used as storage for user data except root user.
+		(o) no_automount		-> partition used as storage for sensetive information which are not intended for regular use and require manual mounting.
+		(p) bios_grub			-> partition used as GRUB (GRand Unified Bootloader) boot code and require of BIOS-based system.
+		(q) palo				-> partition used as boot loader for PA-RISC systems and HP Unix.
+	8. Partition name only requires for gpt, mac, pc98.
 
 To display information related to block device			-> parted /dev/[ storage name ] print
-To create new partitioning table						-> parted /dev/[ storage name ] mklable [ label name ]
+To create new disk lable								-> parted /dev/[ storage name ] mklable [ label name ]
 To remove partition from disk							-> parted /dev/[ storage name ] rm [ partition number ]
+To create new partition									-> parted /dev/[ storage name ] mkpart [ partition type ] [ partition name ] [ partition flag ] [ start size ] [ end size ]
 To check alignment contraints of partitions				-> parted /dev/[ storage name ] align-check [ minimal | optimal ] [ partition number ]
+To name partition explicitly							-> parted /dev/[ storage name ] name [ partition number ] [ partition name ]

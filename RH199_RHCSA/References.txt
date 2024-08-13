@@ -68,6 +68,7 @@ Section 5: -
     anacrontab
     systemd.timer
 	dnf.conf
+	fstab
 
 Section 7: -
     hier
@@ -105,6 +106,12 @@ Section 8: -
 	mount
 	umount
 	lsof
+	parted
+	mkfs
+	mount
+	mkswap
+	swapon
+	swapoff
 
 man 8 insights-client       (Redhat only)
 man 5 insights-client.conf  (Redhat only)
