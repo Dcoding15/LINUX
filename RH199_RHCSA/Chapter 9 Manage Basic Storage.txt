@@ -79,9 +79,9 @@ Partitions, File System and Persistent Mounts: -
 		(q) palo				-> partition used as boot loader for PA-RISC systems and HP Unix.
 	8. Partition name only requires for gpt, mac, pc98.
 
-To display information related to block device			-> parted /dev/[ storage name ] print
-To create new disk lable								-> parted /dev/[ storage name ] mklable [ label name ]
-To remove partition from disk							-> parted /dev/[ storage name ] rm [ partition number ]
-To create new partition									-> parted /dev/[ storage name ] mkpart [ partition type ] [ partition name ] [ partition flag ] [ start size ] [ end size ]
-To check alignment contraints of partitions				-> parted /dev/[ storage name ] align-check [ minimal | optimal ] [ partition number ]
-To name partition explicitly							-> parted /dev/[ storage name ] name [ partition number ] [ partition name ]
+To display information related to block device	-> parted /dev/[ storage name ] print
+To create new disk lable						-> parted /dev/[ storage name ] mklable [ label name ]
+To remove partition from disk					-> parted /dev/[ storage name ] rm [ partition number ]
+To create new partition							-> parted /dev/[ storage name ] mkpart [ partition type ] [ partition name ] [ partition flag ] [ start size ] [ end size ]
+To check alignment contraints of partitions		-> parted /dev/[ storage name ] align-check [ minimal | optimal ] [ partition number ]
+To name partition explicitly					-> parted /dev/[ storage name ] name [ partition number ] [ partition name ]
