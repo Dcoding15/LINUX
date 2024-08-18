@@ -78,10 +78,47 @@ Partitions, File System and Persistent Mounts: -
 		(p) bios_grub			-> partition used as GRUB (GRand Unified Bootloader) boot code and require of BIOS-based system.
 		(q) palo				-> partition used as boot loader for PA-RISC systems and HP Unix.
 	8. Partition name only requires for gpt, mac, pc98.
+	9. Types of unit: -
+		(a) s		-> sectors
+		(b) B		-> bytes
+		(c) %		-> percentage of device size
+		(d) cyl		-> cylinders
+		(e) chs		-> cylinders, heads, sectors
+		(f) compact	->  megabyte for input and human-friendly form for output
+	10. To configure system to automatically detect and mount partition during booting -> /etc/fstab file. There are 6 fields for each partition syntactically.
+		/etc/fstab
+		----------
+		[UUID= | /dev/[ storage partition name ]]	[path of mount point]	[partition flag]	defaults	0	0
+
+		It is recommended to use UUID.
+	11. Linux kernel memory management subsystem control swap space area. Swap space to supplement the system RAM by holding inactive pages in memory.
+	12. RAM and swap space recommendation: -
+		RAM						||		SWAP SPACE			||		SWAP SPACE FOR HIBERNATION
+		======================================================================================
+		2 GB < 					||		2x RAM				||		3x RAM
+		2 GB >= and 8 GB <=		||		Same as RAM			||		2x RAM
+		8 GB >= and 64 GB <=	||		4 GB >=				||		1.5x RAM
+		64 GB >					||		4 GB >=				||		Not recommended
+	13. To configure swap on /etc/fstab file: -
+		/etc/fstab
+		----------
+		[UUID=]	swap	swap	defaults	0	0
 
 To display information related to block device	-> parted /dev/[ storage name ] print
-To create new disk lable						-> parted /dev/[ storage name ] mklable [ label name ]
+To create new disk label						-> parted /dev/[ storage name ] mklable [ label name ]
 To remove partition from disk					-> parted /dev/[ storage name ] rm [ partition number ]
 To create new partition							-> parted /dev/[ storage name ] mkpart [ partition type ] [ partition name ] [ partition flag ] [ start size ] [ end size ]
+To change file system on partition				-> parted /dev/[ storage name ] set [ partition number ] [ partition flag ] [ on | off ]
 To check alignment contraints of partitions		-> parted /dev/[ storage name ] align-check [ minimal | optimal ] [ partition number ]
+
 To name partition explicitly					-> parted /dev/[ storage name ] name [ partition number ] [ partition name ]
+To resize partition								-> parted /dev/[ storage name ] resize [ partition number ] [ start size ] [ end size ]
+To create file system on partition				-> parted /dev/[ storage name ] mkfs [ partition number ] [ partition flag ]
+
+To register new partition on system										-> udevadm settle
+To update systemd daemon for system to register updated /etc/fstab file	-> systemctl daemon-reload
+
+To format swap partition	-> mkswap /dev/[ storage partition name ]
+To activate all swap space listed on /etc/fstab file	-> swapon -a
+To deactivate all swap spaces							-> swapoff
+

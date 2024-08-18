@@ -1,0 +1,31 @@
+Validate Network Configurations: -
+-------------------------------
+	1. Use ip command to view device and address information.
+	2. link/ether string shows MAC address of the device.
+	3. inet string shows IPv4 address, its prefix length and scope
+	4. inet6 string shows IPv6 address, its prefix length, scope, link scope only used local ethernet link communication.
+	5. IPv4 each place takes 1 byte of space and has 4 fields which is separated by period ( x.x.x.x ). Maximum value for each field is 225.
+	6. IPv6 each place takes 2 bytes of space and has 8 fields which is separated by colon ( x:x:x:x:x:x:x:x ). Maximum value for each field is ffff.
+	7. IPv4 class and range: -
+		Class A (used by big network providers):				1.0.0.0 to 127.225.225.225
+		Class B (used by big organizations):					128.0.0.0 to 191.225.225.225
+		Class C (used by small organizations):					192.0.0.0 to 223.225.225.225
+		Class D (used to defined multicast address):			224.0.0.0 to 239.225.225.225
+		Class E (reserved for research and future purchase):	240.0.0.0 to 225.225.225.225
+	8. IPv4 network id (NID) and host id (HID): -
+		Class A:	1 NID + 3 HID
+		Class B:	2 NID + 2 HID
+		Class C:	3 NID + 1 HID
+		Class D:	4 NID
+		Class E:	4 NID
+
+To list all available network interface on system					-> ip link show
+To display information of specific network interface				-> ip link show [ network interface name ]
+To display performance statistics of network interface				-> ip -s link show [ network interface name ]
+To verify connection between hosts with specific count using IPv4	-> ping -c[ number of iteration ] [ host name with domain name or ip4 of host ]
+To verify connection between hosts with specific count using IPv6	-> ping6 [ ip6 of host ]
+To display routing information of IPv4								-> ip route
+To display routing infomation of IPv6								-> ip -6 route
+To trace network traffic to  reach remote host						-> tracepath [ host name ]
+Login to another host through IPv4 and hostname						-> ssh x.x.x.x@[ host name ]
+Login to another host through IPv6 and hostname						-> ssh x:x:x:x:x:x:x:x%[ host name ]
