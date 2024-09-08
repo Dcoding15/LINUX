@@ -18,14 +18,89 @@ Validate Network Configurations: -
 		Class C:	3 NID + 1 HID
 		Class D:	4 NID
 		Class E:	4 NID
+	9. Information related to well-known ports are listed on file	-> /etc/services
+	10. To display socket statistics								-> ss [OPTIONS]
+		[OPTIONS]		[DESCRIPTION]
+			-n			show port and interface numbers instead of name
+			-t			show TCP sockets
+			-u			show UPD sockets
+			-l			show listening sockets
+			-a			show all sockets
+			-p			show process used by sockets
+			-A inet		show active connections but not listening sockets for inet address family
+			-A inet6	show active connections but not listening sockets for inet6 address family
 
 To list all available network interface on system					-> ip link show
 To display information of specific network interface				-> ip link show [ network interface name ]
 To display performance statistics of network interface				-> ip -s link show [ network interface name ]
-To verify connection between hosts with specific count using IPv4	-> ping -c[ number of iteration ] [ host name with domain name or ip4 of host ]
+To verify connection between hosts with specific count using IPv4	-> ping -c[ number of iteration ] [ host name or ip4 of host ]
 To verify connection between hosts with specific count using IPv6	-> ping6 [ ip6 of host ]
 To display routing information of IPv4								-> ip route
 To display routing infomation of IPv6								-> ip -6 route
-To trace network traffic to  reach remote host						-> tracepath [ host name ]
+To trace network traffic to reach remote host						-> tracepath [ host name ]
+To trace network traffic to reach remote host by IPv6				-> tracepath6 [ host name ]
 Login to another host through IPv4 and hostname						-> ssh x.x.x.x@[ host name ]
 Login to another host through IPv6 and hostname						-> ssh x:x:x:x:x:x:x:x%[ host name ]
+
+Configure Networking from the Command Line: -
+------------------------------------------
+	1. Network configurations are stored in directory if any changes made by `nmcli con mod [ network interface name ]`		->	/etc/NetworkManager/system-connections/
+	2. Run `nmcli con reload` to inform NetworkManager about these changes.
+	3. Sample of configuration file: -
+		/etc/NetworkManager/system-connections/[ Connection Name  ].nmconnection
+		========================================================================
+		[connection]
+		id=[ connection name ]
+		uuid=
+		interface-name=[ network interface name ]
+		mac-address=[ xx:xx:xx:xx:xx:xx ]
+		type=[ type of connection ]
+		autoconnect=[ true | false ]
+
+		[ipv4]
+		address1=[ x.x.x.x ]/24
+		geteway=[ x.x.x.x ]
+		dns=[ x.x.x.x ]
+		dns-search=[ host name ].[ domain name ]
+		method=[ manual | dhcp ]
+		ignore-auto-dns=[ true | false ]
+
+		[ipv6]
+		address1=[ x:x:x:x:x:x:x:x ]/24
+		gateway=[ x:x:x:x:x:x:x:x ]
+		dns=[ x:x:x:x:x:x:x:x ]
+		dns-search=[ host name ].[ domain name ]
+		method=[ manual | auto | dhcp ]
+		ignore-auto-dns=[ true | false ]
+
+Configure Hostnames and Name Resolution: -
+---------------------------------------
+	1. Static host name are stored in /etc/hostnames file.
+	2. Mapping of IP address to host or domain name are stored in /etc/hosts file.
+	3. /etc/resolv.conf file controls how query is performed.
+
+
+To display host name											-> hostname
+To modify host name												-> hostnamectl hostname [ name ]
+To display system's fully qualified hostname					-> hostnamectl status
+
+To show overall status of NetworkManager						-> nmcli general status
+To show system hostname											-> nmcli general hostname
+To edit system hostname											-> nmcli general hostname [ name ]
+To show permission provided by NetworkManager					-> nmcli general permission
+To show current logging level and domains of NetworkManager		-> nmcli general logging
+To edit logging level and domains of NetworkManager				-> nmcli general logging level [ number ] domain [ names ]
+
+To modify networking control by NetworkManager					-> nmcli networking [ on | off ]
+To show network connectivity state by NetworkManager			-> nmcli networking connectivity
+
+To show Wi-Fi status in NetworkManager							-> nmcli radio wifi
+To modify Wi-Fi in NetworkManager								-> nmcli radio wifi [ on | off ]
+To show WWAN (mobile broadband) status in NetworkManager		-> nmcli radio wwan
+To modify WWAN (mobile broadband) in NetworkManager				-> nmcli radio wwan [ on | off ]
+To show Wi-Fi and WWAN status in NetworkManager					-> nmcli radio all
+To modify Wi-Fi and WWAN in NetworkManager						-> nmcli radio all [ on | off ]
+
+To show activity related to NetworkManager						-> nmcli monitor
+
+To show status of device										-> nmcli device status

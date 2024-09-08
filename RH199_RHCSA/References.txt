@@ -69,6 +69,9 @@ Section 5: -
     systemd.timer
 	dnf.conf
 	fstab
+	nmcli
+	nm-settings
+	nm-settings-keyfile
 
 Section 7: -
     hier
@@ -112,6 +115,13 @@ Section 8: -
 	mkswap
 	swapon
 	swapoff
+	ip-link
+	ip-address
+	ip-route
+	ip
+	ping
+	tracepath
+	ss
 
 man 8 insights-client       (Redhat only)
 man 5 insights-client.conf  (Redhat only)
