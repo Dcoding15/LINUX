@@ -71,6 +71,7 @@ Section 5: -
 	fstab
 	nmcli
 	nm-settings
+	nm-settings-nmcli
 	nm-settings-keyfile
 
 Section 7: -
