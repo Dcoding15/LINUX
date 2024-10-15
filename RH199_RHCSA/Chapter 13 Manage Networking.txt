@@ -104,10 +104,20 @@ To modify Wi-Fi and WWAN in NetworkManager						-> nmcli radio all [ on | off ]
 To show activity related to NetworkManager						-> nmcli monitor
 
 To show details for active connections							-> nmcli connection show --active
-To activate a connections										-> nmcli connection up/connect [ DEVICE ]
-To deactivate a connections										-> nmcli connection down/disconnect [ DEVICE ]
+To activate a connections										-> nmcli connection up/connect [ NAME | UUID ]
+To deactivate a connections										-> nmcli connection down/disconnect [ NAME | UUID ]
 
 To show status of all available device							-> nmcli device status
 To show status of selected device								-> nmcli device show [ DEVICE ]
 To monitor connected device										-> nmcli device monitor [ DEVICE ]
 To update device with changes									-> nmcli device reapply [ DEVICE ]
+To modify device's settings										-> nmcli device modify [ DEVICE ] [ + | - ] [ settings name ].[ property name ] [ value ]
+To remove device												-> nmcli device delete [ DEVICE ]
+To add device and activate connections							-> nmcli device up/connect [ DEVICE ]
+To remove device and deactivate connections						-> nmcli device down/disconnect [ DEVICE ]
+
+To show available wifi devices									-> nmcli device wifi list --rescan yes
+																-> nmcli device wifi rescan
+To connect wifi network specified by BSSID						-> nmcli device wifi connect [ BSSID |  SSID ] password [ password of wifi ]
+To create hotspot												-> nmcli device wifi hotspot ifname [ DEVICE ] con-name [ name of hotspot ] ssid [ ssid of hotspot ] band [ wifi band ] channel [ no. of channel ] password [ password of hotspot ]
+To display passowrd of wifi										-> nmcli device wifi show-password ifname [ DEVICE ]
