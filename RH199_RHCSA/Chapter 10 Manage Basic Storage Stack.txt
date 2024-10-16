@@ -1,2 +1,6 @@
 Logical Volumn Manager Overview: -
-	1. 
+	1. Physical Device
+	2. Physical Volume
+	3. Volume Group
+	4. Logical Volumn
+	5. LVM (logical volume manager) -> create logical storage volumes as a layer on the physical storage.
