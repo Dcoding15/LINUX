@@ -7,3 +7,46 @@ Logical Volumn Manager Overview: -
 
 Physical Volumne Workflow: -
 Physical Block Device -----> Create Multiple Physical Volumnes -----> Combine as one Volumne Group -----> Create Logical Volume from space available in Volumne Group.
+
+Creating LVM: -
+------------
+	1. parted /dev/[device file name] mklabel gpt
+	2. parted /dev/[device file name] mkpart [partition name] [starting size] [ending size]
+	3. parted /dev/[device file name] print
+	4. parted /dev/[device file name] set [partition number] lvm on
+	5. udevadm settle
+	6. pvcreate /dev/[device file name]p[partition number]
+	7. vgcreate -s [size of volumn group]M [volumn group name] /dev/[device file name]p[partition number]
+	8. lvcreate -L [size of volumn label]M -n [logical volumn name] [volumn group name]
+	9. mkfs.ext4 /dev/[volumn group name]/[logical volumn name]
+	10. mkdir /[folder name]
+	11. mount /dev/[volumn group name]/[logical volumn name] /[folder name]
+	12. echo "/dev/[volumn group name]/[logical volumn name]	/[folder name]	ext4	defaults	0	0" >> /etc/fstab
+
+Extending LVM ( space available in Volumn Group ): -
+-------------------------------------------------
+	1. lvextend -L +[size of volumn lable]M /dev/[volumn group name]/[logical volumn name]
+	2. resize2fs /dev/[volumn group name]/[logical volumn name]
+
+Extending LVM ( space not available in Volumn Group ): -
+-----------------------------------------------------
+	1. parted /dev/[device file name] mklabel gpt
+	2. parted /dev/[device file name] mkpart [partition name] [starting size] [ending size]
+	3. parted /dev/[device file name] print
+	4. parted /dev/[device file name] set [partition number] lvm on
+	5. udevadm settle
+	6. pvcreate /dev/[device file name]p[partition number]
+	7. vgextend [existing volumn group name] /dev/[device file name]p[partition number]
+	8. lvextend -L +[size of volumn lable]M  /dev/[volumn group name]/[logical volumn name]
+	9. resize2fs  /dev/[volumn group name]/[logical volumn name]
+
+Reduce LVM: -
+----------
+	1. umount /dev/[volumn group name]/[logical volumn name]
+	2. e2fsck -f /dev/[volumn group name]/[logical volumn name]
+	3. resize2fs /dev/[volumn group name]/[logical volumn name] [size]M
+	4. lvreduce -L -[logical volumn size]M /dev/[volumn group name]/[logical volumn name]
+	5. mount
+Note: - total size = ending size - starting size
+
+To view physical volumn
