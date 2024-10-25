@@ -46,7 +46,15 @@ Reduce LVM: -
 	2. e2fsck -f /dev/[volumn group name]/[logical volumn name]
 	3. resize2fs /dev/[volumn group name]/[logical volumn name] [size]M
 	4. lvreduce -L -[logical volumn size]M /dev/[volumn group name]/[logical volumn name]
-	5. mount
+	5. mount /[folder name]
 Note: - total size = ending size - starting size
+		Never run fsck command to mounted file system
+		For xfs: -
+			Format with mkfs.xfs
+			Resize with xfs_growfs
+			We can't reduce
+	For ext2, ext3, ext4 all commands are same
 
-To view physical volumn
+To view physical volumn	-> pvdisplay
+To view volumn group	-> vgdisplay
+To view logical volumne	-> lvdisplay
