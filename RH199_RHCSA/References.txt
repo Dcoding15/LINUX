@@ -44,7 +44,9 @@ Section 1: -
     seinfo
     chcon
     crontab
-	dnf
+    dnf
+    systemd
+    systemctl
 
 Section 2: -
     sched_setscheduler
@@ -67,12 +69,12 @@ Section 5: -
     anacron
     anacrontab
     systemd.timer
-	dnf.conf
-	fstab
-	nmcli
-	nm-settings
-	nm-settings-nmcli
-	nm-settings-keyfile
+    dnf.conf
+    fstab
+    nmcli
+    nm-settings
+    nm-settings-nmcli
+    nm-settings-keyfile
 
 Section 7: -
     hier
@@ -104,25 +106,28 @@ Section 8: -
     crond
     subscription-manager
     rct
-	dnf
-	dnf-config-manager
-	lsblk
-	mount
-	umount
-	lsof
-	parted
-	mkfs
-	mount
-	mkswap
-	swapon
-	swapoff
-	ip-link
-	ip-address
-	ip-route
-	ip
-	ping
-	tracepath
-	ss
+    dnf
+    dnf-config-manager
+    lsblk
+    mount
+    umount
+    lsof
+    parted
+    mkfs
+    mount
+    mkswap
+    swapon
+    swapoff
+    ip-link
+    ip-address
+    ip-route
+    ip
+    ping
+    tracepath
+    ss
+    systemd.unit
+    systemd.service
+    systemd.socket
 
 man 8 insights-client       (Redhat only)
 man 5 insights-client.conf  (Redhat only)

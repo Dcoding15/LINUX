@@ -1,0 +1,60 @@
+systemd Daemon: -
+	1. It the startup process for linux.
+	2. It activates both at boot time and running system.
+	3. Daemons are processes that either wait or run in the background, to perform various tasks.
+	4. The first process .i.e., PID 1 is RHEL is systemd daemon.
+	5. There are different types of daemons 
+		i.   service unit i.e., .service for system services
+		ii.  socket unit i.e., .socket for interprocess communication (IPC).
+		iii. path unit i.e., .path for services that use spool directories, such as a printing system.
+	6. It will bydefault takes .service files.
+
+List units with activate state		-> systemctl list-units --type=[unit type]
+List units regardless of state		-> systemctl list-units --type=[unit type] --all
+
+To view unit status					-> systemctl status [name].[unit type]
+To start unit						-> systemctl start [name].[unit type]
+To stop running unit				-> systemctl stop [name].[unit type]
+To restart unit						-> systemctl restart [name].[unit type]
+To restart running unit				-> systemctl reload [name].[unit type]
+To either restart or reload unit	-> systemctl reload-or-restart [name].[unit name]
+
+Check whether process is active	-> systemctl is-active [name].[unit type]
+Check whether process is enable	-> systemctl is-enable [name].[unit type]
+Check whether process is failed	-> systemctl is-failed [name].[unit type]
+
+List all dependencies that others depend on that process	-> systemctl list-dependencies --reverse [name].[unit type]
+List all dependencies that process depend on that process	-> systemctl list-dependencies [name].[unit type]
+
+Mask: It will create a symlink to /dev/null, so that adminstrator doesn't start it automatically.
+
+To mask a unit 		-> systemctl mask [name].[unit type]
+To unmask a unit	-> systemctl unmask [name].[unit type]
+
+To enable unit at boot time		-> systemctl enable [name].[unit type]
+To disable unit at boot time	-> systemctl disable [name].[unit type]
+To enable unit at boot time and also for current session	-> systemctl enable --now [name].[unit type]
+To disable unit at boot time and also for current session	-> systemctl disable --now [name].[unit type]
+
+Red Hat Linux Enterprise 9 Boot Process: -
+=======================================
+	Step 1: Power on -> UEFI (Unified Extensible Firmware Interface) or BIOS (Basic Input/Output System) runs POST (Power On Self Test) -> initialise hardware.
+	Step 2: After hardware initialise -> search for boot devices like UEFI / BIOS firmware.
+	Step 3: UEFI / BIOS firmware loads bootloader
+			In Case of BIOS firmaware: -
+			-------------------------
+				1. It loads the bootloader stored in MBR (Master Boot Record) partition.
+				2. It then looks for the bootloader stored in /boot/grub2/ directory.
+				3. After loading bootloader then it load GRUB2 (GRand Unified Bootloader version 2) menu from /boot/grub2/grub.cfg .
+
+			In Case of UEFI firmware: -
+			------------------------
+				1. It loads the boot loader stored in GPT (GUID (Globally Unique Identifier) Partition Table) partition.
+				2. It then looks for the bootloader in EFI partition and mount UEFI partition from /boot/efi.
+				3. After loading bootloader then it load GRUB2 (GRand Unified Bootoaderversion 2) menu from /boot/efi/EFI/redhat/grubx64.efi .
+	Step 4: After selecting kernel from grub menu, the bootloader loads the kernel and initramfs from disk and place in memory.
+			Initramfs --> It is an image which is archive with kernel modules for required hardware at boot, initialization scripts and more.
+						  It contains a bootable root file system with a running kernel and a systemd unit.
+						  It is configured by using the /etc/dracut.conf.d/ directory, the dracut command.
+						  To inspect initramfs file		--> dracut  ||	lsinitrd
+	Step 5: 
